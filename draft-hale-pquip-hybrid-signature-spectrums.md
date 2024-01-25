@@ -1,4 +1,4 @@
----
+!---
 title: Hybrid signature spectrums
 abbrev: hale-pquip-hybrid-spectrums
 docname: draft-hale-pquip-hybrid-signature-spectrums-latest
@@ -163,7 +163,7 @@ authenticity play a role (e.g., digital signatures on legal documents).
 
 One approach to design quantum-resistant protocols, particularly during the
 transition period from traditional to post-quantum algorithms, is incorporating
-hybrid/composite signatures schemes, which combine both traditional and
+PQ/T hybrid signature schemes, which combine both traditional and
 post-quantum (or more generally next-generation) algorithms in one cryptographic
 scheme. Hybridization has been looked at for key encapsulation [HYBRIDKEM], and
 in an initial sense for digital signatures [HYBRIDSIG]. Compared to key
@@ -171,7 +171,7 @@ encapsulation, hybridization of digital signatures, where the verification tag
 may be expected to attest to both standard and post-quantum components, is
 subtler to design and implement due to the potential separability of the
 composite signatures and the risk of downgrade/stripping attacks.  There are
-also a range of requirements and properties that may be required from dual
+also a range of requirements and properties that may be required from hybrid
 signatures, not all of which can be achieved at once.
 
 This document focuses on explaining advantages and disadvantages of different
@@ -235,8 +235,7 @@ certificate' as defined in [RFC4949].
   [I-D.ietf-tls-hybrid-design], hybrid signatures are mostly motiviated as
   preparation for the post-quantum migration. Following
   [I-D.ietf-tls-hybrid-design], we opt to use the more generic term
-  "next-generation" and "traditional" algorithm instead of "post-quantum" and
-  "classical" algorithms.
+  "next-generation" algorithm instead of "post-quantum" algorithm.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component algorithm tag is removed. Artifacts
@@ -244,7 +243,6 @@ certificate' as defined in [RFC4949].
   at the protocol level (e.g., within the certificate), or on the system policy
   level (e.g., within the message). Artifacts should be easily identifiable by
   the receiver in the case of signature stripping.
-
 
 ## Motivation for use of hybrid signature schemes {#motivation}
 
@@ -287,7 +285,7 @@ conservative adopters and therefore might hinder adoption.
 
 ### **Time**
 
-The need to transition to quantum-resistant algorithms now while simultaneously
+The need to transition to post-quantum algorithms now while simultaneously
 being aware of potential, hidden subtleties in their resistance to standard
 attacks drives transition designs towards hybridization.  Mosca’s equation
 [MOSCA] very simply illustrates the risk of post-quantum transition delay: `l +
@@ -312,7 +310,7 @@ future checks on past authenticity plays a role (e.g., many legal, financial,
 auditing, and governmental systems).  The 'store-now-modify-later' analogy would
 present challenges in such sectors, where future analysis of past authentication
 may be more critical than in e.g., internet connection use cases. As such there
-is an eagerness to use next-generation signatures algorithms for some
+is an eagerness to use next-generation signature algorithms for some
 applications.
 
 
@@ -330,13 +328,13 @@ security is maintained as long as at least one of the ingredient schemes is
 EUF-CMA secure.  There might be, however, other goals in competition with this
 one, such as backward-compatibility, where the EUF-CMA security of the hybrid
 signature relies solely on the security of one of the ingredient schemes instead
-of relying on both.
+of relying on both
 
 ### **Proof Composability**
 
 Under proof composability, the ingredient algorithms are combined in such a way
 that it is possible to prove a security reduction from the security properties
-of hybrid signature scheme to the properties of the respective ingredient
+of a hybrid signature scheme to the properties of the respective ingredient
 signature schemes and, potentially, other building blocks such as hash
 functions, KDF, etc.  Otherwise an entirely new proof of security is required,
 and there is a lack of assurance that the combination builds on the
@@ -604,7 +602,7 @@ Non-Separability with Simultaneous Verification, verification succeeds not only
 when both of the component signatures are present but also only when the
 verifier has verified both signatures. Moreover, no information is leaked to the
 receiver during the verification process on the possibile validity/invalidity of
-the component signatures until both verify. This construct most closely mirrors
+the component signatures until both verify (or fail to verify). This construct most closely mirrors
 traditional digital signatures where, assuming that the verifier does verify a
 signature at all, the result is either a positive verification of a the full
 signature or a failure if the signature is not valid. For hybrid signatures, a
