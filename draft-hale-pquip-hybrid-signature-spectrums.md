@@ -126,7 +126,7 @@ informative:
 
 This document describes classification of design goals and security
 considerations for hybrid digital signature schemes, including proof
-composability, non-separability of the ingredient signatures given a hybrid
+composability, non-separability of the component signatures given a hybrid
 signature, backwards/forwards compatiblity, hybrid generality, and simultaneous
 verification.
 
@@ -228,8 +228,7 @@ certificate' as defined in [RFC4949].
 
 - Component (signature) scheme: Component signature schemes are the
   cryptographic algorithms contributing to the hybrid signature scheme. This has
-  a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  In this
-  draft, we will use 'ingredient signature scheme' as a synonym.
+  a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient (signature) scheme' may be used as a synonym.
 
 - Next-generation algorithms: Similarly to the case of hybrid KEMs
   [I-D.ietf-tls-hybrid-design], hybrid signatures are mostly motiviated as
@@ -324,23 +323,23 @@ such as backwards compatibility.
 ### **Unforgeability**
 
 One goal is security of hybrid signature schemes, in particular that EUF-CMA
-security is maintained as long as at least one of the ingredient schemes is
+security is maintained as long as at least one of the component schemes is
 EUF-CMA secure.  There might be, however, other goals in competition with this
 one, such as backward-compatibility, where the EUF-CMA security of the hybrid
-signature relies solely on the security of one of the ingredient schemes instead
+signature relies solely on the security of one of the component schemes instead
 of relying on both
 
 ### **Proof Composability**
 
-Under proof composability, the ingredient algorithms are combined in such a way
+Under proof composability, the component algorithms are combined in such a way
 that it is possible to prove a security reduction from the security properties
-of a hybrid signature scheme to the properties of the respective ingredient
+of a hybrid signature scheme to the properties of the respective component
 signature schemes and, potentially, other building blocks such as hash
 functions, KDF, etc.  Otherwise an entirely new proof of security is required,
 and there is a lack of assurance that the combination builds on the
-standardization processes and analysis performed to date on ingredient
+standardization processes and analysis performed to date on component
 algorithms. The resulting hybrid signature would be, in effect, an entirely new
-algorithm of its own. The more the ingredient signature schemes are entangled,
+algorithm of its own. The more the component signature schemes are entangled,
 the more likely it is that an entirely new proof is required, thus not meeting
 proof composability.
 
@@ -348,11 +347,11 @@ proof composability.
 
 Non-Separability was one of the earliest properties of hybrid digital signatures
 to be discussed [HYBRIDSIG]. It was defined as the guarantee that an adversary
-cannot simply “remove” one of the ingredient signatures without evidence left
+cannot simply “remove” one of the component signatures without evidence left
 behind. For example there are artifacts that a carefully designed verifier may
 be able to identify, or that are identifiable in later audits. This was later
 termed Weak Non-Separability (WNS) [HYBRIDSIGDESIGN]. Note that WNS does not
-restrict an adversary from potentially creating a valid ingredient digital
+restrict an adversary from potentially creating a valid component digital
 signature from a hybrid one (a signature stripping attack), but rather implies
 that such a digital signature will contain artifacts of the separation. Thus
 authentication is not simply provided by the sender to the receiver through
@@ -360,8 +359,8 @@ correct verification of the digital signature(s), but potentially through
 further investigation on the receiver side that may extend well beyond
 traditional signature verification behavior. For instance, this can intuitively
 be seen in cases of a message containing a context note on hybrid
-authentication, that is then signed by all ingredient algorithms/the hybrid
-signature scheme. If an adversary removes one ingredient signature but not the
+authentication, that is then signed by all component algorithms/the hybrid
+signature scheme. If an adversary removes one component signature but not the
 other, then artifacts in the message itself point to the possible existence of
 hybrid signature such as a label stating “this message must be hybrid
 signed”. This might be a counter measure against stripping attacks if the
@@ -374,7 +373,7 @@ precise content thereof.
 
 Strong Non-Separability (SNS) is a stronger notion of WNS, introduced in
 [HYBRIDSIGDESIGN]. SNS guarantees that an adversary cannot take as input a
-hybrid signature (and message) and output a valid ingredient signature (and
+hybrid signature (and message) and output a valid component signature (and
 potentially different message) that will verify correctly. In other words,
 separation of the hybrid signature into component signatures implies that the
 component signature will fail verification (of the component signature scheme)
@@ -383,7 +382,7 @@ through correct verification of the digital signature(s), as in traditional
 signature security experiments. It is not dependent on other components, such as
 message content checking, or protocol level aspects, such as public key
 provenance. As an illustrative example distinguishing WNS from SNS, consider the
-case of ingredient algorithms `Sigma_1.Sign` and `Sigma_2.Sign` where the
+case of component algorithms `Sigma_1.Sign` and `Sigma_2.Sign` where the
 hybrid signature is computed as a concatenation `(sig_1, sig_2)`, where `sig_1 =
 Sigma_1.Sign(hybridAlgID, m)` and `sig_2 = Sigma_2.Sign(hybridAlgID, m)`.  In
 this case, a new message `m' = (hybridAlgID, m)`
@@ -424,7 +423,7 @@ next-generation algorithms while still supporting select legacy
 receivers. Notably, this is a verification property; the sender has provided a
 hybrid digital signature, but the verifier is allowed, due to internal policy
 and/or implementation, to only verify one component signature. Backwards
-compatibility may be further decomposed to subcategories where ingredient key
+compatibility may be further decomposed to subcategories where component key
 provenance is either separate or hybrid so as to support implementations that
 cannot recognize (and/or process) hybrid signatures or keys.
 
@@ -447,7 +446,7 @@ compatibility is achieved using redundant information as little as possible.
 ### **Simultaneous Verification**
 
 Simultaneous Verification (SV) builds on SNS and was first introduced in
-[HYBRIDSIGDESIGN]. SV requires that not only are all ingredient signatures
+[HYBRIDSIGDESIGN]. SV requires that not only are all component signatures
 needed to achieve a successful verification present in the hybrid signature, but
 also that verification of both component algorithms occurs
 simultaneously. Namely, "missing" information needs to be computed by the
@@ -553,7 +552,7 @@ representing `degrees` of separability hardness, visualized in
 {: #fig-spectrum-non-separability title="Spectrum of non-separability from weakest to strongest."}
 
 
-At one end of the spectrum are schemes in which one of the ingredient signatures
+At one end of the spectrum are schemes in which one of the component signatures
 can be stripped away with the verifier not being able to detect the change
 during verification. An example of this includes simple concatenation of
 signatures without any artifacts used. Nested signatures (where a message is
