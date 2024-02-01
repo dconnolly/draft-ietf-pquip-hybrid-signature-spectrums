@@ -316,12 +316,15 @@ following provides a summary of these goals, while also noting where security
 goals are in conflict, i.e., that achievement of one goal precludes another,
 such as backwards compatibility.
 
-### **Unforgeability**
+### **Hybrid Authentication**
 
-One goal is security of hybrid signature schemes, in particular that EUF-CMA
+One goal of hybrid signature schemes is security. As defined in [I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the property that (cryptograpthic) authentication is achieved by the hybrid signature scheme provided that a least one component signature algorithm remains secure.  There might be, however, other goals in competition with this one, such as backward-compatibility. Hybrid authentication is an umbrella term that encompassess more specific concepts of hybrid signature security.
+
+### **Hybrid Unforgeability**
+
+Hybrid unforgeability is a specific type of hybrid authentication, where EUF-CMA
 security is maintained as long as at least one of the component schemes is
-EUF-CMA secure.  There might be, however, other goals in competition with this
-one, such as backward-compatibility, where the EUF-CMA security of the hybrid
+EUF-CMA secure.  As discussed above, this is incompatible with backward-compatibility, where the EUF-CMA security of the hybrid
 signature relies solely on the security of one of the component schemes instead
 of relying on both
 
