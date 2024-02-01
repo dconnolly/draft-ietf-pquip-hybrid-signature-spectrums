@@ -230,11 +230,7 @@ certificate' as defined in [RFC4949].
   cryptographic algorithms contributing to the hybrid signature scheme. This has
   a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient (signature) scheme' may be used as a synonym.
 
-- Next-generation algorithms: Similarly to the case of hybrid KEMs
-  [I-D.ietf-tls-hybrid-design], hybrid signatures are mostly motiviated as
-  preparation for the post-quantum migration. Following
-  [I-D.ietf-tls-hybrid-design], we opt to use the more generic term
-  "next-generation" algorithm instead of "post-quantum" algorithm.
+- Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we define next-generation algorithms to be "algorithms which are not yet widely deployed but which may eventually be widely deployed". Hybrid signatures are mostly motivated by preparation for post-quantum migration, hence the reference to post-quantum algorithms through this draft.  However, the majority of the discussion in this document applies equally well to future migration to other next-generation algorithms.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component algorithm tag is removed. Artifacts
@@ -253,7 +249,7 @@ addition, we explicate the motivation for hybrid signatures here.
 
 ### **Complexity**
 
-Next-generation algorithms and their underlying hardness assumptions are often
+Post-quantum algorithms and their underlying hardness assumptions are often
 more complex than traditional algorithms and as such carry a higher risk of
 implementation mistakes and revision of parameters compared to traditional
 algorithms, such as RSA. RSA is a relatively simple algorithm to understand and
@@ -268,7 +264,7 @@ Of note, next generation algorithms have been heavily vetted. Thus, if and when
 further information on caveats and implementation issues come to light, it is
 less likely that a "break" will be catastrophic. Instead, such vulnerabilities
 and issues may represent a weakening of security - which may in turn be offset
-if a hybrid approach has been used. The complexity of next-generation algorithms
+if a hybrid approach has been used. The complexity of post-quantum algorithms
 needs to be balanced against the fact that hybridization itself adds more
 complexity to a protocol and introduces the risk of implementation mistakes in
 the hybridization process.
@@ -278,7 +274,7 @@ One example of a next generation algorithm is the signature scheme ML-DSA
 NIST. While the scheme follows the well-known Fiat-Shamir transform to construct the
 signature scheme, it also relies on rejection sampling that is known to give
 cache side channel information (although this does not lead to a known attack).
-Furthermore, recent attacks again the next-generation multivariate schemes Rainbow
+Furthermore, recent attacks again the post-quantum multivariate schemes Rainbow
 and GeMSS might call into question the asymptotic and concrete security for
 conservative adopters and therefore might hinder adoption.
 
@@ -291,7 +287,7 @@ attacks drives transition designs towards hybridization.  Mosca’s equation
 d > q`, where l is the information life-span, d is the time for system
 transition to post-quantum algorithms, and q is the time before a quantum
 computer is ready to execute cryptanalysis. As opposed to key exchange and KEMs,
-it may not be obvious why there is urgency for an adoption of next-generation
+it may not be obvious why there is urgency for an adoption of post-quantum
 signatures; namely, while encryption is subject to store-now-decrypt-later
 attacks, there may not seem to be a parallel notion for authenticity, i.e.,
 'store-now-modify-later attacks'.
@@ -304,12 +300,12 @@ implications.  In such systems, algorithm turn-over can be complex and difficult
 and can take considerable time (such as in long-lived systems with hardware
 deployment), meaning that an algorithm may be committed to long-term, with no
 option for replacement. Long-term committment creates further urgency for
-immediate next-generation algorithm selection.  Additionally, for some sectors
+immediate post-quantum algorithm selection.  Additionally, for some sectors
 future checks on past authenticity plays a role (e.g., many legal, financial,
 auditing, and governmental systems).  The 'store-now-modify-later' analogy would
 present challenges in such sectors, where future analysis of past authentication
 may be more critical than in e.g., internet connection use cases. As such there
-is an eagerness to use next-generation signature algorithms for some
+is an eagerness to use post-quantum signature algorithms for some
 applications.
 
 
@@ -417,9 +413,9 @@ in the SNS category.
 Backwards compatibility refers to the property where a hybrid signature may be
 verified by only verifying one component signature, allowing the scheme to be
 used by legacy receivers. In general this means verifying the traditional
-component signature scheme, potentially ignoring the next-generation signature
+component signature scheme, potentially ignoring the post-quantum signature
 entirely. This provides an option to transition sender systems to
-next-generation algorithms while still supporting select legacy
+post-quantum algorithms while still supporting select legacy
 receivers. Notably, this is a verification property; the sender has provided a
 hybrid digital signature, but the verifier is allowed, due to internal policy
 and/or implementation, to only verify one component signature. Backwards
@@ -431,12 +427,12 @@ Forwards compatibility has also been a consideration in hybrid proposals
 [I-D.becker-guthrie-noncomposite-hybrid-auth]. Forward compatibility assumes
 that hybrid signature schemes will be used for some time, but that eventually
 all systems will transition to use only one (particularly, only one
-next-generation) algorithm. As this is very similar to backwards compatibility,
+post-quantum) algorithm. As this is very similar to backwards compatibility,
 it also may imply separability of a hybrid algorithm; however, it could also
 simply imply capability to support separate component signatures. Thus the key
 distinction between backwards and forwards compatibility is that backwards
 compatibility may be needed for legacy systems that cannot use and/or process
-hybrid or next-generation signatures, whereas in forwards compatibility the
+hybrid or post-quantum signatures, whereas in forwards compatibility the
 system has those capabilities and can choose what to support (e.g., for
 efficiency reasons).
 
