@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-01T00:18:58.889105+00:00",
+  "timestamp": "2024-02-04T00:19:44.234829+00:00",
   "repo": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -49,6 +49,66 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
-  "pulls": []
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOKkGQK859_ETx",
+      "title": "Citations ",
+      "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/issues/2",
+      "state": "OPEN",
+      "author": "br-hale",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Recommended citations to be added regarding approvals requirements, e.g., from ETSI. Awaiting the current document under draft.",
+      "createdAt": "2024-02-01T23:05:13Z",
+      "updatedAt": "2024-02-01T23:05:13Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOKkGQK859_EpI",
+      "title": "Examples",
+      "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/issues/3",
+      "state": "OPEN",
+      "author": "br-hale",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Some further examples, e.g., on schemes with WNS and SNS were suggested.",
+      "createdAt": "2024-02-01T23:06:26Z",
+      "updatedAt": "2024-02-01T23:06:26Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOKkGQK85lrQ_u",
+      "title": "Flo",
+      "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/pull/1",
+      "state": "OPEN",
+      "author": "fd1729",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-01T09:53:14Z",
+      "updatedAt": "2024-02-01T09:53:14Z",
+      "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "baseRefName": "main",
+      "baseRefOid": "ccfa69ee954719f93a93d8c02155afe385f1320d",
+      "headRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "headRefName": "flo",
+      "headRefOid": "d9f007a484620aaad076adbd163b39f75f3f3a6e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
