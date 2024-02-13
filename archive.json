@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-11T00:19:47.782724+00:00",
+  "timestamp": "2024-02-13T00:18:35.938411+00:00",
   "repo": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -96,7 +96,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-01T09:53:14Z",
-      "updatedAt": "2024-02-01T09:53:14Z",
+      "updatedAt": "2024-02-11T17:13:14Z",
       "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
       "baseRefName": "main",
       "baseRefOid": "ccfa69ee954719f93a93d8c02155afe385f1320d",
@@ -108,7 +108,28 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKkGQK85vuSMI",
+          "commit": {
+            "abbreviatedOid": "d9f007a"
+          },
+          "author": "br-hale",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-11T17:13:14Z",
+          "updatedAt": "2024-02-11T17:13:14Z",
+          "comments": [
+            {
+              "originalPosition": 133,
+              "body": "I would recommend this being \"where e.g. EUF-CMA...\" since unforgeability could also be in the context of SUF-CMA, etc.",
+              "createdAt": "2024-02-11T17:13:14Z",
+              "updatedAt": "2024-02-11T17:13:14Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
