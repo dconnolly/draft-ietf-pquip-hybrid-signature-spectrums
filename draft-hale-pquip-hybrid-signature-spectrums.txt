@@ -20,7 +20,7 @@ Abstract
 
    This document describes classification of design goals and security
    considerations for hybrid digital signature schemes, including proof
-   composability, non-separability of the ingredient signatures given a
+   composability, non-separability of the component signatures given a
    hybrid signature, backwards/forwards compatiblity, hybrid generality,
    and simultaneous verification.
 
@@ -81,8 +81,8 @@ Table of Contents
        1.3.1.  *Complexity*
        1.3.2.  *Time*
      1.4.  Goals
-       1.4.1.  *Unforgeability*
-       1.4.2.  *Proof Composability*
+       1.4.1.  *Hybrid Authentication*
+       1.4.2.  *Hybrid Unforgeability*
        1.4.3.  *Weak Non-Separability*
        1.4.4.  *Strong Non-Separability*
        1.4.5.  *Backwards/Forwards Compatibility*
@@ -120,18 +120,18 @@ Table of Contents
 
    One approach to design quantum-resistant protocols, particularly
    during the transition period from traditional to post-quantum
-   algorithms, is incorporating hybrid/composite signatures schemes,
-   which combine both traditional and post-quantum (or more generally
-   next-generation) algorithms in one cryptographic scheme.
-   Hybridization has been looked at for key encapsulation [HYBRIDKEM],
-   and in an initial sense for digital signatures [HYBRIDSIG].  Compared
-   to key encapsulation, hybridization of digital signatures, where the
+   algorithms, is incorporating PQ/T hybrid signature schemes, which
+   combine both traditional and post-quantum (or more generally next-
+   generation) algorithms in one cryptographic scheme.  Hybridization
+   has been looked at for key encapsulation [HYBRIDKEM], and in an
+   initial sense for digital signatures [HYBRIDSIG].  Compared to key
+   encapsulation, hybridization of digital signatures, where the
    verification tag may be expected to attest to both standard and post-
    quantum components, is subtler to design and implement due to the
    potential separability of the composite signatures and the risk of
    downgrade/stripping attacks.  There are also a range of requirements
-   and properties that may be required from dual signatures, not all of
-   which can be achieved at once.
+   and properties that may be required from hybrid signatures, not all
+   of which can be achieved at once.
 
    This document focuses on explaining advantages and disadvantages of
    different hybrid signature scheme designs and different security
@@ -199,15 +199,17 @@ Table of Contents
    *  Component (signature) scheme: Component signature schemes are the
       cryptographic algorithms contributing to the hybrid signature
       scheme.  This has a similar purpose as in
-      [I-D.ietf-pquip-pqt-hybrid-terminology].  In this draft, we will
-      use 'ingredient signature scheme' as a synonym.
+      [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient (signature)
+      scheme' may be used as a synonym.
 
-   *  Next-generation algorithms: Similarly to the case of hybrid KEMs
-      [I-D.ietf-tls-hybrid-design], hybrid signatures are mostly
-      motiviated as preparation for the post-quantum migration.
-      Following [I-D.ietf-tls-hybrid-design], we opt to use the more
-      generic term "next-generation" and "traditional" algorithm instead
-      of "post-quantum" and "classical" algorithms.
+   *  Next-generation algorithms: Following
+      [I-D.ietf-tls-hybrid-design], we define next-generation algorithms
+      to be "algorithms which are not yet widely deployed but which may
+      eventually be widely deployed".  Hybrid signatures are mostly
+      motivated by preparation for post-quantum migration, hence the
+      reference to post-quantum algorithms through this draft.  However,
+      the majority of the discussion in this document applies equally
+      well to future migration to other next-generation algorithms.
 
    *  Artifact: An artifact is evidence of the sender's intent to
       hybridize a signature that remains even if a component algorithm
@@ -228,9 +230,9 @@ Table of Contents
 
 1.3.1.  *Complexity*
 
-   Next-generation algorithms and their underlying hardness assumptions
-   are often more complex than traditional algorithms and as such carry
-   a higher risk of implementation mistakes and revision of parameters
+   Post-quantum algorithms and their underlying hardness assumptions are
+   often more complex than traditional algorithms and as such carry a
+   higher risk of implementation mistakes and revision of parameters
    compared to traditional algorithms, such as RSA.  RSA is a relatively
    simple algorithm to understand and explain, yet during its existence
    and use there have been multiple attacks and refinements, such as
@@ -246,10 +248,10 @@ Table of Contents
    come to light, it is less likely that a "break" will be catastrophic.
    Instead, such vulnerabilities and issues may represent a weakening of
    security - which may in turn be offset if a hybrid approach has been
-   used.  The complexity of next-generation algorithms needs to be
-   balanced against the fact that hybridization itself adds more
-   complexity to a protocol and introduces the risk of implementation
-   mistakes in the hybridization process.
+   used.  The complexity of post-quantum algorithms needs to be balanced
+   against the fact that hybridization itself adds more complexity to a
+   protocol and introduces the risk of implementation mistakes in the
+   hybridization process.
 
    One example of a next generation algorithm is the signature scheme
    ML-DSA (a.k.a.  CRYSTALS-Dilithium) that has been selected for
@@ -257,14 +259,14 @@ Table of Contents
    Fiat-Shamir transform to construct the signature scheme, it also
    relies on rejection sampling that is known to give cache side channel
    information (although this does not lead to a known attack).
-   Furthermore, recent attacks again the next-generation multivariate
+   Furthermore, recent attacks again the post-quantum multivariate
    schemes Rainbow and GeMSS might call into question the asymptotic and
    concrete security for conservative adopters and therefore might
    hinder adoption.
 
 1.3.2.  *Time*
 
-   The need to transition to quantum-resistant algorithms now while
+   The need to transition to post-quantum algorithms now while
    simultaneously being aware of potential, hidden subtleties in their
    resistance to standard attacks drives transition designs towards
    hybridization.  Mosca’s equation [MOSCA] very simply illustrates the
@@ -272,10 +274,10 @@ Table of Contents
    information life-span, d is the time for system transition to post-
    quantum algorithms, and q is the time before a quantum computer is
    ready to execute cryptanalysis.  As opposed to key exchange and KEMs,
-   it may not be obvious why there is urgency for an adoption of next-
-   generation signatures; namely, while encryption is subject to store-
-   now-decrypt-later attacks, there may not seem to be a parallel notion
-   for authenticity, i.e., 'store-now-modify-later attacks'.
+   it may not be obvious why there is urgency for an adoption of post-
+   quantum signatures; namely, while encryption is subject to store-now-
+   decrypt-later attacks, there may not seem to be a parallel notion for
+   authenticity, i.e., 'store-now-modify-later attacks'.
 
    However, in larger systems, including national systems, space
    systems, large healthcare support systems, and critical
@@ -286,14 +288,14 @@ Table of Contents
    can take considerable time (such as in long-lived systems with
    hardware deployment), meaning that an algorithm may be committed to
    long-term, with no option for replacement.  Long-term committment
-   creates further urgency for immediate next-generation algorithm
+   creates further urgency for immediate post-quantum algorithm
    selection.  Additionally, for some sectors future checks on past
    authenticity plays a role (e.g., many legal, financial, auditing, and
    governmental systems).  The 'store-now-modify-later' analogy would
    present challenges in such sectors, where future analysis of past
    authentication may be more critical than in e.g., internet connection
-   use cases.  As such there is an eagerness to use next-generation
-   signatures algorithms for some applications.
+   use cases.  As such there is an eagerness to use post-quantum
+   signature algorithms for some applications.
 
 1.4.  Goals
 
@@ -303,28 +305,37 @@ Table of Contents
    achievement of one goal precludes another, such as backwards
    compatibility.
 
-1.4.1.  *Unforgeability*
+1.4.1.  *Hybrid Authentication*
 
-   One goal is security of hybrid signature schemes, in particular that
-   EUF-CMA security is maintained as long as at least one of the
-   ingredient schemes is EUF-CMA secure.  There might be, however, other
-   goals in competition with this one, such as backward-compatibility,
-   where the EUF-CMA security of the hybrid signature relies solely on
-   the security of one of the ingredient schemes instead of relying on
-   both.
+   One goal of hybrid signature schemes is security.  As defined in
+   [I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the
+   property that (cryptograpthic) authentication is achieved by the
+   hybrid signature scheme provided that a least one component signature
+   algorithm remains secure.  There might be, however, other goals in
+   competition with this one, such as backward-compatibility.  Hybrid
+   authentication is an umbrella term that encompassess more specific
+   concepts of hybrid signature security.
 
-1.4.2.  *Proof Composability*
+1.4.2.  *Hybrid Unforgeability*
 
-   Under proof composability, the ingredient algorithms are combined in
+   Hybrid unforgeability is a specific type of hybrid authentication,
+   where the security assumption for the scheme, e.g.  EUF-CMA or SUF-
+   CMA, is maintained as long as at least one of the component schemes
+   is EUF-CMA secure.  As discussed above, this is incompatible with
+   backward-compatibility, where the EUF-CMA security of the hybrid
+   signature relies solely on the security of one of the component
+   schemes instead of relying on both. ### *Proof Composability*
+
+   Under proof composability, the component algorithms are combined in
    such a way that it is possible to prove a security reduction from the
-   security properties of hybrid signature scheme to the properties of
-   the respective ingredient signature schemes and, potentially, other
+   security properties of a hybrid signature scheme to the properties of
+   the respective component signature schemes and, potentially, other
    building blocks such as hash functions, KDF, etc.  Otherwise an
    entirely new proof of security is required, and there is a lack of
    assurance that the combination builds on the standardization
-   processes and analysis performed to date on ingredient algorithms.
+   processes and analysis performed to date on component algorithms.
    The resulting hybrid signature would be, in effect, an entirely new
-   algorithm of its own.  The more the ingredient signature schemes are
+   algorithm of its own.  The more the component signature schemes are
    entangled, the more likely it is that an entirely new proof is
    required, thus not meeting proof composability.
 
@@ -333,12 +344,12 @@ Table of Contents
    Non-Separability was one of the earliest properties of hybrid digital
    signatures to be discussed [HYBRIDSIG].  It was defined as the
    guarantee that an adversary cannot simply “remove” one of the
-   ingredient signatures without evidence left behind.  For example
-   there are artifacts that a carefully designed verifier may be able to
+   component signatures without evidence left behind.  For example there
+   are artifacts that a carefully designed verifier may be able to
    identify, or that are identifiable in later audits.  This was later
    termed Weak Non-Separability (WNS) [HYBRIDSIGDESIGN].  Note that WNS
    does not restrict an adversary from potentially creating a valid
-   ingredient digital signature from a hybrid one (a signature stripping
+   component digital signature from a hybrid one (a signature stripping
    attack), but rather implies that such a digital signature will
    contain artifacts of the separation.  Thus authentication is not
    simply provided by the sender to the receiver through correct
@@ -347,8 +358,8 @@ Table of Contents
    beyond traditional signature verification behavior.  For instance,
    this can intuitively be seen in cases of a message containing a
    context note on hybrid authentication, that is then signed by all
-   ingredient algorithms/the hybrid signature scheme.  If an adversary
-   removes one ingredient signature but not the other, then artifacts in
+   component algorithms/the hybrid signature scheme.  If an adversary
+   removes one component signature but not the other, then artifacts in
    the message itself point to the possible existence of hybrid
    signature such as a label stating “this message must be hybrid
    signed”. This might be a counter measure against stripping attacks if
@@ -362,7 +373,7 @@ Table of Contents
    Strong Non-Separability (SNS) is a stronger notion of WNS, introduced
    in [HYBRIDSIGDESIGN].  SNS guarantees that an adversary cannot take
    as input a hybrid signature (and message) and output a valid
-   ingredient signature (and potentially different message) that will
+   component signature (and potentially different message) that will
    verify correctly.  In other words, separation of the hybrid signature
    into component signatures implies that the component signature will
    fail verification (of the component signature scheme) entirely.
@@ -371,7 +382,7 @@ Table of Contents
    traditional signature security experiments.  It is not dependent on
    other components, such as message content checking, or protocol level
    aspects, such as public key provenance.  As an illustrative example
-   distinguishing WNS from SNS, consider the case of ingredient
+   distinguishing WNS from SNS, consider the case of component
    algorithms Sigma_1.Sign and Sigma_2.Sign where the hybrid signature
    is computed as a concatenation (sig_1, sig_2), where sig_1 =
    Sigma_1.Sign(hybridAlgID, m) and sig_2 = Sigma_2.Sign(hybridAlgID,
@@ -403,14 +414,14 @@ Table of Contents
    signature may be verified by only verifying one component signature,
    allowing the scheme to be used by legacy receivers.  In general this
    means verifying the traditional component signature scheme,
-   potentially ignoring the next-generation signature entirely.  This
-   provides an option to transition sender systems to next-generation
+   potentially ignoring the post-quantum signature entirely.  This
+   provides an option to transition sender systems to post-quantum
    algorithms while still supporting select legacy receivers.  Notably,
    this is a verification property; the sender has provided a hybrid
    digital signature, but the verifier is allowed, due to internal
    policy and/or implementation, to only verify one component signature.
    Backwards compatibility may be further decomposed to subcategories
-   where ingredient key provenance is either separate or hybrid so as to
+   where component key provenance is either separate or hybrid so as to
    support implementations that cannot recognize (and/or process) hybrid
    signatures or keys.
 
@@ -418,13 +429,13 @@ Table of Contents
    proposals [I-D.becker-guthrie-noncomposite-hybrid-auth].  Forward
    compatibility assumes that hybrid signature schemes will be used for
    some time, but that eventually all systems will transition to use
-   only one (particularly, only one next-generation) algorithm.  As this
-   is very similar to backwards compatibility, it also may imply
+   only one (particularly, only one post-quantum) algorithm.  As this is
+   very similar to backwards compatibility, it also may imply
    separability of a hybrid algorithm; however, it could also simply
    imply capability to support separate component signatures.  Thus the
    key distinction between backwards and forwards compatibility is that
    backwards compatibility may be needed for legacy systems that cannot
-   use and/or process hybrid or next-generation signatures, whereas in
+   use and/or process hybrid or post-quantum signatures, whereas in
    forwards compatibility the system has those capabilities and can
    choose what to support (e.g., for efficiency reasons).
 
@@ -435,7 +446,7 @@ Table of Contents
 1.4.6.  *Simultaneous Verification*
 
    Simultaneous Verification (SV) builds on SNS and was first introduced
-   in [HYBRIDSIGDESIGN].  SV requires that not only are all ingredient
+   in [HYBRIDSIGDESIGN].  SV requires that not only are all component
    signatures needed to achieve a successful verification present in the
    hybrid signature, but also that verification of both component
    algorithms occurs simultaneously.  Namely, "missing" information
@@ -514,7 +525,7 @@ Table of Contents
 
   Figure 1: Spectrum of non-separability from weakest to strongest.
 
-   At one end of the spectrum are schemes in which one of the ingredient
+   At one end of the spectrum are schemes in which one of the component
    signatures can be stripped away with the verifier not being able to
    detect the change during verification.  An example of this includes
    simple concatenation of signatures without any artifacts used.
@@ -561,15 +572,15 @@ Table of Contents
    only when the verifier has verified both signatures.  Moreover, no
    information is leaked to the receiver during the verification process
    on the possibile validity/invalidity of the component signatures
-   until both verify.  This construct most closely mirrors traditional
-   digital signatures where, assuming that the verifier does verify a
-   signature at all, the result is either a positive verification of a
-   the full signature or a failure if the signature is not valid.  For
-   hybrid signatures, a full signature implies the hybridization of both
-   component algorithms, and therefore the strongest non-separability
-   notion enforces an all-or-nothing approach to verification.  Examples
-   of algorithms providing this type of security can be found in
-   [HYBRIDSIGDESIGN].
+   until both verify (or fail to verify).  This construct most closely
+   mirrors traditional digital signatures where, assuming that the
+   verifier does verify a signature at all, the result is either a
+   positive verification of a the full signature or a failure if the
+   signature is not valid.  For hybrid signatures, a full signature
+   implies the hybridization of both component algorithms, and therefore
+   the strongest non-separability notion enforces an all-or-nothing
+   approach to verification.  Examples of algorithms providing this type
+   of security can be found in [HYBRIDSIGDESIGN].
 
 3.  Artifacts
 
@@ -922,9 +933,9 @@ Table of Contents
    [I-D.ietf-pquip-pqt-hybrid-terminology]
               D, F., "Terminology for Post-Quantum Traditional Hybrid
               Schemes", Work in Progress, Internet-Draft, draft-ietf-
-              pquip-pqt-hybrid-terminology-01, 20 October 2023,
+              pquip-pqt-hybrid-terminology-02, 2 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-pquip-
-              pqt-hybrid-terminology-01>.
+              pqt-hybrid-terminology-02>.
 
    [I-D.ietf-tls-hybrid-design]
               Stebila, D., Fluhrer, S., and S. Gueron, "Hybrid key
@@ -937,9 +948,9 @@ Table of Contents
               Ounsworth, M., Gray, J., Pala, M., and J. Klaußner,
               "Composite Signatures For Use In Internet PKI", Work in
               Progress, Internet-Draft, draft-ounsworth-pq-composite-
-              sigs-10, 23 October 2023,
+              sigs-12, 11 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-
-              composite-sigs-10>.
+              composite-sigs-12>.
 
    [MOSCA]    Kaye, P., Laflamme, R., and M. Mosca, "An Introduction to
               Quantum Computing, Oxford University Press", November
