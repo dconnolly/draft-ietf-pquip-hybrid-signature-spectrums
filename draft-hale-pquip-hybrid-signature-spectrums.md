@@ -322,8 +322,7 @@ One goal of hybrid signature schemes is security. As defined in [I-D.ietf-pquip-
 
 ### **Hybrid Unforgeability**
 
-Hybrid unforgeability is a specific type of hybrid authentication, where EUF-CMA
-security is maintained as long as at least one of the component schemes is
+Hybrid unforgeability is a specific type of hybrid authentication, where the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as long as at least one of the component schemes is
 EUF-CMA secure.  As discussed above, this is incompatible with backward-compatibility, where the EUF-CMA security of the hybrid
 signature relies solely on the security of one of the component schemes instead
 of relying on both
