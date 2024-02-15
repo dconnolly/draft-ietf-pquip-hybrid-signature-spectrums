@@ -336,11 +336,12 @@ concepts of hybrid signature security.
 
 ### **Hybrid Unforgeability**
 
-Hybrid unforgeability is a specific type of hybrid authentication, where the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as long as at least one of the component schemes is
-EUF-CMA secure.  As discussed above, this is incompatible with backward-compatibility, where the EUF-CMA security of the hybrid
-signature relies solely on the security of one of the component schemes instead
-of relying on both
-
+Hybrid unforgeability is a specific type of hybrid authentication, where the
+security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as
+long as at least one of the component schemes is EUF-CMA secure.  As discussed
+above, this is incompatible with backward-compatibility, where the EUF-CMA
+security of the hybrid signature relies solely on the security of one of the
+component schemes instead of relying on both.
 ### **Proof Composability**
 
 Under proof composability, the component algorithms are combined in such a way
