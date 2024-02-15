@@ -12,31 +12,31 @@
 <meta content="
        This document describes classification of design goals and security
 considerations for hybrid digital signature schemes, including proof
-composability, non-separability of the ingredient signatures given a hybrid
+composability, non-separability of the component signatures given a hybrid
 signature, backwards/forwards compatiblity, hybrid generality, and simultaneous
 verification. 
        Discussion of this work is encouraged to happen on the IETF PQUIP mailing list
 pqc@ietf.org or on the GitHub repository which contains the draft:
 https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.19.2" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-hale-pquip-hybrid-signature-spectrums-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
+  xml2rfc 3.19.2
     Python 3.11.6
-    ConfigArgParse 1.5.3
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.2.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.9
+    wcwidth 0.2.13
 -->
 <link href="draft-hale-pquip-hybrid-signature-spectrums.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1084,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document describes classification of design goals and security
 considerations for hybrid digital signature schemes, including proof
-composability, non-separability of the ingredient signatures given a hybrid
+composability, non-separability of the component signatures given a hybrid
 signature, backwards/forwards compatiblity, hybrid generality, and simultaneous
 verification.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">Discussion of this work is encouraged to happen on the IETF PQUIP mailing list
@@ -1174,34 +1174,37 @@ https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums<a href=
                 <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-goals" class="internal xref">Goals</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.1">
-                    <p id="section-toc.1-1.1.2.4.2.1.1"><a href="#section-1.4.1" class="auto internal xref">1.4.1</a>.  <a href="#name-unforgeability" class="internal xref"><strong>Unforgeability</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.1.1"><a href="#section-1.4.1" class="auto internal xref">1.4.1</a>.  <a href="#name-hybrid-authentication" class="internal xref"><strong>Hybrid Authentication</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.2">
-                    <p id="section-toc.1-1.1.2.4.2.2.1"><a href="#section-1.4.2" class="auto internal xref">1.4.2</a>.  <a href="#name-proof-composability" class="internal xref"><strong>Proof Composability</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.2.1"><a href="#section-1.4.2" class="auto internal xref">1.4.2</a>.  <a href="#name-hybrid-unforgeability" class="internal xref"><strong>Hybrid Unforgeability</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.3">
-                    <p id="section-toc.1-1.1.2.4.2.3.1"><a href="#section-1.4.3" class="auto internal xref">1.4.3</a>.  <a href="#name-weak-non-separability" class="internal xref"><strong>Weak Non-Separability</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.3.1"><a href="#section-1.4.3" class="auto internal xref">1.4.3</a>.  <a href="#name-proof-composability" class="internal xref"><strong>Proof Composability</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.4">
-                    <p id="section-toc.1-1.1.2.4.2.4.1"><a href="#section-1.4.4" class="auto internal xref">1.4.4</a>.  <a href="#name-strong-non-separability" class="internal xref"><strong>Strong Non-Separability</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.4.1"><a href="#section-1.4.4" class="auto internal xref">1.4.4</a>.  <a href="#name-weak-non-separability" class="internal xref"><strong>Weak Non-Separability</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.5">
-                    <p id="section-toc.1-1.1.2.4.2.5.1"><a href="#section-1.4.5" class="auto internal xref">1.4.5</a>.  <a href="#name-backwards-forwards-compatib" class="internal xref"><strong>Backwards/Forwards Compatibility</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.5.1"><a href="#section-1.4.5" class="auto internal xref">1.4.5</a>.  <a href="#name-strong-non-separability" class="internal xref"><strong>Strong Non-Separability</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.6">
-                    <p id="section-toc.1-1.1.2.4.2.6.1"><a href="#section-1.4.6" class="auto internal xref">1.4.6</a>.  <a href="#name-simultaneous-verification" class="internal xref"><strong>Simultaneous Verification</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.6.1"><a href="#section-1.4.6" class="auto internal xref">1.4.6</a>.  <a href="#name-backwards-forwards-compatib" class="internal xref"><strong>Backwards/Forwards Compatibility</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.7">
-                    <p id="section-toc.1-1.1.2.4.2.7.1"><a href="#section-1.4.7" class="auto internal xref">1.4.7</a>.  <a href="#name-hybrid-generality" class="internal xref"><strong>Hybrid Generality</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.7.1"><a href="#section-1.4.7" class="auto internal xref">1.4.7</a>.  <a href="#name-simultaneous-verification" class="internal xref"><strong>Simultaneous Verification</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.8">
-                    <p id="section-toc.1-1.1.2.4.2.8.1"><a href="#section-1.4.8" class="auto internal xref">1.4.8</a>.  <a href="#name-high-performance" class="internal xref"><strong>High performance</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.8.1"><a href="#section-1.4.8" class="auto internal xref">1.4.8</a>.  <a href="#name-hybrid-generality" class="internal xref"><strong>Hybrid Generality</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.9">
-                    <p id="section-toc.1-1.1.2.4.2.9.1"><a href="#section-1.4.9" class="auto internal xref">1.4.9</a>.  <a href="#name-high-space-efficiency" class="internal xref"><strong>High space efficiency</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.9.1"><a href="#section-1.4.9" class="auto internal xref">1.4.9</a>.  <a href="#name-high-performance" class="internal xref"><strong>High performance</strong></a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.10">
-                    <p id="section-toc.1-1.1.2.4.2.10.1"><a href="#section-1.4.10" class="auto internal xref">1.4.10</a>. <a href="#name-minimal-duplicate-informati" class="internal xref"><strong>Minimal duplicate information</strong></a></p>
+                    <p id="section-toc.1-1.1.2.4.2.10.1"><a href="#section-1.4.10" class="auto internal xref">1.4.10</a>. <a href="#name-high-space-efficiency" class="internal xref"><strong>High space efficiency</strong></a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.11">
+                    <p id="section-toc.1-1.1.2.4.2.11.1"><a href="#section-1.4.11" class="auto internal xref">1.4.11</a>. <a href="#name-minimal-duplicate-informati" class="internal xref"><strong>Minimal duplicate information</strong></a></p>
 </li>
                 </ul>
 </li>
@@ -1263,7 +1266,7 @@ systems with hardware roots of trust), or where future checks on past
 authenticity play a role (e.g., digital signatures on legal documents).<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">One approach to design quantum-resistant protocols, particularly during the
 transition period from traditional to post-quantum algorithms, is incorporating
-hybrid/composite signatures schemes, which combine both traditional and
+PQ/T hybrid signature schemes, which combine both traditional and
 post-quantum (or more generally next-generation) algorithms in one cryptographic
 scheme. Hybridization has been looked at for key encapsulation <span>[<a href="#HYBRIDKEM" class="cite xref">HYBRIDKEM</a>]</span>, and
 in an initial sense for digital signatures <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. Compared to key
@@ -1271,7 +1274,7 @@ encapsulation, hybridization of digital signatures, where the verification tag
 may be expected to attest to both standard and post-quantum components, is
 subtler to design and implement due to the potential separability of the
 composite signatures and the risk of downgrade/stripping attacks.  There are
-also a range of requirements and properties that may be required from dual
+also a range of requirements and properties that may be required from hybrid
 signatures, not all of which can be achieved at once.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document focuses on explaining advantages and disadvantages of different
 hybrid signature scheme designs and different security goals for them. It is
@@ -1352,16 +1355,10 @@ more signatures on a common message" <span>[<a href="#NIST_PQC_FAQ" class="cite 
           <li class="normal" id="section-1.2-2.4">
             <p id="section-1.2-2.4.1">Component (signature) scheme: Component signature schemes are the
 cryptographic algorithms contributing to the hybrid signature scheme. This has
-a similar purpose as in <span>[<a href="#I-D.ietf-pquip-pqt-hybrid-terminology" class="cite xref">I-D.ietf-pquip-pqt-hybrid-terminology</a>]</span>.  In this
-draft, we will use 'ingredient signature scheme' as a synonym.<a href="#section-1.2-2.4.1" class="pilcrow">¶</a></p>
+a similar purpose as in <span>[<a href="#I-D.ietf-pquip-pqt-hybrid-terminology" class="cite xref">I-D.ietf-pquip-pqt-hybrid-terminology</a>]</span>.  'Ingredient (signature) scheme' may be used as a synonym.<a href="#section-1.2-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.5">
-            <p id="section-1.2-2.5.1">Next-generation algorithms: Similarly to the case of hybrid KEMs
-<span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, hybrid signatures are mostly motiviated as
-preparation for the post-quantum migration. Following
-<span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, we opt to use the more generic term
-"next-generation" and "traditional" algorithm instead of "post-quantum" and
-"classical" algorithms.<a href="#section-1.2-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-2.5.1">Next-generation algorithms: Following <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, we define next-generation algorithms to be "algorithms which are not yet widely deployed but which may eventually be widely deployed". Hybrid signatures are mostly motivated by preparation for post-quantum migration, hence the reference to post-quantum algorithms through this draft.  However, the majority of the discussion in this document applies equally well to future migration to other next-generation algorithms.<a href="#section-1.2-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.6">
             <p id="section-1.2-2.6.1">Artifact: An artifact is evidence of the sender's intent to hybridize a
@@ -1389,7 +1386,7 @@ addition, we explicate the motivation for hybrid signatures here.<a href="#secti
           <h4 id="name-complexity">
 <a href="#section-1.3.1" class="section-number selfRef">1.3.1. </a><a href="#name-complexity" class="section-name selfRef"><strong>Complexity</strong></a>
           </h4>
-<p id="section-1.3.1-1">Next-generation algorithms and their underlying hardness assumptions are often
+<p id="section-1.3.1-1">Post-quantum algorithms and their underlying hardness assumptions are often
 more complex than traditional algorithms and as such carry a higher risk of
 implementation mistakes and revision of parameters compared to traditional
 algorithms, such as RSA. RSA is a relatively simple algorithm to understand and
@@ -1403,7 +1400,7 @@ discoveries and caveats needs to be taken into account.<a href="#section-1.3.1-1
 further information on caveats and implementation issues come to light, it is
 less likely that a "break" will be catastrophic. Instead, such vulnerabilities
 and issues may represent a weakening of security - which may in turn be offset
-if a hybrid approach has been used. The complexity of next-generation algorithms
+if a hybrid approach has been used. The complexity of post-quantum algorithms
 needs to be balanced against the fact that hybridization itself adds more
 complexity to a protocol and introduces the risk of implementation mistakes in
 the hybridization process.<a href="#section-1.3.1-2" class="pilcrow">¶</a></p>
@@ -1412,7 +1409,7 @@ the hybridization process.<a href="#section-1.3.1-2" class="pilcrow">¶</a></p>
 NIST. While the scheme follows the well-known Fiat-Shamir transform to construct the
 signature scheme, it also relies on rejection sampling that is known to give
 cache side channel information (although this does not lead to a known attack).
-Furthermore, recent attacks again the next-generation multivariate schemes Rainbow
+Furthermore, recent attacks again the post-quantum multivariate schemes Rainbow
 and GeMSS might call into question the asymptotic and concrete security for
 conservative adopters and therefore might hinder adoption.<a href="#section-1.3.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1422,14 +1419,14 @@ conservative adopters and therefore might hinder adoption.<a href="#section-1.3.
           <h4 id="name-time">
 <a href="#section-1.3.2" class="section-number selfRef">1.3.2. </a><a href="#name-time" class="section-name selfRef"><strong>Time</strong></a>
           </h4>
-<p id="section-1.3.2-1">The need to transition to quantum-resistant algorithms now while simultaneously
+<p id="section-1.3.2-1">The need to transition to post-quantum algorithms now while simultaneously
 being aware of potential, hidden subtleties in their resistance to standard
 attacks drives transition designs towards hybridization.  Mosca’s equation
 <span>[<a href="#MOSCA" class="cite xref">MOSCA</a>]</span> very simply illustrates the risk of post-quantum transition delay: <code>l +
 d &gt; q</code>, where l is the information life-span, d is the time for system
 transition to post-quantum algorithms, and q is the time before a quantum
 computer is ready to execute cryptanalysis. As opposed to key exchange and KEMs,
-it may not be obvious why there is urgency for an adoption of next-generation
+it may not be obvious why there is urgency for an adoption of post-quantum
 signatures; namely, while encryption is subject to store-now-decrypt-later
 attacks, there may not seem to be a parallel notion for authenticity, i.e.,
 'store-now-modify-later attacks'.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
@@ -1441,12 +1438,12 @@ implications.  In such systems, algorithm turn-over can be complex and difficult
 and can take considerable time (such as in long-lived systems with hardware
 deployment), meaning that an algorithm may be committed to long-term, with no
 option for replacement. Long-term committment creates further urgency for
-immediate next-generation algorithm selection.  Additionally, for some sectors
+immediate post-quantum algorithm selection.  Additionally, for some sectors
 future checks on past authenticity plays a role (e.g., many legal, financial,
 auditing, and governmental systems).  The 'store-now-modify-later' analogy would
 present challenges in such sectors, where future analysis of past authentication
 may be more critical than in e.g., internet connection use cases. As such there
-is an eagerness to use next-generation signatures algorithms for some
+is an eagerness to use post-quantum signature algorithms for some
 applications.<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1461,49 +1458,56 @@ applications.<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
 following provides a summary of these goals, while also noting where security
 goals are in conflict, i.e., that achievement of one goal precludes another,
 such as backwards compatibility.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
-<div id="unforgeability">
+<div id="hybrid-authentication">
 <section id="section-1.4.1">
-          <h4 id="name-unforgeability">
-<a href="#section-1.4.1" class="section-number selfRef">1.4.1. </a><a href="#name-unforgeability" class="section-name selfRef"><strong>Unforgeability</strong></a>
+          <h4 id="name-hybrid-authentication">
+<a href="#section-1.4.1" class="section-number selfRef">1.4.1. </a><a href="#name-hybrid-authentication" class="section-name selfRef"><strong>Hybrid Authentication</strong></a>
           </h4>
-<p id="section-1.4.1-1">One goal is security of hybrid signature schemes, in particular that EUF-CMA
-security is maintained as long as at least one of the ingredient schemes is
-EUF-CMA secure.  There might be, however, other goals in competition with this
-one, such as backward-compatibility, where the EUF-CMA security of the hybrid
-signature relies solely on the security of one of the ingredient schemes instead
-of relying on both.<a href="#section-1.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.4.1-1">One goal of hybrid signature schemes is security. As defined in <span>[<a href="#I-D.ietf-pquip-pqt-hybrid-terminology" class="cite xref">I-D.ietf-pquip-pqt-hybrid-terminology</a>]</span> hybrid authentication is the property that (cryptograpthic) authentication is achieved by the hybrid signature scheme provided that a least one component signature algorithm remains secure.  There might be, however, other goals in competition with this one, such as backward-compatibility. Hybrid authentication is an umbrella term that encompassess more specific concepts of hybrid signature security.<a href="#section-1.4.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="hybrid-unforgeability">
+<section id="section-1.4.2">
+          <h4 id="name-hybrid-unforgeability">
+<a href="#section-1.4.2" class="section-number selfRef">1.4.2. </a><a href="#name-hybrid-unforgeability" class="section-name selfRef"><strong>Hybrid Unforgeability</strong></a>
+          </h4>
+<p id="section-1.4.2-1">Hybrid unforgeability is a specific type of hybrid authentication, where EUF-CMA
+security is maintained as long as at least one of the component schemes is
+EUF-CMA secure.  As discussed above, this is incompatible with backward-compatibility, where the EUF-CMA security of the hybrid
+signature relies solely on the security of one of the component schemes instead
+of relying on both<a href="#section-1.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="proof-composability">
-<section id="section-1.4.2">
+<section id="section-1.4.3">
           <h4 id="name-proof-composability">
-<a href="#section-1.4.2" class="section-number selfRef">1.4.2. </a><a href="#name-proof-composability" class="section-name selfRef"><strong>Proof Composability</strong></a>
+<a href="#section-1.4.3" class="section-number selfRef">1.4.3. </a><a href="#name-proof-composability" class="section-name selfRef"><strong>Proof Composability</strong></a>
           </h4>
-<p id="section-1.4.2-1">Under proof composability, the ingredient algorithms are combined in such a way
+<p id="section-1.4.3-1">Under proof composability, the component algorithms are combined in such a way
 that it is possible to prove a security reduction from the security properties
-of hybrid signature scheme to the properties of the respective ingredient
+of a hybrid signature scheme to the properties of the respective component
 signature schemes and, potentially, other building blocks such as hash
 functions, KDF, etc.  Otherwise an entirely new proof of security is required,
 and there is a lack of assurance that the combination builds on the
-standardization processes and analysis performed to date on ingredient
+standardization processes and analysis performed to date on component
 algorithms. The resulting hybrid signature would be, in effect, an entirely new
-algorithm of its own. The more the ingredient signature schemes are entangled,
+algorithm of its own. The more the component signature schemes are entangled,
 the more likely it is that an entirely new proof is required, thus not meeting
-proof composability.<a href="#section-1.4.2-1" class="pilcrow">¶</a></p>
+proof composability.<a href="#section-1.4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="weak-non-separability">
-<section id="section-1.4.3">
+<section id="section-1.4.4">
           <h4 id="name-weak-non-separability">
-<a href="#section-1.4.3" class="section-number selfRef">1.4.3. </a><a href="#name-weak-non-separability" class="section-name selfRef"><strong>Weak Non-Separability</strong></a>
+<a href="#section-1.4.4" class="section-number selfRef">1.4.4. </a><a href="#name-weak-non-separability" class="section-name selfRef"><strong>Weak Non-Separability</strong></a>
           </h4>
-<p id="section-1.4.3-1">Non-Separability was one of the earliest properties of hybrid digital signatures
+<p id="section-1.4.4-1">Non-Separability was one of the earliest properties of hybrid digital signatures
 to be discussed <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. It was defined as the guarantee that an adversary
-cannot simply “remove” one of the ingredient signatures without evidence left
+cannot simply “remove” one of the component signatures without evidence left
 behind. For example there are artifacts that a carefully designed verifier may
 be able to identify, or that are identifiable in later audits. This was later
 termed Weak Non-Separability (WNS) <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. Note that WNS does not
-restrict an adversary from potentially creating a valid ingredient digital
+restrict an adversary from potentially creating a valid component digital
 signature from a hybrid one (a signature stripping attack), but rather implies
 that such a digital signature will contain artifacts of the separation. Thus
 authentication is not simply provided by the sender to the receiver through
@@ -1511,25 +1515,25 @@ correct verification of the digital signature(s), but potentially through
 further investigation on the receiver side that may extend well beyond
 traditional signature verification behavior. For instance, this can intuitively
 be seen in cases of a message containing a context note on hybrid
-authentication, that is then signed by all ingredient algorithms/the hybrid
-signature scheme. If an adversary removes one ingredient signature but not the
+authentication, that is then signed by all component algorithms/the hybrid
+signature scheme. If an adversary removes one component signature but not the
 other, then artifacts in the message itself point to the possible existence of
 hybrid signature such as a label stating “this message must be hybrid
 signed”. This might be a counter measure against stripping attacks if the
 verifier expects a hybrid signature scheme to have this property. However, it
 places the responsibility of signature validity not only on the correct format
 of the message, as in a traditional signature security guarantee, but the
-precise content thereof.<a href="#section-1.4.3-1" class="pilcrow">¶</a></p>
+precise content thereof.<a href="#section-1.4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="strong-non-separability">
-<section id="section-1.4.4">
+<section id="section-1.4.5">
           <h4 id="name-strong-non-separability">
-<a href="#section-1.4.4" class="section-number selfRef">1.4.4. </a><a href="#name-strong-non-separability" class="section-name selfRef"><strong>Strong Non-Separability</strong></a>
+<a href="#section-1.4.5" class="section-number selfRef">1.4.5. </a><a href="#name-strong-non-separability" class="section-name selfRef"><strong>Strong Non-Separability</strong></a>
           </h4>
-<p id="section-1.4.4-1">Strong Non-Separability (SNS) is a stronger notion of WNS, introduced in
+<p id="section-1.4.5-1">Strong Non-Separability (SNS) is a stronger notion of WNS, introduced in
 <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SNS guarantees that an adversary cannot take as input a
-hybrid signature (and message) and output a valid ingredient signature (and
+hybrid signature (and message) and output a valid component signature (and
 potentially different message) that will verify correctly. In other words,
 separation of the hybrid signature into component signatures implies that the
 component signature will fail verification (of the component signature scheme)
@@ -1538,7 +1542,7 @@ through correct verification of the digital signature(s), as in traditional
 signature security experiments. It is not dependent on other components, such as
 message content checking, or protocol level aspects, such as public key
 provenance. As an illustrative example distinguishing WNS from SNS, consider the
-case of ingredient algorithms <code>Sigma_1.Sign</code> and <code>Sigma_2.Sign</code> where the
+case of component algorithms <code>Sigma_1.Sign</code> and <code>Sigma_2.Sign</code> where the
 hybrid signature is computed as a concatenation <code>(sig_1, sig_2)</code>, where <code>sig_1 =
 Sigma_1.Sign(hybridAlgID, m)</code> and <code>sig_2 = Sigma_2.Sign(hybridAlgID, m)</code>.  In
 this case, a new message <code>m' = (hybridAlgID, m)</code>
@@ -1546,8 +1550,8 @@ along with signature <code>sig_1</code> and <code>Sigma_1.pk</code>, with the hy
 in the message instead of the signature, could be correctly verified. The
 separation would be identifiable through further investigation but the signature
 verification itself would not fail. Thus, this case shows WNS (assuming the
-verification algorithm is defined accordingly) but not SNS.<a href="#section-1.4.4-1" class="pilcrow">¶</a></p>
-<p id="section-1.4.4-2">Some work <span>[<a href="#I-D.ounsworth-pq-composite-sigs" class="cite xref">I-D.ounsworth-pq-composite-sigs</a>]</span> has looked at reliance on the public
+verification algorithm is defined accordingly) but not SNS.<a href="#section-1.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.4.5-2">Some work <span>[<a href="#I-D.ounsworth-pq-composite-sigs" class="cite xref">I-D.ounsworth-pq-composite-sigs</a>]</span> has looked at reliance on the public
 key certificate chains to explicitly define hybrid use of the public
 key. Namely, that <code>Sigma_1.pk</code> cannot be used without <code>Sigma_2.pk</code>. This
 implies pushing the hybrid artifacts into the protocol and system level and a
@@ -1558,49 +1562,49 @@ a valid public key is used but how its hybridization and hybrid artifacts have
 been managed throughout the entire chain. External dependencies such as this may
 imply hybrid artifacts lie outside the scope of the signature algorithm
 itself. SNS may potentially be achieveable based on dependencies at the system
-level.<a href="#section-1.4.4-2" class="pilcrow">¶</a></p>
+level.<a href="#section-1.4.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="backwardsforwards-compatibility">
-<section id="section-1.4.5">
+<section id="section-1.4.6">
           <h4 id="name-backwards-forwards-compatib">
-<a href="#section-1.4.5" class="section-number selfRef">1.4.5. </a><a href="#name-backwards-forwards-compatib" class="section-name selfRef"><strong>Backwards/Forwards Compatibility</strong></a>
+<a href="#section-1.4.6" class="section-number selfRef">1.4.6. </a><a href="#name-backwards-forwards-compatib" class="section-name selfRef"><strong>Backwards/Forwards Compatibility</strong></a>
           </h4>
-<p id="section-1.4.5-1">Backwards compatibility refers to the property where a hybrid signature may be
+<p id="section-1.4.6-1">Backwards compatibility refers to the property where a hybrid signature may be
 verified by only verifying one component signature, allowing the scheme to be
 used by legacy receivers. In general this means verifying the traditional
-component signature scheme, potentially ignoring the next-generation signature
+component signature scheme, potentially ignoring the post-quantum signature
 entirely. This provides an option to transition sender systems to
-next-generation algorithms while still supporting select legacy
+post-quantum algorithms while still supporting select legacy
 receivers. Notably, this is a verification property; the sender has provided a
 hybrid digital signature, but the verifier is allowed, due to internal policy
 and/or implementation, to only verify one component signature. Backwards
-compatibility may be further decomposed to subcategories where ingredient key
+compatibility may be further decomposed to subcategories where component key
 provenance is either separate or hybrid so as to support implementations that
-cannot recognize (and/or process) hybrid signatures or keys.<a href="#section-1.4.5-1" class="pilcrow">¶</a></p>
-<p id="section-1.4.5-2">Forwards compatibility has also been a consideration in hybrid proposals
+cannot recognize (and/or process) hybrid signatures or keys.<a href="#section-1.4.6-1" class="pilcrow">¶</a></p>
+<p id="section-1.4.6-2">Forwards compatibility has also been a consideration in hybrid proposals
 <span>[<a href="#I-D.becker-guthrie-noncomposite-hybrid-auth" class="cite xref">I-D.becker-guthrie-noncomposite-hybrid-auth</a>]</span>. Forward compatibility assumes
 that hybrid signature schemes will be used for some time, but that eventually
 all systems will transition to use only one (particularly, only one
-next-generation) algorithm. As this is very similar to backwards compatibility,
+post-quantum) algorithm. As this is very similar to backwards compatibility,
 it also may imply separability of a hybrid algorithm; however, it could also
 simply imply capability to support separate component signatures. Thus the key
 distinction between backwards and forwards compatibility is that backwards
 compatibility may be needed for legacy systems that cannot use and/or process
-hybrid or next-generation signatures, whereas in forwards compatibility the
+hybrid or post-quantum signatures, whereas in forwards compatibility the
 system has those capabilities and can choose what to support (e.g., for
-efficiency reasons).<a href="#section-1.4.5-2" class="pilcrow">¶</a></p>
-<p id="section-1.4.5-3">As noted in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, ideally, forward/backward
-compatibility is achieved using redundant information as little as possible.<a href="#section-1.4.5-3" class="pilcrow">¶</a></p>
+efficiency reasons).<a href="#section-1.4.6-2" class="pilcrow">¶</a></p>
+<p id="section-1.4.6-3">As noted in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, ideally, forward/backward
+compatibility is achieved using redundant information as little as possible.<a href="#section-1.4.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="simultaneous-verification">
-<section id="section-1.4.6">
+<section id="section-1.4.7">
           <h4 id="name-simultaneous-verification">
-<a href="#section-1.4.6" class="section-number selfRef">1.4.6. </a><a href="#name-simultaneous-verification" class="section-name selfRef"><strong>Simultaneous Verification</strong></a>
+<a href="#section-1.4.7" class="section-number selfRef">1.4.7. </a><a href="#name-simultaneous-verification" class="section-name selfRef"><strong>Simultaneous Verification</strong></a>
           </h4>
-<p id="section-1.4.6-1">Simultaneous Verification (SV) builds on SNS and was first introduced in
-<span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SV requires that not only are all ingredient signatures
+<p id="section-1.4.7-1">Simultaneous Verification (SV) builds on SNS and was first introduced in
+<span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SV requires that not only are all component signatures
 needed to achieve a successful verification present in the hybrid signature, but
 also that verification of both component algorithms occurs
 simultaneously. Namely, "missing" information needs to be computed by the
@@ -1610,60 +1614,60 @@ essentially ensuring that the hybrid digital signature behaves as a single
 algorithm vs. two separate component stages. Alternatively phrased, under an SV
 guarantee it is not possible for an unerring verifier to initiate termination of
 the hybrid verification upon successful verification of one component algorithm
-without also knowing if the other component succeeded or failed.<a href="#section-1.4.6-1" class="pilcrow">¶</a></p>
+without also knowing if the other component succeeded or failed.<a href="#section-1.4.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hybrid-generality">
-<section id="section-1.4.7">
+<section id="section-1.4.8">
           <h4 id="name-hybrid-generality">
-<a href="#section-1.4.7" class="section-number selfRef">1.4.7. </a><a href="#name-hybrid-generality" class="section-name selfRef"><strong>Hybrid Generality</strong></a>
+<a href="#section-1.4.8" class="section-number selfRef">1.4.8. </a><a href="#name-hybrid-generality" class="section-name selfRef"><strong>Hybrid Generality</strong></a>
           </h4>
-<p id="section-1.4.7-1">Hybrid generality means that a general signature combiner is defined, based on
+<p id="section-1.4.8-1">Hybrid generality means that a general signature combiner is defined, based on
 inherent and common structures of component digital signatures "categories." For
 instance, since multiple signature schemes use a Fiat-Shamir Transform, a hybrid
 scheme based on the transform can be made that is generalizable to all such
 signatures. Such generality can also result in simplified constructions whereas
 more tailored hybrid variants might be more efficient in terms of sizes and
-performance.<a href="#section-1.4.7-1" class="pilcrow">¶</a></p>
+performance.<a href="#section-1.4.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="high-performance">
-<section id="section-1.4.8">
+<section id="section-1.4.9">
           <h4 id="name-high-performance">
-<a href="#section-1.4.8" class="section-number selfRef">1.4.8. </a><a href="#name-high-performance" class="section-name selfRef"><strong>High performance</strong></a>
+<a href="#section-1.4.9" class="section-number selfRef">1.4.9. </a><a href="#name-high-performance" class="section-name selfRef"><strong>High performance</strong></a>
           </h4>
-<p id="section-1.4.8-1">Similarly to performance goals noted for hybridization of other cryptographic
+<p id="section-1.4.9-1">Similarly to performance goals noted for hybridization of other cryptographic
 components <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span> hybrid signature constructions are
 expected to be as performant as possible. For most hybrid signatures this means
 that the computation time should only minimally exceed the sum of the component
 signature computation time. It is noted that performance of any variety may come
-at the cost of other properties, such as hybrid generality.<a href="#section-1.4.8-1" class="pilcrow">¶</a></p>
+at the cost of other properties, such as hybrid generality.<a href="#section-1.4.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="high-space-efficiency">
-<section id="section-1.4.9">
+<section id="section-1.4.10">
           <h4 id="name-high-space-efficiency">
-<a href="#section-1.4.9" class="section-number selfRef">1.4.9. </a><a href="#name-high-space-efficiency" class="section-name selfRef"><strong>High space efficiency</strong></a>
+<a href="#section-1.4.10" class="section-number selfRef">1.4.10. </a><a href="#name-high-space-efficiency" class="section-name selfRef"><strong>High space efficiency</strong></a>
           </h4>
-<p id="section-1.4.9-1">Similarly to space considerations in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, hybrid
+<p id="section-1.4.10-1">Similarly to space considerations in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, hybrid
 signature constructions are expected to be as space performant as possible. This
 includes messages (as they might increase if artifacts are used), public keys,
 and the hybrid signature.  For the hybrid signature, size should no more than
 minimally exceed the signature size of the two component signatures. In some
 cases, it may be possible for a hybrid signature to be smaller than the
-concatenationation of the two component signatures.<a href="#section-1.4.9-1" class="pilcrow">¶</a></p>
+concatenationation of the two component signatures.<a href="#section-1.4.10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="minimal-duplicate-information">
-<section id="section-1.4.10">
+<section id="section-1.4.11">
           <h4 id="name-minimal-duplicate-informati">
-<a href="#section-1.4.10" class="section-number selfRef">1.4.10. </a><a href="#name-minimal-duplicate-informati" class="section-name selfRef"><strong>Minimal duplicate information</strong></a>
+<a href="#section-1.4.11" class="section-number selfRef">1.4.11. </a><a href="#name-minimal-duplicate-informati" class="section-name selfRef"><strong>Minimal duplicate information</strong></a>
           </h4>
-<p id="section-1.4.10-1">Similarly to <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, duplicated information should be
+<p id="section-1.4.11-1">Similarly to <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, duplicated information should be
 avoided when possible. This might concern repeated information in hybrid
 certificates or in the communication of component certificates in additional to
 hybrid certificates (for example to achieve backwards/forwards-compatibility), or
-sending multiple public keys or signatures of the same component algorithm.<a href="#section-1.4.10-1" class="pilcrow">¶</a></p>
+sending multiple public keys or signatures of the same component algorithm.<a href="#section-1.4.11-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1703,7 +1707,7 @@ representing <code>degrees</code> of separability hardness, visualized in
 <a href="#name-spectrum-of-non-separabilit" class="selfRef">Spectrum of non-separability from weakest to strongest.</a>
         </figcaption></figure>
 </div>
-<p id="section-2-3">At one end of the spectrum are schemes in which one of the ingredient signatures
+<p id="section-2-3">At one end of the spectrum are schemes in which one of the component signatures
 can be stripped away with the verifier not being able to detect the change
 during verification. An example of this includes simple concatenation of
 signatures without any artifacts used. Nested signatures (where a message is
@@ -1742,7 +1746,7 @@ Non-Separability with Simultaneous Verification, verification succeeds not only
 when both of the component signatures are present but also only when the
 verifier has verified both signatures. Moreover, no information is leaked to the
 receiver during the verification process on the possibile validity/invalidity of
-the component signatures until both verify. This construct most closely mirrors
+the component signatures until both verify (or fail to verify). This construct most closely mirrors
 traditional digital signatures where, assuming that the verifier does verify a
 signature at all, the result is either a positive verification of a the full
 signature or a failure if the signature is not valid. For hybrid signatures, a
@@ -2174,7 +2178,7 @@ Douglas Stebila<a href="#section-8-3" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.ietf-pquip-pqt-hybrid-terminology">[I-D.ietf-pquip-pqt-hybrid-terminology]</dt>
       <dd>
-<span class="refAuthor">D, F.</span>, <span class="refTitle">"Terminology for Post-Quantum Traditional Hybrid Schemes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqt-hybrid-terminology-01</span>, <time datetime="2023-10-20" class="refDate">20 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqt-hybrid-terminology-01">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqt-hybrid-terminology-01</a>&gt;</span>. </dd>
+<span class="refAuthor">D, F.</span>, <span class="refTitle">"Terminology for Post-Quantum Traditional Hybrid Schemes"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqt-hybrid-terminology-02</span>, <time datetime="2024-02-02" class="refDate">2 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqt-hybrid-terminology-02">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqt-hybrid-terminology-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tls-hybrid-design">[I-D.ietf-tls-hybrid-design]</dt>
       <dd>
@@ -2182,7 +2186,7 @@ Douglas Stebila<a href="#section-8-3" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.ounsworth-pq-composite-sigs">[I-D.ounsworth-pq-composite-sigs]</dt>
       <dd>
-<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, and <span class="refAuthor">J. Klaußner</span>, <span class="refTitle">"Composite Signatures For Use In Internet PKI"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ounsworth-pq-composite-sigs-10</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-composite-sigs-10">https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-composite-sigs-10</a>&gt;</span>. </dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, and <span class="refAuthor">J. Klaußner</span>, <span class="refTitle">"Composite Signatures For Use In Internet PKI"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ounsworth-pq-composite-sigs-12</span>, <time datetime="2024-02-11" class="refDate">11 February 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-composite-sigs-12">https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-composite-sigs-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MOSCA">[MOSCA]</dt>
       <dd>
