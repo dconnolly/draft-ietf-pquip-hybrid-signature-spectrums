@@ -228,7 +228,8 @@ certificate' as defined in [RFC4949].
 
 - Component (signature) scheme: Component signature schemes are the
   cryptographic algorithms contributing to the hybrid signature scheme. This has
-  a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient (signature) scheme' may be used as a synonym.
+  a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient
+  (signature) scheme' may be used as a synonym.
 
 - Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we define
 next-generation algorithms to be "algorithms which are not yet widely deployed
