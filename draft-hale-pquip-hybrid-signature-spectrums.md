@@ -230,7 +230,13 @@ certificate' as defined in [RFC4949].
   cryptographic algorithms contributing to the hybrid signature scheme. This has
   a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient (signature) scheme' may be used as a synonym.
 
-- Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we define next-generation algorithms to be "algorithms which are not yet widely deployed but which may eventually be widely deployed". Hybrid signatures are mostly motivated by preparation for post-quantum migration, hence the reference to post-quantum algorithms through this draft.  However, the majority of the discussion in this document applies equally well to future migration to other next-generation algorithms.
+- Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we define
+next-generation algorithms to be "algorithms which are not yet widely deployed
+but which may eventually be widely deployed". Hybrid signatures are mostly
+motivated by preparation for post-quantum migration, hence the reference to
+post-quantum algorithms through this draft.  However, the majority of the
+discussion in this document applies equally well to future migration to
+other next-generation algorithms.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component algorithm tag is removed. Artifacts
