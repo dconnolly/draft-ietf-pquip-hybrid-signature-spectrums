@@ -1,4 +1,4 @@
-!---
+---
 title: Hybrid signature spectrums
 abbrev: hale-pquip-hybrid-spectrums
 docname: draft-hale-pquip-hybrid-signature-spectrums-latest
