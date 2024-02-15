@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-13T00:18:35.938411+00:00",
+  "timestamp": "2024-02-15T00:17:55.130241+00:00",
   "repo": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -96,7 +96,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-01T09:53:14Z",
-      "updatedAt": "2024-02-11T17:13:14Z",
+      "updatedAt": "2024-02-13T18:05:31Z",
       "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
       "baseRefName": "main",
       "baseRefOid": "ccfa69ee954719f93a93d8c02155afe385f1320d",
@@ -126,6 +126,26 @@
               "body": "I would recommend this being \"where e.g. EUF-CMA...\" since unforgeability could also be in the context of SUF-CMA, etc.",
               "createdAt": "2024-02-11T17:13:14Z",
               "updatedAt": "2024-02-11T17:13:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85v-ZdY",
+          "commit": {
+            "abbreviatedOid": "d9f007a"
+          },
+          "author": "fd1729",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-13T18:05:31Z",
+          "updatedAt": "2024-02-13T18:05:31Z",
+          "comments": [
+            {
+              "originalPosition": 133,
+              "body": "Can we define this so that it doesn't rely on the e.g.?  Something like \"where the security assumption for the scheme, e.g. EUF-CMA, SUF-CMA is maintained...\"?  Is there a better way to put that?",
+              "createdAt": "2024-02-13T18:05:31Z",
+              "updatedAt": "2024-02-13T18:05:31Z"
             }
           ]
         }
