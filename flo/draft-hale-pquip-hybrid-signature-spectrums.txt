@@ -83,15 +83,14 @@ Table of Contents
      1.4.  Goals
        1.4.1.  *Hybrid Authentication*
        1.4.2.  *Hybrid Unforgeability*
-       1.4.3.  *Proof Composability*
-       1.4.4.  *Weak Non-Separability*
-       1.4.5.  *Strong Non-Separability*
-       1.4.6.  *Backwards/Forwards Compatibility*
-       1.4.7.  *Simultaneous Verification*
-       1.4.8.  *Hybrid Generality*
-       1.4.9.  *High performance*
-       1.4.10. *High space efficiency*
-       1.4.11. *Minimal duplicate information*
+       1.4.3.  *Weak Non-Separability*
+       1.4.4.  *Strong Non-Separability*
+       1.4.5.  *Backwards/Forwards Compatibility*
+       1.4.6.  *Simultaneous Verification*
+       1.4.7.  *Hybrid Generality*
+       1.4.8.  *High performance*
+       1.4.9.  *High space efficiency*
+       1.4.10. *Minimal duplicate information*
    2.  Non-separability spectrum
    3.  Artifacts
      3.1.  Artifact locations
@@ -325,9 +324,7 @@ Table of Contents
    is EUF-CMA secure.  As discussed above, this is incompatible with
    backward-compatibility, where the EUF-CMA security of the hybrid
    signature relies solely on the security of one of the component
-   schemes instead of relying on both
-
-1.4.3.  *Proof Composability*
+   schemes instead of relying on both. ### *Proof Composability*
 
    Under proof composability, the component algorithms are combined in
    such a way that it is possible to prove a security reduction from the
@@ -342,7 +339,7 @@ Table of Contents
    entangled, the more likely it is that an entirely new proof is
    required, thus not meeting proof composability.
 
-1.4.4.  *Weak Non-Separability*
+1.4.3.  *Weak Non-Separability*
 
    Non-Separability was one of the earliest properties of hybrid digital
    signatures to be discussed [HYBRIDSIG].  It was defined as the
@@ -371,7 +368,7 @@ Table of Contents
    on the correct format of the message, as in a traditional signature
    security guarantee, but the precise content thereof.
 
-1.4.5.  *Strong Non-Separability*
+1.4.4.  *Strong Non-Separability*
 
    Strong Non-Separability (SNS) is a stronger notion of WNS, introduced
    in [HYBRIDSIGDESIGN].  SNS guarantees that an adversary cannot take
@@ -411,7 +408,7 @@ Table of Contents
    scope of the signature algorithm itself.  SNS may potentially be
    achieveable based on dependencies at the system level.
 
-1.4.6.  *Backwards/Forwards Compatibility*
+1.4.5.  *Backwards/Forwards Compatibility*
 
    Backwards compatibility refers to the property where a hybrid
    signature may be verified by only verifying one component signature,
@@ -446,7 +443,7 @@ Table of Contents
    compatibility is achieved using redundant information as little as
    possible.
 
-1.4.7.  *Simultaneous Verification*
+1.4.6.  *Simultaneous Verification*
 
    Simultaneous Verification (SV) builds on SNS and was first introduced
    in [HYBRIDSIGDESIGN].  SV requires that not only are all component
@@ -463,7 +460,7 @@ Table of Contents
    verification of one component algorithm without also knowing if the
    other component succeeded or failed.
 
-1.4.8.  *Hybrid Generality*
+1.4.7.  *Hybrid Generality*
 
    Hybrid generality means that a general signature combiner is defined,
    based on inherent and common structures of component digital
@@ -474,7 +471,7 @@ Table of Contents
    more tailored hybrid variants might be more efficient in terms of
    sizes and performance.
 
-1.4.9.  *High performance*
+1.4.8.  *High performance*
 
    Similarly to performance goals noted for hybridization of other
    cryptographic components [I-D.ietf-tls-hybrid-design] hybrid
@@ -484,7 +481,7 @@ Table of Contents
    computation time.  It is noted that performance of any variety may
    come at the cost of other properties, such as hybrid generality.
 
-1.4.10.  *High space efficiency*
+1.4.9.  *High space efficiency*
 
    Similarly to space considerations in [I-D.ietf-tls-hybrid-design],
    hybrid signature constructions are expected to be as space performant
@@ -495,7 +492,7 @@ Table of Contents
    may be possible for a hybrid signature to be smaller than the
    concatenationation of the two component signatures.
 
-1.4.11.  *Minimal duplicate information*
+1.4.10.  *Minimal duplicate information*
 
    Similarly to [I-D.ietf-tls-hybrid-design], duplicated information
    should be avoided when possible.  This might concern repeated
