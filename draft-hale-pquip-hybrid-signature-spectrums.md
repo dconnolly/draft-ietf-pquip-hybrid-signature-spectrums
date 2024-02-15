@@ -325,7 +325,14 @@ such as backwards compatibility.
 
 ### **Hybrid Authentication**
 
-One goal of hybrid signature schemes is security. As defined in [I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the property that (cryptograpthic) authentication is achieved by the hybrid signature scheme provided that a least one component signature algorithm remains secure.  There might be, however, other goals in competition with this one, such as backward-compatibility. Hybrid authentication is an umbrella term that encompassess more specific concepts of hybrid signature security.
+One goal of hybrid signature schemes is security. As defined in
+[I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the
+property that (cryptograpthic) authentication is achieved by the
+hybrid signature scheme provided that a least one component signature
+algorithm remains secure.  There might be, however, other goals in
+competition with this one, such as backward-compatibility. Hybrid
+authentication is an umbrella term that encompassess more specific
+concepts of hybrid signature security.
 
 ### **Hybrid Unforgeability**
 
