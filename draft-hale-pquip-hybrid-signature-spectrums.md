@@ -142,9 +142,11 @@ https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums
 
 - add discussion
 - extend with discussion points from private emails between Britta, Nina and IETF
-- extend with discussion points fromn IETF mailing lists - for both be very careful to provide
-acknowledgements!!
-- double-check and extend/refer to Flo's draft
+- revise re Brendan's email
+  - change terminology 'proof composability'?
+  - change terminology 'next-gen' vs 'post-quantum'?
+- change terminology using 'black-box'?
+
 
 -->
 
@@ -163,15 +165,15 @@ authenticity play a role (e.g., digital signatures on legal documents).
 
 One approach to design quantum-resistant protocols, particularly during the
 transition period from traditional to post-quantum algorithms, is incorporating
-PQ/T hybrid signature schemes, which combine both traditional and
+hybrid signatures schemes, which combine both traditional and
 post-quantum (or more generally next-generation) algorithms in one cryptographic
 scheme. Hybridization has been looked at for key encapsulation [HYBRIDKEM], and
 in an initial sense for digital signatures [HYBRIDSIG]. Compared to key
 encapsulation, hybridization of digital signatures, where the verification tag
 may be expected to attest to both standard and post-quantum components, is
 subtler to design and implement due to the potential separability of the
-composite signatures and the risk of downgrade/stripping attacks.  There are
-also a range of requirements and properties that may be required from hybrid
+hybrid/dual signatures and the risk of downgrade/stripping attacks.  There are
+also a range of requirements and properties that may be required from dual
 signatures, not all of which can be achieved at once.
 
 This document focuses on explaining advantages and disadvantages of different
@@ -210,21 +212,30 @@ certificate' as defined in [RFC4949].
 
 - Hybrid signature scheme: Following [I-D.ietf-pquip-pqt-hybrid-terminology], we
   define a hybrid signature scheme to be "a multi-algorithm digital signature
-  scheme made up of two or more component digital signature algorithms ...". We
+  scheme made up of two or more component digital signature algorithms ...". While
+  it often makes sense for security purposes to 
   require that the security of the component schemes is based on the hardness of
-  different cryptographic assumptions. In contrast to
+  different cryptographic assumptions, in other cases hybrid schemes might be
+  motivated, e.g., by interoperatbility of variants on the same scheme and as
+  such both component schemes are based on the same hardness assumption. We allow
+  this explicitely. This means in particular that in contrast to
   [I-D.ietf-pquip-pqt-hybrid-terminology], we will use the more general term
   'hybrid signature scheme' instead of requiring one post-quantum and one
   traditional algorithm (i.e., PQ/T hybrid signature schemes) to allow also the
-  combination of several post-quantum algorithms. The term 'composite' scheme is
-  often used as a synonym for 'hybrid scheme'. This is different from
-  [I-D.ietf-pquip-pqt-hybrid-terminology] where the term is used at the protocol
-  level.
+  combination of several post-quantum algorithms. The term 'composite scheme' is
+  sometimes used as a synonym for 'hybrid scheme'. This is different from
+  [I-D.ietf-pquip-pqt-hybrid-terminology] where the term is used as a specific
+  instantiation of hybrid schemes such that "where multiple cryptographic
+  algorithms are combined to form a single key or signature such that they can
+  be treated as a single atomic object at the protocol level." To avoid confusing
+  we will avoid the term 'composite scheme'. 
 
 - Hybrid signature: A hybrid signature is the output of the hybrid signature
-  scheme's signature generation. As synonyms we might use 'composite signature'
-  or 'dual signature'.  For example, NIST define a dual signature as "two or
-  more signatures on a common message" [NIST_PQC_FAQ].
+  scheme's signature generation. As synonyms we might use 'dual signature'.
+  For example, NIST define a dual signature as "two or more signatures on a
+  common message" [NIST_PQC_FAQ]. For the same reason as above we will avoid
+  using the term 'composite signature' although it sometimes appears as synonym
+  for 'hybrid/dual signature'.
 
 - Component (signature) scheme: Component signature schemes are the
   cryptographic algorithms contributing to the hybrid signature scheme. This has
@@ -256,8 +267,18 @@ addition, we explicate the motivation for hybrid signatures here.
 
 ### **Complexity**
 
-Post-quantum algorithms and their underlying hardness assumptions are often
-more complex than traditional algorithms and as such carry a higher risk of
+Next-generation algorithms and their underlying hardness assumptions are often
+more complex than traditional algorithms. For example, the signature scheme ML-DSA
+(a.k.a. CRYSTALS-Dilithium) that has been selected for standardization by
+NIST. While the scheme follows the well-known Fiat-Shamir transform to construct the
+signature scheme, it also relies on rejection sampling that is known to give
+cache side channel information (although this does not lead to a known attack).
+Likewise, the signature scheme Falcon uses complex sampling during signature
+generation. Furthermore, recent attacks again the next-generation multivariate
+schemes Rainbow and GeMSS might call into question the asymptotic and concrete
+security for conservative adopters and therefore might hinder adoption.
+
+As such, some next-generation algorithms carry a higher risk of
 implementation mistakes and revision of parameters compared to traditional
 algorithms, such as RSA. RSA is a relatively simple algorithm to understand and
 explain, yet during its existence and use there have been multiple attacks and
@@ -326,22 +347,26 @@ such as backwards compatibility.
 ### **Hybrid Authentication**
 
 One goal of hybrid signature schemes is security. As defined in
-[I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the
-property that (cryptograpthic) authentication is achieved by the
-hybrid signature scheme provided that a least one component signature
-algorithm remains secure.  There might be, however, other goals in
-competition with this one, such as backward-compatibility. Hybrid
-authentication is an umbrella term that encompassess more specific
-concepts of hybrid signature security.
+[I-D.ietf-pquip-pqt-hybrid-terminology], ideally a hybrid signature
+scheme can achieve 'hybrid authentication' which is the property that
+(cryptograpthic) authentication is achieved by the hybrid signature
+scheme provided that a least one component signature algorithm remains
+'secure'. There might be, however, other goals in competition with this
+one, such as backward-compatibility. Hybrid authentication is an umbrella
+term that encompassess more specific concepts of hybrid signature
+security, such as 'hybrid unforgability' described next.
 
-### **Hybrid Unforgeability**
-
+#### **Hybrid Unforgeability**
 Hybrid unforgeability is a specific type of hybrid authentication, where the
 security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as
-long as at least one of the component schemes is EUF-CMA secure.  As discussed
-above, this is incompatible with backward-compatibility, where the EUF-CMA
-security of the hybrid signature relies solely on the security of one of the
-component schemes instead of relying on both.
+long as at least one of the component schemes is EUF-CMA secure without a
+prioritisation. We call this notion 'hybrid unforgeability'; it is a specific
+type of hybrid authentication. For example, the concatenation combiner in
+[HYBRIDSIG] is 'hybrid unforgeable'. As mentioned above, this is incompatible
+with backward-compatibility, where the EUF-CMA security of the hybrid signature
+relies solely on the security of one of the ingredient schemes instead of
+relying on both, e.g., the dual message combiner using nesting in [HYBRIDSIG].
+
 ### **Proof Composability**
 
 Under proof composability, the component algorithms are combined in such a way
@@ -575,7 +600,7 @@ dependent on whether the inner or outer signature is stripped off without any
 artifacts remaining.
 
 Next on the spectrum are weakly non-separable signatures. Under Weak
-Non-Separability, if one of the composite signatures of a hybrid is removed
+Non-Separability, if one of the component signatures of a hybrid is removed
 artifacts of the hybrid will remain (in the message, signature, or at the
 protocol level, etc.). This may enable the verifier to detect if a component
 signature is stripped away from a hybrid signature, but that detectability
@@ -741,9 +766,16 @@ in a stripping attack) may be goals of a nesting approach.
 -->
 
 - Fused hybrid: variants of hybridization where for component algorithms
-`Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated with
-entanglement to produce a single hybrid signature `sig_h` without clear
-component constructs.
+`Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated to
+generate a single hybrid signature `sig_h` that cannot be clearly divided
+into component constructs. For example, if both signature schemes are
+signatures schemes constructed through the Fiat-Shamir transform, thus the
+component signatures would include a response r_1 and r_2, and a challenge
+c_1 and c_2 that is a hash computed over the respective commitments comm_1
+and comm_2 (and the message). A fused hybrid signature could consist of the
+component responses, r_1 and r_2 and a hash over 'both' responses, 
+i.e., c = Hash(comm_1,comm_2,message). As such, c does not belong to either
+of the component signatures but they are 'entangled'. 
 
 <!--
 
@@ -954,10 +986,30 @@ relevant specification documents.
 
 # Discussion of Advantages/Disadvantages
 
-There is an inherent mutual exclusion between backwards compatibility and SNS.
+The design (and hence, security guarantees) of hybrid signature schemes depend
+heavily on the properties needed for the application or protocol using hybrid
+signatures. It seems that not all goals can be achieved simultaneously as
+exemplified below. 
+
+Backwards compatibility vs. SNS. There is an inherent mutual exclusion between
+backwards compatibility and SNS.
 While WNS allows for a valid separation under leftover artifacts, SNS will
 ensure verification failure if a receiver attempts separation.
 
+Backwards compatibility vs. hybrid unforgeability. Similarly, there is an inherent
+mutual exclusion between backwards comptaibility and hybrid unforgeability as
+briefly mentioned above. Since the goal of backwards compatibility is usually to
+allow legacy systems without any software change to be able to process hybrid
+signatures, all differences between the legacy signature format and the hybrid
+signature format must allow to be ignored, including skipping verification of 
+signatures in additional to the classical signature. As such security cannot rely
+on the security of all component signatures. 
+
+Simultaneous verification vs. low need for approval. It seems that the more
+simultaneous verification is enforced by the hybrid design, the higher is the
+need-for-approval as simultaneous verification algorithms fuse (or 'entangle')
+the verification of the component algorithms such that verification operations
+from the different component schemes depend on each other in some way. 
 
 # Acknowledgements
 
@@ -968,4 +1020,4 @@ contributed to pushing this draft forward, offered insights and perspectives,
 and/or stimulated work in the area:
 
 Scott Fluhrer, Felix Günther, John Gray, Serge Mister, Max Pala, Mike Ounsworth,
-Douglas Stebila
+Douglas Stebila, Brendan Zember
