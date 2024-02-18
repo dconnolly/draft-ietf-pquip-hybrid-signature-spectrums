@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-15T00:17:55.130241+00:00",
+  "timestamp": "2024-02-18T00:19:21.564534+00:00",
   "repo": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -89,24 +89,26 @@
       "id": "PR_kwDOKkGQK85lrQ_u",
       "title": "Flo",
       "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fd1729",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-02-01T09:53:14Z",
-      "updatedAt": "2024-02-13T18:05:31Z",
+      "updatedAt": "2024-02-15T16:47:54Z",
       "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
       "baseRefName": "main",
       "baseRefOid": "ccfa69ee954719f93a93d8c02155afe385f1320d",
       "headRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
       "headRefName": "flo",
-      "headRefOid": "d9f007a484620aaad076adbd163b39f75f3f3a6e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "026e2f784a00b2589f042b1cd3bd738e6fccee8d",
+      "closedAt": "2024-02-15T16:47:51Z",
+      "mergedAt": "2024-02-15T16:47:51Z",
+      "mergedBy": "dconnolly",
+      "mergeCommit": {
+        "oid": "7e2ec83f3c940b73efd78bd8b46847acbb905dbb"
+      },
       "comments": [],
       "reviews": [
         {
@@ -146,6 +148,388 @@
               "body": "Can we define this so that it doesn't rely on the e.g.?  Something like \"where the security assumption for the scheme, e.g. EUF-CMA, SUF-CMA is maintained...\"?  Is there a better way to put that?",
               "createdAt": "2024-02-13T18:05:31Z",
               "updatedAt": "2024-02-13T18:05:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wKXzz",
+          "commit": {
+            "abbreviatedOid": "d9f007a"
+          },
+          "author": "br-hale",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T04:57:10Z",
+          "updatedAt": "2024-02-15T04:57:11Z",
+          "comments": [
+            {
+              "originalPosition": 133,
+              "body": "\"where the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained...\" would be a fine alternative.",
+              "createdAt": "2024-02-15T04:57:11Z",
+              "updatedAt": "2024-02-15T04:57:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQDJX",
+          "commit": {
+            "abbreviatedOid": "d9f007a"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:13:21Z",
+          "updatedAt": "2024-02-15T16:13:21Z",
+          "comments": [
+            {
+              "originalPosition": 2,
+              "body": "no leading ! for ietf/kramdown markdown\r\n```suggestion\r\n---\r\n```",
+              "createdAt": "2024-02-15T16:13:21Z",
+              "updatedAt": "2024-02-15T16:14:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQHLN",
+          "commit": {
+            "abbreviatedOid": "0b08f74"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:17:58Z",
+          "updatedAt": "2024-02-15T16:17:58Z",
+          "comments": [
+            {
+              "originalPosition": 128,
+              "body": "```suggestion\r\nHybrid unforgeability is a specific type of hybrid authentication, where the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as long as at least one of the component schemes is\r\n```",
+              "createdAt": "2024-02-15T16:17:58Z",
+              "updatedAt": "2024-02-15T16:17:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQJP8",
+          "commit": {
+            "abbreviatedOid": "ae623f1"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:20:59Z",
+          "updatedAt": "2024-02-15T16:20:59Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\n- Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we define\r\nnext-generation algorithms to be \"algorithms which are not yet widely deployed\r\nbut which may eventually be widely deployed\". Hybrid signatures are mostly\r\nmotivated by preparation for post-quantum migration, hence the reference to\r\npost-quantum algorithms through this draft.  However, the majority of the\r\ndiscussion in this document applies equally well to future migration to\r\nother next-generation algorithms.\r\n```",
+              "createdAt": "2024-02-15T16:20:59Z",
+              "updatedAt": "2024-02-15T16:20:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQJs5",
+          "commit": {
+            "abbreviatedOid": "a6f49dd"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:21:44Z",
+          "updatedAt": "2024-02-15T16:21:44Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\n  a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].  'Ingredient\r\n  (signature) scheme' may be used as a synonym.\r\n```",
+              "createdAt": "2024-02-15T16:21:44Z",
+              "updatedAt": "2024-02-15T16:21:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQLLm",
+          "commit": {
+            "abbreviatedOid": "20dad21"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:24:22Z",
+          "updatedAt": "2024-02-15T16:24:22Z",
+          "comments": [
+            {
+              "originalPosition": 124,
+              "body": "```suggestion\r\nOne goal of hybrid signature schemes is security. As defined in\r\n[I-D.ietf-pquip-pqt-hybrid-terminology] hybrid authentication is the\r\nproperty that (cryptograpthic) authentication is achieved by the\r\nhybrid signature scheme provided that a least one component signature\r\nalgorithm remains secure.  There might be, however, other goals in\r\ncompetition with this one, such as backward-compatibility. Hybrid\r\nauthentication is an umbrella term that encompassess more specific\r\nconcepts of hybrid signature security.\r\n```",
+              "createdAt": "2024-02-15T16:24:22Z",
+              "updatedAt": "2024-02-15T16:24:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQXOJ",
+          "commit": {
+            "abbreviatedOid": "846e9ab"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:46:40Z",
+          "updatedAt": "2024-02-15T16:46:40Z",
+          "comments": [
+            {
+              "originalPosition": 145,
+              "body": "```suggestion\r\nHybrid unforgeability is a specific type of hybrid authentication, where the\r\nsecurity assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as\r\nlong as at least one of the component schemes is EUF-CMA secure.  As discussed\r\nabove, this is incompatible with backward-compatibility, where the EUF-CMA\r\nsecurity of the hybrid signature relies solely on the security of one of the\r\ncomponent schemes instead of relying on both.\r\n```",
+              "createdAt": "2024-02-15T16:46:40Z",
+              "updatedAt": "2024-02-15T16:46:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQXbF",
+          "commit": {
+            "abbreviatedOid": "026e2f7"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-15T16:47:05Z",
+          "updatedAt": "2024-02-15T16:47:05Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOKkGQK85nAKnp",
+      "title": "Ninabindel patch 1",
+      "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/pull/4",
+      "state": "MERGED",
+      "author": "dconnolly",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-15T16:52:00Z",
+      "updatedAt": "2024-02-15T17:31:17Z",
+      "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "baseRefName": "main",
+      "baseRefOid": "7e2ec83f3c940b73efd78bd8b46847acbb905dbb",
+      "headRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "headRefName": "ninabindel-patch-1",
+      "headRefOid": "fe27ed08b744abe6db12cc16503216b8837a60c0",
+      "closedAt": "2024-02-15T17:31:15Z",
+      "mergedAt": "2024-02-15T17:31:15Z",
+      "mergedBy": "dconnolly",
+      "mergeCommit": {
+        "oid": "248f6ad0f96e73825c991a3831271ce12174bf25"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKkGQK85wQbQq",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:53:47Z",
+          "updatedAt": "2024-02-15T16:53:48Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n  scheme made up of two or more component digital signature algorithms ...\". While\r\n  it often makes sense for security purposes to \r\n```",
+              "createdAt": "2024-02-15T16:53:47Z",
+              "updatedAt": "2024-02-15T16:53:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQbrw",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:54:33Z",
+          "updatedAt": "2024-02-15T16:54:34Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\r\n  different cryptographic assumptions, in other cases hybrid schemes might be\r\n  motivated, e.g., by interoperatbility of variants on the same scheme and as\r\n  such both component schemes are based on the same hardness assumption. We allow\r\n  this explicitely. This means in particular that in contrast to\r\n```",
+              "createdAt": "2024-02-15T16:54:33Z",
+              "updatedAt": "2024-02-15T16:54:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQcMv",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:55:25Z",
+          "updatedAt": "2024-02-15T16:55:26Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "```suggestion\r\n  combination of several post-quantum algorithms. The term 'composite scheme' is\r\n  sometimes used as a synonym for 'hybrid scheme'. This is different from\r\n  [I-D.ietf-pquip-pqt-hybrid-terminology] where the term is used as a specific\r\n  instantiation of hybrid schemes such that \"where multiple cryptographic\r\n  algorithms are combined to form a single key or signature such that they can\r\n  be treated as a single atomic object at the protocol level.\" To avoid confusing\r\n  we will avoid the term 'composite scheme'. \r\n```",
+              "createdAt": "2024-02-15T16:55:26Z",
+              "updatedAt": "2024-02-15T16:55:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQcr9",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:56:21Z",
+          "updatedAt": "2024-02-15T16:56:21Z",
+          "comments": [
+            {
+              "originalPosition": 60,
+              "body": "```suggestion\r\n  scheme's signature generation. As synonyms we might use 'dual signature'.\r\n  For example, NIST define a dual signature as \"two or more signatures on a\r\n  common message\" [NIST_PQC_FAQ]. For the same reason as above we will avoid\r\n  using the term 'composite signature' although it sometimes appears as synonym\r\n  for 'hybrid/dual signature'.\r\n```",
+              "createdAt": "2024-02-15T16:56:21Z",
+              "updatedAt": "2024-02-15T16:56:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQd6l",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T16:58:38Z",
+          "updatedAt": "2024-02-15T16:58:38Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "```suggestion\r\nsignature scheme, it also relies on rejection sampling that is known to give\r\ncache side channel information (although this does not lead to a known attack).\r\nLikewise, the signature scheme Falcon uses complex sampling during signature\r\ngeneration. Furthermore, recent attacks again the next-generation multivariate\r\nschemes Rainbow and GeMSS might call into question the asymptotic and concrete\r\nsecurity for conservative adopters and therefore might hinder adoption.\r\n```",
+              "createdAt": "2024-02-15T16:58:38Z",
+              "updatedAt": "2024-02-15T16:58:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQe85",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T17:00:36Z",
+          "updatedAt": "2024-02-15T17:00:36Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\nOne goal of hybrid signature schemes is security. As defined in\r\n[I-D.ietf-pquip-pqt-hybrid-terminology], ideally a hybrid signature\r\nscheme can achieve 'hybrid authentication' which is the property that\r\n(cryptograpthic) authentication is achieved by the hybrid signature\r\nscheme provided that a least one component signature algorithm remains\r\n'secure'. There might be, however, other goals in competition with this\r\none, such as backward-compatibility. Hybrid authentication is an umbrella\r\nterm that encompassess more specific concepts of hybrid signature\r\nsecurity, such as 'hybrid unforgability' described next.\r\n```",
+              "createdAt": "2024-02-15T17:00:36Z",
+              "updatedAt": "2024-02-15T17:00:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQf1B",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T17:02:15Z",
+          "updatedAt": "2024-02-15T17:02:15Z",
+          "comments": [
+            {
+              "originalPosition": 114,
+              "body": "```suggestion\r\n#### **Hybrid Unforgeability**\r\nIdeally EUF-CMA security is maintained as long as at least one of the ingredient\r\nschemes is EUF-CMA secure without a prioritisation. We call this notion 'hybrid\r\nunforgeability'; it is a specific type of hybrid authentication. For example, the\r\nconcatenation combiner in [HYBRIDSIG] is 'hybrid unforgeable'. As mentioned above,\r\nthis is incompatible with backward-compatibility, where the EUF-CMA security of the hybrid\r\n```",
+              "createdAt": "2024-02-15T17:02:15Z",
+              "updatedAt": "2024-02-15T17:02:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQgoe",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T17:03:49Z",
+          "updatedAt": "2024-02-15T17:03:49Z",
+          "comments": [
+            {
+              "originalPosition": 138,
+              "body": "```suggestion\r\n`Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated to\r\ngenerate a single hybrid signature `sig_h` that cannot be clearly divided\r\ninto component constructs. For example, if both signature schemes are\r\nsignatures schemes constructed through the Fiat-Shamir transform, thus the\r\ncomponent signatures would include a response r_1 and r_2, and a challenge\r\nc_1 and c_2 that is a hash computed over the respective commitments comm_1\r\nand comm_2 (and the message). A fused hybrid signature could consist of the\r\ncomponent responses, r_1 and r_2 and a hash over 'both' responses, \r\ni.e., c = Hash(comm_1,comm_2,message). As such, c does not belong to either\r\nof the component signatures but they are 'entangled'. \r\n```",
+              "createdAt": "2024-02-15T17:03:49Z",
+              "updatedAt": "2024-02-15T17:03:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQhnr",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T17:05:36Z",
+          "updatedAt": "2024-02-15T17:05:37Z",
+          "comments": [
+            {
+              "originalPosition": 149,
+              "body": "```suggestion\r\nThe design (and hence, security guarantees) of hybrid signature schemes depend\r\nheavily on the properties needed for the application or protocol using hybrid\r\nsignatures. It seems that not all goals can be achieved simultaneously as\r\nexemplified below. \r\n\r\nBackwards compatibility vs. SNS. There is an inherent mutual exclusion between\r\nbackwards compatibility and SNS.\r\n```",
+              "createdAt": "2024-02-15T17:05:37Z",
+              "updatedAt": "2024-02-15T17:05:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKkGQK85wQivF",
+          "commit": {
+            "abbreviatedOid": "9cabf20"
+          },
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-15T17:07:56Z",
+          "updatedAt": "2024-02-15T17:07:57Z",
+          "comments": [
+            {
+              "originalPosition": 155,
+              "body": "```suggestion\r\nBackwards compatibility vs. hybrid unforgeability. Similarly, there is an inherent\r\nmutual exclusion between backwards comptaibility and hybrid unforgeability as\r\nbriefly mentioned above. Since the goal of backwards compatibility is usually to\r\nallow legacy systems without any software change to be able to process hybrid\r\nsignatures, all differences between the legacy signature format and the hybrid\r\nsignature format must allow to be ignored, including skipping verification of \r\nsignatures in additional to the classical signature. As such security cannot rely\r\non the security of all component signatures. \r\n\r\nSimultaneous verification vs. low need for approval. It seems that the more\r\nsimultaneous verification is enforced by the hybrid design, the higher is the\r\nneed-for-approval as simultaneous verification algorithms fuse (or 'entangle')\r\nthe verification of the component algorithms such that verification operations\r\nfrom the different component schemes depend on each other in some way. \r\n```",
+              "createdAt": "2024-02-15T17:07:56Z",
+              "updatedAt": "2024-02-15T17:07:57Z"
             }
           ]
         }
