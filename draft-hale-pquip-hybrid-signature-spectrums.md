@@ -218,7 +218,7 @@ certificate' as defined in [RFC4949].
   different cryptographic assumptions, in other cases hybrid schemes might be
   motivated, e.g., by interoperatbility of variants on the same scheme and as
   such both component schemes are based on the same hardness assumption. We allow
-  this explicitely. This means in particular that in contrast to
+  this explicitly. This means in particular that in contrast to
   [I-D.ietf-pquip-pqt-hybrid-terminology], we will use the more general term
   'hybrid signature scheme' instead of requiring one post-quantum and one
   traditional algorithm (i.e., PQ/T hybrid signature schemes) to allow also the
@@ -359,13 +359,15 @@ security, such as 'hybrid unforgability' described next.
 #### **Hybrid Unforgeability**
 Hybrid unforgeability is a specific type of hybrid authentication, where the
 security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is maintained as
-long as at least one of the component schemes is EUF-CMA secure without a
+long as at least one of the component schemes is EUF-CMA (resp., SUF-CMA) secure without a
 prioritisation. We call this notion 'hybrid unforgeability'; it is a specific
 type of hybrid authentication. For example, the concatenation combiner in
-[HYBRIDSIG] is 'hybrid unforgeable'. As mentioned above, this is incompatible
-with backward-compatibility, where the EUF-CMA security of the hybrid signature
-relies solely on the security of one of the ingredient schemes instead of
-relying on both, e.g., the dual message combiner using nesting in [HYBRIDSIG].
+[HYBRIDSIG] is 'hybrid unforgeable'. As mentioned above, this might be incompatible
+with backward-compatibility, where the EUF-CMA (resp., SUF-CMA) security of the hybrid signature
+relies solely on the security of one of the component schemes instead of
+relying on both, e.g., the dual message combiner using nesting in [HYBRIDSIG]. For more details, we refer to our discussion below.
+
+Use cases where a hybrid scheme is used with, e.g., EUF-CMA security assumed for only one component scheme generally use hybrid techniques for their functional transition pathway support, while fully trusting either the traditional or post-quantum algorithm. In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA security assumed for both component schemes without prioritisation can use hybrid techniques for both functional transition and security transition, where it may not be known which algorithm should be relied upon.
 
 ### **Proof Composability**
 
@@ -767,15 +769,12 @@ in a stripping attack) may be goals of a nesting approach.
 
 - Fused hybrid: variants of hybridization where for component algorithms
 `Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated to
-generate a single hybrid signature `sig_h` that cannot be clearly divided
-into component constructs. For example, if both signature schemes are
-signatures schemes constructed through the Fiat-Shamir transform, thus the
-component signatures would include a response r_1 and r_2, and a challenge
-c_1 and c_2 that is a hash computed over the respective commitments comm_1
-and comm_2 (and the message). A fused hybrid signature could consist of the
-component responses, r_1 and r_2 and a hash over 'both' responses, 
-i.e., c = Hash(comm_1,comm_2,message). As such, c does not belong to either
-of the component signatures but they are 'entangled'. 
+generate a single hybrid signature `sig_h` that cannot be cleanly separated to form one or more valid
+component constructs. For example, if both signature schemes are
+signatures schemes constructed through the Fiat-Shamir transform, the component signatures would include responses r_1 and r_2 and challenges c_1 and c_2, where c_1 and c_2 are hashes computed over the respective commitments comm_1 and comm_2 (and the message).
+A fused hybrid signature could consist of the
+component responses, r_1 and r_2 and and a challenge c that is computed as a hash over both commitments, i.e., c = Hash(comm_1,comm_2,message).
+As such, c does not belong to either of the component signatures but rather both, meaning that the signatures are 'entangled'.
 
 <!--
 
@@ -996,20 +995,13 @@ backwards compatibility and SNS.
 While WNS allows for a valid separation under leftover artifacts, SNS will
 ensure verification failure if a receiver attempts separation.
 
-Backwards compatibility vs. hybrid unforgeability. Similarly, there is an inherent
-mutual exclusion between backwards comptaibility and hybrid unforgeability as
-briefly mentioned above. Since the goal of backwards compatibility is usually to
-allow legacy systems without any software change to be able to process hybrid
-signatures, all differences between the legacy signature format and the hybrid
-signature format must allow to be ignored, including skipping verification of 
-signatures in additional to the classical signature. As such security cannot rely
-on the security of all component signatures. 
+Backwards compatibility vs. hybrid unforgeability. Similarly, there is an inherent mutual exclusion between backwards compatibility, when acted upon, and hybrid unforgeability as briefly mentioned above. Since the goal of backwards compatibility is usually to allow legacy systems without any software change to be able to process hybrid signatures, all differences between the legacy signature format and the hybrid signature format must be allowed to be ignored, including skipping verification of signatures in additional to the classical signature. As such, if a system does skip an component signature, security does not rely on the security of all component signatures. Note that this mutual exclusion occurs at the verification stage, as a hybrid signature that is verified by a system that can process both component schemes can provide hybrid unforgeability even if another (legacy) system, processing the same hybrid signature loses that property.
 
 Simultaneous verification vs. low need for approval. It seems that the more
 simultaneous verification is enforced by the hybrid design, the higher is the
 need-for-approval as simultaneous verification algorithms fuse (or 'entangle')
 the verification of the component algorithms such that verification operations
-from the different component schemes depend on each other in some way. 
+from the different component schemes depend on each other in some way. For example, concatenation of signatures in a black-box way without any artefacts is, e.g., FIPS-approved, but the component signatures are usually verified separately and no 'simultaneous verification' is enforced. 
 
 # Acknowledgements
 
