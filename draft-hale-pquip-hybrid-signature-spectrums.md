@@ -217,8 +217,9 @@ certificate' as defined in [RFC4949].
   require that the security of the component schemes is based on the hardness of
   different cryptographic assumptions, in other cases hybrid schemes might be
   motivated, e.g., by interoperatbility of variants on the same scheme and as
-  such both component schemes are based on the same hardness assumption. We allow
-  this explicitly. This means in particular that in contrast to
+  such both component schemes are based on the same hardness assumption (e.g., both
+  post-quantum assumptions or even both the same concrete assumption such as Ring LWE).
+  We allow this explicitly. This means in particular that in contrast to
   [I-D.ietf-pquip-pqt-hybrid-terminology], we will use the more general term
   'hybrid signature scheme' instead of requiring one post-quantum and one
   traditional algorithm (i.e., PQ/T hybrid signature schemes) to allow also the
