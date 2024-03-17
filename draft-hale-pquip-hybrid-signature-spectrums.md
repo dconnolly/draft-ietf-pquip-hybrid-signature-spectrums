@@ -326,9 +326,9 @@ algorithm subtleties and caveats on implementation and use can arise
 over time. Given the complexity of next generation algorithms, the
 chance of such discoveries and caveats needs to be taken into account.
 
-Of note, next generation algorithms have been heavily vetted. Thus, if
-and when further information on caveats and implementation issues come
-to light, it is less likely that a "break" will be
+Of note, some next generation algorithms have received substantial analysis 
+attention. Thus, if and when further information on caveats and 
+implementation issues come to light, it is less likely that a "break" will be
 catastrophic. Instead, such vulnerabilities and issues may represent a
 weakening of security - which may in turn be offset if a hybrid approach
 has been used. The complexity of post-quantum algorithms needs to be
