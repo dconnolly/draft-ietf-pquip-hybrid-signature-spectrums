@@ -165,32 +165,28 @@ systems with hardware roots of trust), or where future checks on past
 authenticity play a role (e.g., digital signatures on legal documents).
 
 The relative newness of many (although not all) post-quantum algorithms
-means that available and public cryptanalysis of such algorithms is 
-significantly less than long-established counterparts. This applies to 
-RSA and elliptic-curve based solutions, in both confidentiality and 
-authenticity. This relative lesser degree of available analysis has 
-drawn attention to hybrid algorithms, which combine both traditional
+means that less cryptanalysis of such algorithms is 
+available than for long-established counterparts, such as
+RSA and elliptic-curve based solutions for confidentiality and 
+authenticity. This has 
+drawn attention to hybrid cryptographic schemes, which combine both traditional
 and post-quantum (or more generally next-generation) algorithms in one
-cryptographic scheme. Hybrid algorithms offer increased assurance under 
-the varying concerns of a quantum attacker and newness of post-quantum 
-algorithms; namely, so long as one of the two component algorithms of 
+cryptographic scheme. These may offer increased assurance for implementers, namely that as long as the security of one of the two component algorithms of 
 the hybrid scheme holds, the confidentiality or authenticity offered by 
 that scheme is maintained. 
 
-Whether or not a hybrid algorithm is desired may depend on the use case 
-and specific security threat model. In some cases, conservative users 
-may not have complete trust in the post-quantum algorithm options available 
-while also recognizing a need to start post-quantum transition. For some 
-users, there may also be a desire to support a greater leeway time in 
-transition, to avoid trusting solo post-quantum algorithms too early. 
-Consequently, hybridization offers a potential solution, dependent on 
-the specific threat model concerns of a user. 
+Whether or not hybridization is desired depends on the use case 
+and security threat model. Conservative users 
+may not have complete trust in the post-quantum algorithms or implementations available, 
+while also recognizing a need to start post-quantum transition. For such 
+users, hybridization can support near-term transition while also avoiding trusting solo post-quantum algorithms too early. 
+On the other hand, hybrid schemes, particularly for authentication, may introduce significant complexity into a system or a migration process, so might not be the right choice for all. For cases where hybridization is determined to be advantageous, a decision on how to hybridize needs to be made. With many options available, this document is intended to provide context on some of the trade-offs and nuances to consider.
 
 Hybridization has been looked at for key encapsulation [HYBRIDKEM], and 
 in an initial sense for digital signatures [HYBRIDSIG]. Compared to key 
 encapsulation, hybridization of digital signatures, where the verification 
 tag may be expected to attest to both standard and post-quantum components, 
-s subtler to design and implement due to the potential separability of 
+is subtler to design and implement due to the potential separability of 
 the hybrid/dual signatures and the risk of downgrade/stripping attacks.  
 There are also a range of requirements and properties that may be required 
 from hybrid signatures, not all of which can be achieved at once.
@@ -199,8 +195,8 @@ This document focuses on explaining advantages and disadvantages of
 different hybrid signature scheme designs and different security goals
 for them. It is intended as a resource for designers and implementers of
 hybrid signature schemes to help them decide what properties they do and
-do not require from their scheme. It does not attemmpt to answer the 
-question of whether or not a hybrid schemme is desirable for or should be 
+do not require from their scheme. It does not attempt to answer the 
+question of whether or not a hybrid scheme is desirable for, or should be 
 used in a given case. It also intentionally does not propose concrete hybrid 
 signature combiners or instantiations thereof.
 
@@ -327,7 +323,7 @@ over time. Given the complexity of next generation algorithms, the
 chance of such discoveries and caveats needs to be taken into account.
 
 Of note, some next generation algorithms have received substantial analysis 
-attention. Thus, if and when further information on caveats and 
+attention, for example through the NIST Post-Quantum Process [NIST_PQC_FAQ]. Thus, if and when further information on caveats and 
 implementation issues come to light, it is less likely that a "break" will be
 catastrophic. Instead, such vulnerabilities and issues may represent a
 weakening of security - which may in turn be offset if a hybrid approach
