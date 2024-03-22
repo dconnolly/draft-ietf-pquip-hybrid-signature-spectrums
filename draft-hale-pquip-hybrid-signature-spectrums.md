@@ -2,7 +2,7 @@
 title: Hybrid signature spectrums
 abbrev: hale-pquip-hybrid-spectrums
 docname: draft-hale-pquip-hybrid-signature-spectrums-latest
-date: 2024-02-23
+date: 2024-03-21
 category: info
 
 ipr: trust200902
@@ -171,14 +171,14 @@ solutions for confidentiality and authenticity. This has drawn attention
 to hybrid cryptographic schemes, which combine both traditional
 and post-quantum (or more generally next-generation) algorithms in one
 cryptographic scheme. These may offer increased assurance for implementers,
-namely that as long as the security of one of the two component algorithms of 
-the hybrid scheme holds, the confidentiality or authenticity offered by 
-that scheme is maintained. 
+namely that as long as the security of one of the two component algorithms of
+the hybrid scheme holds, the confidentiality or authenticity offered by
+that scheme is maintained.
 
-Whether or not hybridization is desired depends on the use case 
+Whether or not hybridization is desired depends on the use case
 and security threat model. Conservative users may not have complete trust
-in the post-quantum algorithms or implementations available, 
-while also recognizing a need to start post-quantum transition. For such 
+in the post-quantum algorithms or implementations available,
+while also recognizing a need to start post-quantum transition. For such
 users, hybridization can support near-term transition while also avoiding
 trusting solo post-quantum algorithms too early. On the other hand, hybrid
 schemes, particularly for authentication, may introduce significant complexity
@@ -187,22 +187,22 @@ For cases where hybridization is determined to be advantageous, a decision on
 how to hybridize needs to be made. With many options available, this document
 is intended to provide context on some of the trade-offs and nuances to consider.
 
-Hybridization has been looked at for key encapsulation [HYBRIDKEM], and 
-in an initial sense for digital signatures [HYBRIDSIG]. Compared to key 
-encapsulation, hybridization of digital signatures, where the verification 
-tag may be expected to attest to both standard and post-quantum components, 
-is subtler to design and implement due to the potential separability of 
-the hybrid/dual signatures and the risk of downgrade/stripping attacks.  
-There are also a range of requirements and properties that may be required 
+Hybridization has been looked at for key encapsulation [HYBRIDKEM], and
+in an initial sense for digital signatures [HYBRIDSIG]. Compared to key
+encapsulation, hybridization of digital signatures, where the verification
+tag may be expected to attest to both standard and post-quantum components,
+is subtler to design and implement due to the potential separability of
+the hybrid/dual signatures and the risk of downgrade/stripping attacks.
+There are also a range of requirements and properties that may be required
 from hybrid signatures, not all of which can be achieved at once.
 
 This document focuses on explaining advantages and disadvantages of
 different hybrid signature scheme designs and different security goals
 for them. It is intended as a resource for designers and implementers of
 hybrid signature schemes to help them decide what properties they do and
-do not require from their scheme. It does not attempt to answer the 
-question of whether or not a hybrid scheme is desirable for, or should be 
-used in a given case. It also intentionally does not propose concrete hybrid 
+do not require from their scheme. It does not attempt to answer the
+question of whether or not a hybrid scheme is desirable for, or should be
+used in a given case. It also intentionally does not propose concrete hybrid
 signature combiners or instantiations thereof.
 
 ## Revision history
@@ -327,7 +327,7 @@ algorithm subtleties and caveats on implementation and use can arise
 over time. Given the complexity of next generation algorithms, the
 chance of such discoveries and caveats needs to be taken into account.
 
-Of note, some next generation algorithms have received substantial analysis 
+Of note, some next generation algorithms have received substantial analysis
 attention, for example through the NIST Post-Quantum Process [NIST_PQC_FAQ].
 Thus, if and when further information on caveats and implementation issues
 come to light, it is less likely that a "break" will be catastrophic.
