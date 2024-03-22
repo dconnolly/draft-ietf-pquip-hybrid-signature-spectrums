@@ -5,12 +5,12 @@
 Network Working Group                                          N. Bindel
 Internet-Draft                                                 SandboxAQ
 Intended status: Informational                                   B. Hale
-Expires: 26 August 2024                        Naval Postgraduate School
+Expires: 22 September 2024                     Naval Postgraduate School
                                                              D. Connolly
                                                                SandboxAQ
                                                              F. Driscoll
                                        UK National Cyber Security Centre
-                                                        23 February 2024
+                                                           21 March 2024
 
 
                        Hybrid signature spectrums
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 August 2024.
+   This Internet-Draft will expire on 22 September 2024.
 
 Copyright Notice
 
@@ -121,26 +121,49 @@ Table of Contents
    future checks on past authenticity play a role (e.g., digital
    signatures on legal documents).
 
-   One approach to design quantum-resistant protocols, particularly
-   during the transition period from traditional to post-quantum
-   algorithms, is incorporating hybrid signatures schemes, which combine
-   both traditional and post-quantum (or more generally next-generation)
-   algorithms in one cryptographic scheme.  Hybridization has been
-   looked at for key encapsulation [HYBRIDKEM], and in an initial sense
-   for digital signatures [HYBRIDSIG].  Compared to key encapsulation,
-   hybridization of digital signatures, where the verification tag may
-   be expected to attest to both standard and post-quantum components,
-   is subtler to design and implement due to the potential separability
-   of the hybrid/dual signatures and the risk of downgrade/stripping
-   attacks.  There are also a range of requirements and properties that
-   may be required from dual signatures, not all of which can be
-   achieved at once.
+   The relative newness of many (although not all) post-quantum
+   algorithms means that less cryptanalysis of such algorithms is
+   available than for long-established counterparts, such as RSA and
+   elliptic-curve based solutions for confidentiality and authenticity.
+   This has drawn attention to hybrid cryptographic schemes, which
+   combine both traditional and post-quantum (or more generally next-
+   generation) algorithms in one cryptographic scheme.  These may offer
+   increased assurance for implementers, namely that as long as the
+   security of one of the two component algorithms of the hybrid scheme
+   holds, the confidentiality or authenticity offered by that scheme is
+   maintained.
+
+   Whether or not hybridization is desired depends on the use case and
+   security threat model.  Conservative users may not have complete
+   trust in the post-quantum algorithms or implementations available,
+   while also recognizing a need to start post-quantum transition.  For
+   such users, hybridization can support near-term transition while also
+   avoiding trusting solo post-quantum algorithms too early.  On the
+   other hand, hybrid schemes, particularly for authentication, may
+   introduce significant complexity into a system or a migration
+   process, so might not be the right choice for all.  For cases where
+   hybridization is determined to be advantageous, a decision on how to
+   hybridize needs to be made.  With many options available, this
+   document is intended to provide context on some of the trade-offs and
+   nuances to consider.
+
+   Hybridization has been looked at for key encapsulation [HYBRIDKEM],
+   and in an initial sense for digital signatures [HYBRIDSIG].  Compared
+   to key encapsulation, hybridization of digital signatures, where the
+   verification tag may be expected to attest to both standard and post-
+   quantum components, is subtler to design and implement due to the
+   potential separability of the hybrid/dual signatures and the risk of
+   downgrade/stripping attacks.  There are also a range of requirements
+   and properties that may be required from hybrid signatures, not all
+   of which can be achieved at once.
 
    This document focuses on explaining advantages and disadvantages of
    different hybrid signature scheme designs and different security
    goals for them.  It is intended as a resource for designers and
    implementers of hybrid signature schemes to help them decide what
-   properties they do and do not require from their scheme.  It
+   properties they do and do not require from their scheme.  It does not
+   attempt to answer the question of whether or not a hybrid scheme is
+   desirable for, or should be used in a given case.  It also
    intentionally does not propose concrete hybrid signature combiners or
    instantiations thereof.
 
@@ -272,15 +295,16 @@ Table of Contents
    the chance of such discoveries and caveats needs to be taken into
    account.
 
-   Of note, next generation algorithms have been heavily vetted.  Thus,
-   if and when further information on caveats and implementation issues
-   come to light, it is less likely that a "break" will be catastrophic.
-   Instead, such vulnerabilities and issues may represent a weakening of
-   security - which may in turn be offset if a hybrid approach has been
-   used.  The complexity of post-quantum algorithms needs to be balanced
-   against the fact that hybridization itself adds more complexity to a
-   protocol and introduces the risk of implementation mistakes in the
-   hybridization process.
+   Of note, some next generation algorithms have received substantial
+   analysis attention, for example through the NIST Post-Quantum Process
+   [NIST_PQC_FAQ].  Thus, if and when further information on caveats and
+   implementation issues come to light, it is less likely that a "break"
+   will be catastrophic.  Instead, such vulnerabilities and issues may
+   represent a weakening of security - which may in turn be offset if a
+   hybrid approach has been used.  The complexity of post-quantum
+   algorithms needs to be balanced against the fact that hybridization
+   itself adds more complexity to a protocol and introduces the risk of
+   implementation mistakes in the hybridization process.
 
    One example of a next generation algorithm is the signature scheme
    ML-DSA (a.k.a.  CRYSTALS-Dilithium) that has been selected for
@@ -1040,11 +1064,11 @@ Table of Contents
 
    [I-D.ounsworth-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., and J. Klaußner,
-              "Composite Signatures For Use In Internet PKI", Work in
+              "Composite ML-DSA for use in Internet PKI", Work in
               Progress, Internet-Draft, draft-ounsworth-pq-composite-
-              sigs-12, 11 February 2024,
+              sigs-13, 4 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ounsworth-pq-
-              composite-sigs-12>.
+              composite-sigs-13>.
 
    [MOSCA]    Kaye, P., Laflamme, R., and M. Mosca, "An Introduction to
               Quantum Computing, Oxford University Press", November
