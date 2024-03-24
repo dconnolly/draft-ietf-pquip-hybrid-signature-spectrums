@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-21T00:18:47.338469+00:00",
+  "timestamp": "2024-03-24T00:20:25.477745+00:00",
   "repo": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -534,6 +534,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOKkGQK85qbxwe",
+      "title": "Responding to comments on call for adoption",
+      "url": "https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums/pull/5",
+      "state": "MERGED",
+      "author": "dconnolly",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-03-22T00:57:59Z",
+      "updatedAt": "2024-03-22T01:02:20Z",
+      "baseRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "baseRefName": "main",
+      "baseRefOid": "ddc3ab3f5192d1003c0e1bb493c59fc6fce333a2",
+      "headRepository": "dconnolly/draft-hale-pquip-hybrid-signature-spectrums",
+      "headRefName": "adoption_edits",
+      "headRefOid": "d52081b70f4fcd22c0ed88727f7e9a3da04b059b",
+      "closedAt": "2024-03-22T01:02:15Z",
+      "mergedAt": "2024-03-22T01:02:15Z",
+      "mergedBy": "dconnolly",
+      "mergeCommit": {
+        "oid": "392c301128d8c4302870437fe05825deac607fb6"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
