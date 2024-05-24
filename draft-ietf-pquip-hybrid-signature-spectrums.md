@@ -1,8 +1,8 @@
 ---
 title: Hybrid signature spectrums
-abbrev: hale-pquip-hybrid-spectrums
-docname: draft-hale-pquip-hybrid-signature-spectrums-latest
-date: 2024-03-21
+abbrev: ietf-pquip-hybrid-spectrums
+docname: draft-ietf-pquip-hybrid-signature-spectrums-00
+date: 2024-05-24
 category: info
 
 ipr: trust200902
@@ -133,23 +133,9 @@ and simultaneous verification.
 Discussion of this work is encouraged to happen on the IETF PQUIP
 mailing list pqc@ietf.org or on the GitHub repository which contains the
 draft:
-https://github.com/dconnolly/draft-hale-pquip-hybrid-signature-spectrums
+https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
 
 --- middle
-
-<!--
-
-# Todos
-
-- add discussion
-- extend with discussion points from private emails between Britta, Nina and IETF
-- revise re Brendan's email
-  - change terminology 'proof composability'?
-  - change terminology 'next-gen' vs 'post-quantum'?
-- change terminology using 'black-box'?
-
-
--->
 
 # Introduction {#introduction}
 Initial focus on the transition to use of post-quantum algorithms in
