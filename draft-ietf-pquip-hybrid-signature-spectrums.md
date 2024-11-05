@@ -613,9 +613,9 @@ component signatures.
 
 ### **Minimal duplicate information**
 
-Similarly to [I-D.ietf-tls-hybrid-design], duplicated information should
-be avoided when possible. This might concern repeated information in
-hybrid certificates or in the communication of component certificates in
+Duplicated information should be avoided when possible, as a general 
+point of efficiency. This might include repeated information in hybrid 
+certificates or in the communication of component certificates in
 additional to hybrid certificates (for example to achieve
 backwards/forwards-compatibility), or sending multiple public keys or
 signatures of the same component algorithm.
