@@ -764,11 +764,17 @@ strip this away. For example, a quantum attacker could strip away the
 post-quantum signature of a concatenated dual signature, and (being
 able to forge, e.g., ECDSA signatures) remove the label artifact from
 the message as well. So, for many applications and threat models, adding
-an artifact in the message might not prevent stripping attacks.
+an artifact in the message might be insufficient under stripping attacks.
 Another artifact location could be in the public key certificates as
-described in [I-D.ounsworth-pq-composite-sigs]. In yet another case,
+described in [I-D.ounsworth-pq-composite-sigs]. In such a case, the artifacts 
+are still present even if a stripping attack occurs. In yet another case,
 artifacts may be present through the fused hybrid method, thus making
-them part of the signature at the algorithmic level.
+them part of the signature at the algorithmic level. Note that in this
+latter case, it is not possible for an adversary to strip one of the 
+component signatures or use a component of the hybrid to create a forgery 
+for a component algorithm. Such signatures provide SNS. This consequently 
+also implies that the artifacts of hybridization are absolute in that 
+verification failure would occur if an adversary tries to remove them.
 
 Eventual security analysis may be a consideration in choosing between
 levels. For example, if the security of the hybrid scheme is dependent
@@ -1036,7 +1042,7 @@ requirement is satisfied.
 
 Under traditional signature scheme security assumptions such as EUF-CMA,
 the adversary 'wins' the security experiment if it can produce a new
-message such that a message-signature pair `(m, sig)` with it correctly
+message such that a message-signature pair `(m, sig)` correctly
 verifies. This traditional security notion is challenged under a hybrid
 construct.
 
