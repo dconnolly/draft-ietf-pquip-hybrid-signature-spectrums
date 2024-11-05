@@ -5,12 +5,12 @@
 Network Working Group                                          N. Bindel
 Internet-Draft                                                 SandboxAQ
 Intended status: Informational                                   B. Hale
-Expires: 25 November 2024                      Naval Postgraduate School
+Expires: 9 May 2025                            Naval Postgraduate School
                                                              D. Connolly
                                                                SandboxAQ
                                                              F. Driscoll
                                        UK National Cyber Security Centre
-                                                             24 May 2024
+                                                         5 November 2024
 
 
                        Hybrid signature spectrums
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 November 2024.
+   This Internet-Draft will expire on 9 May 2025.
 
 Copyright Notice
 
