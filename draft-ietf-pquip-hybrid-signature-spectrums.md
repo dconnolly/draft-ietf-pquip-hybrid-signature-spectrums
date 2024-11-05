@@ -2,7 +2,6 @@
 title: Hybrid signature spectrums
 abbrev: ietf-pquip-hybrid-spectrums
 docname: draft-ietf-pquip-hybrid-signature-spectrums-latest
-date: 2024-05-24
 category: info
 
 ipr: trust200902
