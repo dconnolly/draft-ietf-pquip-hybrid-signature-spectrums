@@ -704,7 +704,7 @@ verify (or fail to verify). This construct most closely mirrors
 traditional digital signatures where, assuming that the verifier does
 verify a signature at all, the result is either a positive verification
 of the full signature or a failure if the signature is not valid. For
-hybrid signatures, a `full signature` implies the hybridization of both
+fused hybrid signatures, a `full signature` implies the fusion of both
 component algorithms, and therefore the strongest non-separability
 notion enforces an all-or-nothing approach to verification. Examples of
 algorithms providing this type of security can be found in
