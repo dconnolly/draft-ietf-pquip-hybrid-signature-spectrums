@@ -436,21 +436,21 @@ Non-Separability (WNS) [HYBRIDSIGDESIGN]. Note that WNS does not
 restrict an adversary from potentially creating a valid component
 digital signature from a hybrid one (a signature stripping attack), but
 rather implies that such a digital signature will contain artifacts of
-the separation. Thus authentication is not simply provided by the sender
-to the receiver through correct verification of the digital
-signature(s), but potentially through further investigation on the
-receiver side that may extend well beyond traditional signature
-verification behavior. For instance, this can intuitively be seen in
-cases of a message containing a context note on hybrid authentication,
-that is then signed by all component algorithms/the hybrid signature
-scheme. If an adversary removes one component signature but not the
-other, then artifacts in the message itself point to the possible
-existence of hybrid signature such as a label stating “this message must
-be hybrid signed”. This might be a counter measure against stripping
-attacks if the verifier expects a hybrid signature scheme to have this
-property. However, it places the responsibility of signature validity
-not only on the correct format of the message, as in a traditional
-signature security guarantee, but the precise content thereof.
+the separation. Thus authentication that is normally assured under 
+correct verification of digital signature(s), is now potentially also 
+reliant on further investigation on the receiver side that may extend 
+well beyond traditional signature verification behavior. For instance, 
+this can intuitively be seen in cases of a message containing a context 
+note on hybrid authentication, that is then signed by all component 
+algorithms/the hybrid signature scheme. If an adversary removes one 
+component signature but not the other, then artifacts in the message 
+itself point to the possible existence of hybrid signature such as a 
+label stating “this message must be hybrid signed”. This might be a 
+counter measure against stripping attacks if the verifier expects a 
+hybrid signature scheme to have this property. However, it places the 
+responsibility of signature validity not only on the correct format of 
+the message, as in a traditional signature security guarantee, but the 
+precise content thereof.
 
 ### **Strong Non-Separability**
 
