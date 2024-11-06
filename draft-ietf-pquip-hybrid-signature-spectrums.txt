@@ -5,12 +5,12 @@
 Network Working Group                                          N. Bindel
 Internet-Draft                                                 SandboxAQ
 Intended status: Informational                                   B. Hale
-Expires: 9 May 2025                            Naval Postgraduate School
+Expires: 10 May 2025                           Naval Postgraduate School
                                                              D. Connolly
                                                                SandboxAQ
                                                              F. Driscoll
                                        UK National Cyber Security Centre
-                                                         5 November 2024
+                                                         6 November 2024
 
 
                        Hybrid signature spectrums
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2025.
+   This Internet-Draft will expire on 10 May 2025.
 
 Copyright Notice
 
@@ -164,7 +164,10 @@ Table of Contents
    attempt to answer the question of whether or not a hybrid scheme is
    desirable for, or should be used in a given case.  It also
    intentionally does not propose concrete hybrid signature combiners or
-   instantiations thereof.
+   instantiations thereof.  As with the data authenticity guarantees
+   provided by any digital signature, the security guarantees discussed
+   in this document are reliant on correct provisioning of the keys
+   involved, e.g. entity authentication.
 
 1.1.  Terminology
 
@@ -249,6 +252,16 @@ Table of Contents
       (e.g., within the message).  Artifacts should be easily
       identifiable by the receiver in the case of signature stripping.
 
+   *  Stripping attack: A stripping attack refers to a case where an
+      adversary takes a message and hybrid signature pair and attempts
+      to submit (a potential modification of) the pair to a component
+      algorithm verifier.  A common example of a stripping attack
+      includes a message and hybrid signature, comprised of concatenated
+      post-quantum and traditional signatures, where an adversary simply
+      removes the post-quantum component signature and submits the
+      message and traditional component signature to a traditional
+      verifier.
+
 1.2.  Motivation for use of hybrid signature schemes
 
    Before diving into the design goals for hybrid digital signatures, it
@@ -317,11 +330,13 @@ Table of Contents
    risk of post-quantum transition delay: l + d > q, where l is the
    information life-span, d is the time for system transition to post-
    quantum algorithms, and q is the time before a quantum computer is
-   ready to execute cryptanalysis.  As opposed to key exchange and KEMs,
-   it may not be obvious why there is urgency for an adoption of post-
-   quantum signatures; namely, while encryption is subject to store-now-
-   decrypt-later attacks, there may not seem to be a parallel notion for
-   authenticity, i.e., 'store-now-modify-later attacks'.
+   ready to execute cryptanalysis.  In terms of risk to data
+   confidentiality guarantees and therefore key exchange and KEM
+   algorithms, application of this equation is straightforward.  In
+   contrast, it may not be obvious why there is urgency for an adoption
+   of post-quantum signatures; namely, while encryption is subject to
+   store-now-decrypt-later attacks, there may not seem to be a parallel
+   notion for authenticity, i.e., 'store-now-modify-later attacks'.
 
    However, in larger systems, including national systems, space
    systems, large healthcare support systems, and critical
@@ -365,27 +380,42 @@ Table of Contents
 1.3.1.1.  *Hybrid Unforgeability*
 
    Hybrid unforgeability is a specific type of hybrid authentication,
-   where the security assumption for the scheme, e.g.  EUF-CMA or SUF-
-   CMA, is maintained as long as at least one of the component schemes
-   is EUF-CMA (resp., SUF-CMA) secure without a prioritisation.  We call
-   this notion 'hybrid unforgeability'; it is a specific type of hybrid
-   authentication.  For example, the concatenation combiner in
-   [HYBRIDSIG] is 'hybrid unforgeable'.  As mentioned above, this might
-   be incompatible with backward-compatibility, where the EUF-CMA
-   (resp., SUF-CMA) security of the hybrid signature relies solely on
-   the security of one of the component schemes instead of relying on
-   both, e.g., the dual message combiner using nesting in [HYBRIDSIG].
-   For more details, we refer to our discussion below.
+   where the security assumption for the scheme, e.g.  EUF-CMA, is
+   maintained as long as at least one of the component schemes is EUF-
+   CMA secure without a prioritisation.  We call this notion 'hybrid
+   unforgeability'; it is a specific type of hybrid authentication.  For
+   example, the concatenation combiner in [HYBRIDSIG] is 'hybrid
+   unforgeable'.  As mentioned above, this might be incompatible with
+   backward-compatibility, where the EUF-CMA security of the hybrid
+   signature relies solely on the security of one of the component
+   schemes instead of relying on both, e.g., the dual message combiner
+   using nesting in [HYBRIDSIG].  For more details, we refer to our
+   discussion below.  Note that unlike EUF-CMA security, SUF-CMA
+   security of the hybrid scheme may rely on SUF-CMA security of both
+   component schemes achieving SUF-CMA, depending on the hybridization
+   approach.  For instance, this can be clearly seen under a
+   concatenation combiner where the hybrid signature is comprised of two
+   distinct component signatures; in that case, if either component
+   signature does not offer SUF-CMA, the hybrid does not achieve SUF-
+   CMA.
 
    Use cases where a hybrid scheme is used with, e.g., EUF-CMA security
    assumed for only one component scheme generally use hybrid techniques
-   for their functional transition pathway support, while fully trusting
-   either the traditional or post-quantum algorithm.  In contrast, use
-   cases where a hybrid scheme is used with e.g., EUF-CMA security
-   assumed for both component schemes without prioritisation can use
-   hybrid techniques for both functional transition and security
-   transition, where it may not be known which algorithm should be
-   relied upon.
+   for their 'functional transition' pathway support, while fully
+   trusting either the traditional or post-quantum algorithm.  E.g.,
+   hybrid signatures may be used as a transition step for when a system
+   or system-of-systems is comprised of some verifiers that support
+   traditional signatures only while other verifiers are upgraded to
+   also support post-quantum signatures.  In this example, a system
+   manager is using hybrid signatures as a 'functional transition'
+   support, but not yet expecting different security guarantees.  As
+   such, EUF-CMA security is assumed for one component algorithm.
+
+   In contrast, use cases where a hybrid scheme is used with e.g., EUF-
+   CMA security assumed for both component schemes without
+   prioritisation between them can use hybrid techniques for both
+   functional transition and security transition, where it may not be
+   known which algorithm should be relied upon.
 
 1.3.2.  *Proof Composability*
 
@@ -512,16 +542,19 @@ Table of Contents
    in [HYBRIDSIGDESIGN].  SV requires that not only are all component
    signatures needed to achieve a successful verification present in the
    hybrid signature, but also that verification of both component
-   algorithms occurs simultaneously.  Namely, "missing" information
-   needs to be computed by the verifier so they cannot “quit” the
-   verification process before both component signatures are verified.
-   SV mimics traditional digital signatures guarantees, essentially
-   ensuring that the hybrid digital signature behaves as a single
-   algorithm vs. two separate component stages.  Alternatively phrased,
-   under an SV guarantee it is not possible for an unerring verifier to
-   initiate termination of the hybrid verification upon successful
-   verification of one component algorithm without also knowing if the
-   other component succeeded or failed.
+   algorithms occurs roughly simultaneously.  Namely, "missing"
+   information needs to be computed by the verifier so that a normally
+   functioning verification algorithm cannot “quit” the verification
+   process before both component signatures are verified.  This may
+   additionally cover some error-injection and similar attacks, where an
+   adversary attempts to make an otherwise honest verifier skip
+   algorithm steps.  SV mimics traditional digital signatures
+   guarantees, essentially ensuring that the hybrid digital signature
+   behaves as a single algorithm vs. two separate component stages.
+   Alternatively phrased, under an SV guarantee it is not possible for
+   an otherwise honest verifier to initiate termination of the hybrid
+   verification upon successful verification of one component algorithm
+   without also knowing if the other component succeeded or failed.
 
 1.3.7.  *Hybrid Generality*
 
@@ -641,9 +674,10 @@ Table of Contents
    verification of the full signature or a failure if the signature is
    not valid.  For fused hybrid signatures, a full signature implies the
    fusion of both component algorithms, and therefore the strongest non-
-   separability notion enforces an all-or-nothing approach to
-   verification.  Examples of algorithms providing this type of security
-   can be found in [HYBRIDSIGDESIGN].
+   separability notion ensures an all-or-nothing approach to
+   verification, regardless of adversarial action.  Examples of
+   algorithms providing this type of security can be found in
+   [HYBRIDSIGDESIGN].
 
 3.  Artifacts
 
@@ -941,20 +975,31 @@ Table of Contents
    Under traditional signature scheme security assumptions such as EUF-
    CMA, the adversary 'wins' the security experiment if it can produce a
    new message such that a message-signature pair (m, sig) correctly
-   verifies.  This traditional security notion is challenged under a
-   hybrid construct.
+   verifies.  This traditional security notion has several layers of
+   nuance under a hybrid construct.
 
-   The most straightforward comparison would be for the adversary to
-   attempt to produce a new message m' that a message-hybrid signature
-   pair (m', sig_h) correctly verifies.  However, such a guarantee
-   depends on the signature being strongly non-separable.  Otherwise, in
-   practical terms a security experiment must capture the case that an
-   existing or new message m could be verified with a component
-   signature, e.g., to produce (m', sig_1) that correctly verifies under
-   Sigma_1.Sign.  Such considerations are beyond the scope of
-   traditional security analysis and represent considerations that would
-   need to be accounted for depending on the signature combiner method
-   chosen.
+   The most straightforward extension of the traditional EUF-CMA
+   security game would be for the adversary to attempt to produce a new
+   message m' that a message-hybrid signature pair (m', sig_h) correctly
+   verifies.  However, achieving EUF-CMA security in such a
+   straightforward way depends on the signature choice being strongly
+   non-separable.
+
+   Otherwise, in practical terms, a security experiment must capture the
+   case that an existing or new message m could be verified with a
+   component signature, e.g., to produce (m', sig_1) that correctly
+   verifies under Sigma_1.Verify.  As noted in
+   [I-D.ounsworth-pq-composite-sigs], if such component-wise
+   verification is possible, some concatenated or nested hybrid
+   signatures actually do not achieve EUF-CMA.  To mitigate the issue,
+   dedicated keys can be used for the hybrid signature, i.e., keys which
+   are not allowed to be used in cases of standalone component algorithm
+   verification.  While such a policy requirement alleviates the risk of
+   an EUF-CMA attack such as that described in
+   [I-D.ounsworth-pq-composite-sigs], it is a policy mitigation and is
+   beyond the scope of normal security analysis and cryptographic
+   modeling.  Such subtleties in considerations would need to be
+   accounted for depending on the signature combiner method chosen.
 
 6.  Security Considerations
 
@@ -1017,7 +1062,7 @@ Table of Contents
    insights and perspectives, and/or stimulated work in the area:
 
    Scott Fluhrer, Felix Günther, John Gray, Serge Mister, Max Pala, Mike
-   Ounsworth, Douglas Stebila, Brendan Zember
+   Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
 
 9.  Informative References
 

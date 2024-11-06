@@ -1092,7 +1092,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bindel, et al.</td>
-<td class="center">Expires 9 May 2025</td>
+<td class="center">Expires 10 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1105,12 +1105,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hybrid-signature-spectrums-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-05" class="published">5 November 2024</time>
+<time datetime="2024-11-06" class="published">6 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-09">9 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-10">10 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1175,7 +1175,7 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums<a href=
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1360,7 +1360,10 @@ schemes to help them decide what properties they do and do not require from
 their scheme. It does not attempt to answer the question of whether or not a
 hybrid scheme is desirable for, or should be used in a given case. It also
 intentionally does not propose concrete hybrid signature combiners or
-instantiations thereof.<a href="#section-1-5" class="pilcrow">¶</a></p>
+instantiations thereof. As with the data authenticity guarantees provided by
+any digital signature, the security guarantees discussed in this document
+are reliant on correct provisioning of the keys involved, e.g. entity
+authentication.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1448,13 +1451,23 @@ draft.  However, the majority of the discussion in this document applies
 equally well to future transitions to other next-generation algorithms.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.6">
-            <p id="section-1.1-2.6.1">Artifact: An artifact is evidence of the sender's intent to hybridize
-a signature that remains even if a component algorithm tag is
-removed. Artifacts can be e.g., at the algorithmic level (e.g., within
-the digital signature), or at the protocol level (e.g., within the
+            <p id="section-1.1-2.6.1">Artifact: An artifact is evidence of the sender's intent to hybridize a
+signature that remains even if a component algorithm tag is
+removed. Artifacts can be e.g., at the algorithmic level (e.g., within the
+digital signature), or at the protocol level (e.g., within the
 certificate), or on the system policy level (e.g., within the
-message). Artifacts should be easily identifiable by the receiver in
-the case of signature stripping.<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
+message). Artifacts should be easily identifiable by the receiver in the
+case of signature stripping.<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-2.7">
+            <p id="section-1.1-2.7.1">Stripping attack: A stripping attack refers to a case where an adversary
+takes a message and hybrid signature pair and attempts to submit (a
+potential modification of) the pair to a component algorithm verifier.  A
+common example of a stripping attack includes a message and hybrid
+signature, comprised of concatenated post-quantum and traditional
+signatures, where an adversary simply removes the post-quantum component
+signature and submits the message and traditional component signature to a
+traditional verifier.<a href="#section-1.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1468,7 +1481,7 @@ the case of signature stripping.<a href="#section-1.1-2.6.1" class="pilcrow">¶<
 worth taking a look at why hybrid digital signatures are desirable for
 some applications. As many of the arguments hold in general for hybrid
 algorithms, we again refer to <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span> that
-summarizes these well.  In addition, we explicate the motivation for
+summarizes these well. In addition, we explicate the motivation for
 hybrid signatures here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <div id="complexity">
 <section id="section-1.2.1">
@@ -1530,8 +1543,10 @@ hybridization.  Mosca’s equation <span>[<a href="#MOSCA" class="cite xref">MOS
 risk of post-quantum transition delay: <code>l + d &gt; q</code>, where l is the
 information life-span, d is the time for system transition to
 post-quantum algorithms, and q is the time before a quantum computer is
-ready to execute cryptanalysis. As opposed to key exchange and KEMs, it
-may not be obvious why there is urgency for an adoption of post-quantum
+ready to execute cryptanalysis. In terms of risk to data confidentiality
+guarantees and therefore key exchange and KEM algorithms, application
+of this equation is straightforward. In contrast, it may not be obvious
+why there is urgency for an adoption of post-quantum
 signatures; namely, while encryption is subject to
 store-now-decrypt-later attacks, there may not seem to be a parallel
 notion for authenticity, i.e., 'store-now-modify-later attacks'.<a href="#section-1.2.2-1" class="pilcrow">¶</a></p>
@@ -1583,26 +1598,37 @@ security, such as 'hybrid unforgeability' described next.<a href="#section-1.3.1
             <h5 id="name-hybrid-unforgeability">
 <a href="#section-1.3.1.1" class="section-number selfRef">1.3.1.1. </a><a href="#name-hybrid-unforgeability" class="section-name selfRef"><strong>Hybrid Unforgeability</strong></a>
             </h5>
-<p id="section-1.3.1.1-1">Hybrid unforgeability is a specific type of hybrid authentication, where
-the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is
-maintained as long as at least one of the component schemes is EUF-CMA
-(resp., SUF-CMA) secure without a prioritisation. We call this notion
-'hybrid unforgeability'; it is a specific type of hybrid
-authentication. For example, the concatenation combiner in <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>
-is 'hybrid unforgeable'. As mentioned above, this might be incompatible
-with backward-compatibility, where the EUF-CMA (resp., SUF-CMA) security
-of the hybrid signature relies solely on the security of one of the
-component schemes instead of relying on both, e.g., the dual message
-combiner using nesting in <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. For more details, we refer to our
-discussion below.<a href="#section-1.3.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.3.1.1-2">Use cases where a hybrid scheme is used with, e.g., EUF-CMA security
-assumed for only one component scheme generally use hybrid techniques
-for their functional transition pathway support, while fully trusting
-either the traditional or post-quantum algorithm. In contrast, use cases
-where a hybrid scheme is used with e.g., EUF-CMA security assumed for
-both component schemes without prioritisation can use hybrid techniques
-for both functional transition and security transition, where it may not
-be known which algorithm should be relied upon.<a href="#section-1.3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.3.1.1-1">Hybrid unforgeability is a specific type of hybrid authentication, where the
+security assumption for the scheme, e.g. EUF-CMA, is maintained as long as at
+least one of the component schemes is EUF-CMA secure without a
+prioritisation. We call this notion 'hybrid unforgeability'; it is a specific
+type of hybrid authentication. For example, the concatenation combiner in
+<span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span> is 'hybrid unforgeable'. As mentioned above, this might be
+incompatible with backward-compatibility, where the EUF-CMA security of the
+hybrid signature relies solely on the security of one of the component
+schemes instead of relying on both, e.g., the dual message combiner using
+nesting in <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. For more details, we refer to our discussion
+below. Note that unlike EUF-CMA security, SUF-CMA security of the hybrid
+scheme may rely on SUF-CMA security of both component schemes achieving
+SUF-CMA, depending on the hybridization approach.  For instance, this can be
+clearly seen under a concatenation combiner where the hybrid signature is
+comprised of two distinct component signatures; in that case, if either
+component signature does not offer SUF-CMA, the hybrid does not achieve
+SUF-CMA.<a href="#section-1.3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.1.1-2">Use cases where a hybrid scheme is used with, e.g., EUF-CMA security assumed
+for only one component scheme generally use hybrid techniques for their
+'functional transition' pathway support, while fully trusting either the
+traditional or post-quantum algorithm. E.g., hybrid signatures may be used as
+a transition step for when a system or system-of-systems is comprised of some
+verifiers that support traditional signatures only while other verifiers are
+upgraded to also support post-quantum signatures. In this example, a system
+manager is using hybrid signatures as a 'functional transition' support, but
+not yet expecting different security guarantees. As such, EUF-CMA security is
+assumed for one component algorithm.<a href="#section-1.3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.3.1.1-3">In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA
+security assumed for both component schemes without prioritisation between
+them can use hybrid techniques for both functional transition and security
+transition, where it may not be known which algorithm should be relied upon.<a href="#section-1.3.1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1632,30 +1658,28 @@ composability.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
 <a href="#section-1.3.3" class="section-number selfRef">1.3.3. </a><a href="#name-weak-non-separability" class="section-name selfRef"><strong>Weak Non-Separability</strong></a>
           </h4>
 <p id="section-1.3.3-1">Non-Separability was one of the earliest properties of hybrid digital
-signatures to be discussed <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. It was defined as the guarantee
-that an adversary cannot simply “remove” one of the component signatures
-without evidence left behind. For example there are artifacts that a
-carefully designed verifier may be able to identify, or that are
-identifiable in later audits. This was later termed Weak
-Non-Separability (WNS) <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. Note that WNS does not
-restrict an adversary from potentially creating a valid component
-digital signature from a hybrid one (a signature stripping attack), but
-rather implies that such a digital signature will contain artifacts of
-the separation. Thus authentication that is normally assured under
-correct verification of digital signature(s), is now potentially also
-reliant on further investigation on the receiver side that may extend
-well beyond traditional signature verification behavior. For instance,
-this can intuitively be seen in cases of a message containing a context
-note on hybrid authentication, that is then signed by all component
-algorithms/the hybrid signature scheme. If an adversary removes one
-component signature but not the other, then artifacts in the message
-itself point to the possible existence of hybrid signature such as a
-label stating “this message must be hybrid signed”. This might be a
-counter measure against stripping attacks if the verifier expects a
-hybrid signature scheme to have this property. However, it places the
-responsibility of signature validity not only on the correct format of
-the message, as in a traditional signature security guarantee, but the
-precise content thereof.<a href="#section-1.3.3-1" class="pilcrow">¶</a></p>
+signatures to be discussed <span>[<a href="#HYBRIDSIG" class="cite xref">HYBRIDSIG</a>]</span>. It was defined as the guarantee that
+an adversary cannot simply “remove” one of the component signatures without
+evidence left behind. For example there are artifacts that a carefully
+designed verifier may be able to identify, or that are identifiable in later
+audits. This was later termed Weak Non-Separability (WNS)
+<span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. Note that WNS does not restrict an adversary from
+potentially creating a valid component digital signature from a hybrid one (a
+signature stripping attack), but rather implies that such a digital signature
+will contain artifacts of the separation. Thus authentication that is
+normally assured under correct verification of digital signature(s), is now
+potentially also reliant on further investigation on the receiver side that
+may extend well beyond traditional signature verification behavior. For
+instance, this can intuitively be seen in cases of a message containing a
+context note on hybrid authentication, that is then signed by all component
+algorithms/the hybrid signature scheme. If an adversary removes one component
+signature but not the other, then artifacts in the message itself point to
+the possible existence of hybrid signature such as a label stating “this
+message must be hybrid signed”. This might be a counter measure against
+stripping attacks if the verifier expects a hybrid signature scheme to have
+this property. However, it places the responsibility of signature validity
+not only on the correct format of the message, as in a traditional signature
+security guarantee, but the precise content thereof.<a href="#section-1.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="strong-non-separability">
@@ -1703,35 +1727,33 @@ dependencies at the system level.<a href="#section-1.3.4-2" class="pilcrow">¶</
           <h4 id="name-backwards-forwards-compatib">
 <a href="#section-1.3.5" class="section-number selfRef">1.3.5. </a><a href="#name-backwards-forwards-compatib" class="section-name selfRef"><strong>Backwards/Forwards Compatibility</strong></a>
           </h4>
-<p id="section-1.3.5-1">Backwards compatibility refers to the property where a hybrid signature
-may be verified by only verifying one component signature, allowing the
-scheme to be used by legacy receivers. In general this means verifying
-the traditional component signature scheme, potentially ignoring the
-post-quantum signature entirely. This provides an option to transition
-sender systems to post-quantum algorithms while still supporting select
-legacy receivers. Notably, this is a verification property; the sender
-has provided a hybrid digital signature, but the verifier is allowed,
-due to internal policy and/or implementation, to only verify one
-component signature. Backwards compatibility may be further decomposed
-to subcategories where component key provenance is either separate or
-hybrid so as to support implementations that cannot recognize (and/or
-process) hybrid signatures or keys.<a href="#section-1.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.3.5-1">Backwards compatibility refers to the property where a hybrid signature may
+be verified by only verifying one component signature, allowing the scheme to
+be used by legacy receivers. In general this means verifying the traditional
+component signature scheme, potentially ignoring the post-quantum signature
+entirely. This provides an option to transition sender systems to
+post-quantum algorithms while still supporting select legacy
+receivers. Notably, this is a verification property; the sender has provided
+a hybrid digital signature, but the verifier is allowed, due to internal
+policy and/or implementation, to only verify one component
+signature. Backwards compatibility may be further decomposed to subcategories
+where component key provenance is either separate or hybrid so as to support
+implementations that cannot recognize (and/or process) hybrid signatures or
+keys.<a href="#section-1.3.5-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.5-2">Forwards compatibility has also been a consideration in hybrid proposals
-<span>[<a href="#I-D.becker-guthrie-noncomposite-hybrid-auth" class="cite xref">I-D.becker-guthrie-noncomposite-hybrid-auth</a>]</span>. Forward compatibility
-assumes that hybrid signature schemes will be used for some time, but
-that eventually all systems will transition to use only one
-(particularly, only one post-quantum) algorithm. As this is very similar
-to backwards compatibility, it also may imply separability of a hybrid
-algorithm; however, it could also simply imply capability to support
-separate component signatures. Thus the key distinction between
-backwards and forwards compatibility is that backwards compatibility may
-be needed for legacy systems that cannot use and/or process hybrid or
-post-quantum signatures, whereas in forwards compatibility the system
-has those capabilities and can choose what to support (e.g., for
-efficiency reasons).<a href="#section-1.3.5-2" class="pilcrow">¶</a></p>
+<span>[<a href="#I-D.becker-guthrie-noncomposite-hybrid-auth" class="cite xref">I-D.becker-guthrie-noncomposite-hybrid-auth</a>]</span>. Forward compatibility assumes
+that hybrid signature schemes will be used for some time, but that eventually
+all systems will transition to use only one (particularly, only one
+post-quantum) algorithm. As this is very similar to backwards compatibility,
+it also may imply separability of a hybrid algorithm; however, it could also
+simply imply capability to support separate component signatures. Thus the
+key distinction between backwards and forwards compatibility is that
+backwards compatibility may be needed for legacy systems that cannot use
+and/or process hybrid or post-quantum signatures, whereas in forwards
+compatibility the system has those capabilities and can choose what to
+support (e.g., for efficiency reasons).<a href="#section-1.3.5-2" class="pilcrow">¶</a></p>
 <p id="section-1.3.5-3">As noted in <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>, ideally, forward/backward
-compatibility is achieved using redundant information as little as
-possible.<a href="#section-1.3.5-3" class="pilcrow">¶</a></p>
+compatibility is achieved using redundant information as little as possible.<a href="#section-1.3.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="simultaneous-verification">
@@ -1742,16 +1764,18 @@ possible.<a href="#section-1.3.5-3" class="pilcrow">¶</a></p>
 <p id="section-1.3.6-1">Simultaneous Verification (SV) builds on SNS and was first introduced in
 <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SV requires that not only are all component signatures
 needed to achieve a successful verification present in the hybrid signature,
-but also that verification of both component algorithms occurs
+but also that verification of both component algorithms occurs roughly
 simultaneously. Namely, "missing" information needs to be computed by the
-verifier so they cannot “quit” the verification process before both component
-signatures are verified. SV mimics traditional digital signatures guarantees,
-essentially ensuring that the hybrid digital signature behaves as a single
-algorithm vs. two separate component stages. Alternatively phrased, under an
-SV guarantee it is not possible for an unerring verifier to initiate
-termination of the hybrid verification upon successful verification of one
-component algorithm without also knowing if the other component succeeded or
-failed.<a href="#section-1.3.6-1" class="pilcrow">¶</a></p>
+verifier so that a normally functioning verification algorithm cannot “quit”
+the verification process before both component signatures are verified. This
+may additionally cover some error-injection and similar attacks, where an
+adversary attempts to make an otherwise honest verifier skip algorithm steps.
+SV mimics traditional digital signatures guarantees, essentially ensuring that
+the hybrid digital signature behaves as a single algorithm vs. two separate
+component stages. Alternatively phrased, under an SV guarantee it is not
+possible for an otherwise honest verifier to initiate termination of the
+hybrid verification upon successful verification of one component algorithm
+without also knowing if the other component succeeded or failed.<a href="#section-1.3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hybrid-generality">
@@ -1889,9 +1913,9 @@ where, assuming that the verifier does verify a signature at all, the result
 is either a positive verification of the full signature or a failure if the
 signature is not valid. For fused hybrid signatures, a <code>full signature</code>
 implies the fusion of both component algorithms, and therefore the strongest
-non-separability notion enforces an all-or-nothing approach to
-verification. Examples of algorithms providing this type of security can be
-found in <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>.<a href="#section-2-6" class="pilcrow">¶</a></p>
+non-separability notion ensures an all-or-nothing approach to verification,
+regardless of adversarial action. Examples of algorithms providing this type
+of security can be found in <span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>.<a href="#section-2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="art-spectrum">
@@ -2260,16 +2284,25 @@ requirement is satisfied.<a href="#section-4-9" class="pilcrow">¶</a></p>
 <p id="section-5-1">Under traditional signature scheme security assumptions such as EUF-CMA, the
 adversary 'wins' the security experiment if it can produce a new message such
 that a message-signature pair <code>(m, sig)</code> correctly verifies. This traditional
-security notion is challenged under a hybrid construct.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The most straightforward comparison would be for the adversary to attempt to
-produce a new message <code>m'</code> that a message-hybrid signature pair <code>(m', sig_h)</code>
-correctly verifies.  However, such a guarantee depends on the signature being
-strongly non-separable. Otherwise, in practical terms a security experiment
-must capture the case that an existing or new message <code>m</code> could be verified
-with a component signature, e.g., to produce <code>(m', sig_1)</code> that correctly
-verifies under <code>Sigma_1.Sign</code>. Such considerations are beyond the scope of
-traditional security analysis and represent considerations that would need to
-be accounted for depending on the signature combiner method chosen.<a href="#section-5-2" class="pilcrow">¶</a></p>
+security notion has several layers of nuance under a hybrid construct.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">The most straightforward extension of the traditional EUF-CMA security game
+would be for the adversary to attempt to produce a new message <code>m'</code> that a
+message-hybrid signature pair <code>(m', sig_h)</code> correctly verifies.  However,
+achieving EUF-CMA security in such a straightforward way depends on the
+signature choice being strongly non-separable.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Otherwise, in practical terms, a security experiment must capture the case
+that an existing or new message <code>m</code> could be verified with a component
+signature, e.g., to produce <code>(m', sig_1)</code> that correctly verifies under
+<code>Sigma_1.Verify</code>. As noted in <span>[<a href="#I-D.ounsworth-pq-composite-sigs" class="cite xref">I-D.ounsworth-pq-composite-sigs</a>]</span>, if such
+component-wise verification is possible, some concatenated or nested hybrid
+signatures actually do not achieve EUF-CMA. To mitigate the issue, dedicated
+keys can be used for the hybrid signature, i.e., keys which are not allowed
+to be used in cases of standalone component algorithm verification.  While
+such a policy requirement alleviates the risk of an EUF-CMA attack such as
+that described in <span>[<a href="#I-D.ounsworth-pq-composite-sigs" class="cite xref">I-D.ounsworth-pq-composite-sigs</a>]</span>, it is a policy
+mitigation and is beyond the scope of normal security analysis and
+cryptographic modeling.  Such subtleties in considerations would need to be
+accounted for depending on the signature combiner method chosen.<a href="#section-5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-considerations">
@@ -2350,7 +2383,7 @@ verification' is enforced.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 who have contributed to pushing this draft forward, offered insights and
 perspectives, and/or stimulated work in the area:<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">Scott Fluhrer, Felix Günther, John Gray, Serge Mister, Max Pala, Mike
-Ounsworth, Douglas Stebila, Brendan Zember<a href="#section-8-3" class="pilcrow">¶</a></p>
+Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember<a href="#section-8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-informative-references">
