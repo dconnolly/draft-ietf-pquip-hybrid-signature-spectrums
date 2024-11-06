@@ -641,9 +641,9 @@ where, assuming that the verifier does verify a signature at all, the result
 is either a positive verification of the full signature or a failure if the
 signature is not valid. For fused hybrid signatures, a `full signature`
 implies the fusion of both component algorithms, and therefore the strongest
-non-separability notion enforces an all-or-nothing approach to
-verification. Examples of algorithms providing this type of security can be
-found in [HYBRIDSIGDESIGN].
+non-separability notion ensures an all-or-nothing approach to verification, 
+regardless of adversarial action. Examples of algorithms providing this type 
+of security can be found in [HYBRIDSIGDESIGN].
 
 # Artifacts {#art-spectrum}
 
