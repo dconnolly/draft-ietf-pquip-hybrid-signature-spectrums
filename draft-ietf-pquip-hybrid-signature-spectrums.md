@@ -643,7 +643,7 @@ signature is not valid. For fused hybrid signatures, a `full signature`
 implies the fusion of both component algorithms, and therefore the strongest
 non-separability notion ensures an all-or-nothing approach to verification, 
 regardless of adversarial action. Examples of algorithms providing this type 
-of security can be found in [HYBRIDSIGDESIGN].
+of security can be found in [HYBRIDSIGDESIGN]..
 
 # Artifacts {#art-spectrum}
 
