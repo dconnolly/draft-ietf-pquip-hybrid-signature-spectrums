@@ -189,7 +189,10 @@ schemes to help them decide what properties they do and do not require from
 their scheme. It does not attempt to answer the question of whether or not a
 hybrid scheme is desirable for, or should be used in a given case. It also
 intentionally does not propose concrete hybrid signature combiners or
-instantiations thereof.
+instantiations thereof. As with the data authenticity guarantees provided by 
+any digital signature, the security guarantees discussed in this document 
+are reliant on correct provisioning of the keys involved, e.g. entity 
+authentication. 
 
 ## Terminology {#terminology}
 
