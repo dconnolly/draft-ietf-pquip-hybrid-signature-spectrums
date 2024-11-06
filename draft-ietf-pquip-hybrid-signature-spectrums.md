@@ -337,8 +337,10 @@ hybridization.  Mosca’s equation [MOSCA] very simply illustrates the
 risk of post-quantum transition delay: `l + d > q`, where l is the
 information life-span, d is the time for system transition to
 post-quantum algorithms, and q is the time before a quantum computer is
-ready to execute cryptanalysis. As opposed to key exchange and KEMs, it
-may not be obvious why there is urgency for an adoption of post-quantum
+ready to execute cryptanalysis. In terms of risk to data confidentiality 
+guarantees and therefore key exchange and KEM algorithms, application 
+of this equation is straightforward. In contrast, it may not be obvious 
+why there is urgency for an adoption of post-quantum
 signatures; namely, while encryption is subject to
 store-now-decrypt-later attacks, there may not seem to be a parallel
 notion for authenticity, i.e., 'store-now-modify-later attacks'.
