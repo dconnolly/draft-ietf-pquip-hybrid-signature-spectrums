@@ -984,4 +984,4 @@ who have contributed to pushing this draft forward, offered insights and
 perspectives, and/or stimulated work in the area:
 
 Scott Fluhrer, Felix Günther, John Gray, Serge Mister, Max Pala, Mike
-Ounsworth, Douglas Stebila, Brendan Zember
+Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
