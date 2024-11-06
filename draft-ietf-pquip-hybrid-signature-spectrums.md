@@ -393,17 +393,23 @@ security, such as 'hybrid unforgeability' described next.
 
 #### **Hybrid Unforgeability**
 Hybrid unforgeability is a specific type of hybrid authentication, where
-the security assumption for the scheme, e.g. EUF-CMA or SUF-CMA, is
-maintained as long as at least one of the component schemes is EUF-CMA
-(resp., SUF-CMA) secure without a prioritisation. We call this notion
+the security assumption for the scheme, e.g. EUF-CMA, is
+maintained as long as at least one of the component schemes is EUF-CMA 
+secure without a prioritisation. We call this notion
 'hybrid unforgeability'; it is a specific type of hybrid
 authentication. For example, the concatenation combiner in [HYBRIDSIG]
 is 'hybrid unforgeable'. As mentioned above, this might be incompatible
-with backward-compatibility, where the EUF-CMA (resp., SUF-CMA) security
+with backward-compatibility, where the EUF-CMA security
 of the hybrid signature relies solely on the security of one of the
 component schemes instead of relying on both, e.g., the dual message
 combiner using nesting in [HYBRIDSIG]. For more details, we refer to our
-discussion below.
+discussion below. Note that unlike EUF-CMA security, SUF-CMA security 
+of the hybrid scheme may rely on SUF-CMA security of both component 
+schemes achieving SUF-CMA, depending on the hybridization approach. 
+For instance, this can be clearly seen under a concatenation combiner 
+where the hybrid signature is comprised of two distinct component 
+signatures; in that case, if either component signature does not offer 
+SUF-CMA, the hybrid does not achieve SUF-CMA.
 
 Use cases where a hybrid scheme is used with, e.g., EUF-CMA security
 assumed for only one component scheme generally use hybrid techniques
