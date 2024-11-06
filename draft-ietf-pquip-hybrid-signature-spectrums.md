@@ -396,12 +396,19 @@ discussion below.
 
 Use cases where a hybrid scheme is used with, e.g., EUF-CMA security
 assumed for only one component scheme generally use hybrid techniques
-for their functional transition pathway support, while fully trusting
-either the traditional or post-quantum algorithm. In contrast, use cases
-where a hybrid scheme is used with e.g., EUF-CMA security assumed for
-both component schemes without prioritisation can use hybrid techniques
-for both functional transition and security transition, where it may not
-be known which algorithm should be relied upon.
+for their 'functional transition' pathway support, while fully trusting
+either the traditional or post-quantum algorithm. E.g., hybrid signatures 
+may be used as a transition step for when a system or system-of-systems is 
+comprised of some verifiers that support traditional signatures only while 
+other verifiers are upgraded to also support post-quantum signatures. In this 
+example, a system manager is using hybrid signatures as a 'functional 
+transition' support, but not yet expecting different security guarantees. As 
+such, EUF-CMA security is assumed for one component algorithm.
+
+In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA 
+security assumed for both component schemes without prioritisation between them 
+can use hybrid techniques for both functional transition and security transition, 
+where it may not be known which algorithm should be relied upon.
 
 ### **Proof Composability**
 
