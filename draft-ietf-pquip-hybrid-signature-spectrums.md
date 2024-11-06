@@ -271,14 +271,23 @@ equally well to future transitions to other next-generation algorithms.
   certificate), or on the system policy level (e.g., within the
   message). Artifacts should be easily identifiable by the receiver in
   the case of signature stripping.
-
+  
+- Stripping attack: A stripping attack refers to a case where an adversary
+  takes a message and hybrid signature pair and attempts to submit (a
+  potential modification of) the pair to a component algorithm verifier.
+  A common example of a stripping attack includes a message and hybrid
+  signature, comprised of concatenated post-quantum and traditional
+  signatures, where an adversary simply removes the post-quantum
+  component signature and submits the message and traditional component
+  signature to a traditional verifier. 
+  
 ## Motivation for use of hybrid signature schemes {#motivation}
 
 Before diving into the design goals for hybrid digital signatures, it is
 worth taking a look at why hybrid digital signatures are desirable for
 some applications. As many of the arguments hold in general for hybrid
 algorithms, we again refer to [I-D.ietf-tls-hybrid-design] that
-summarizes these well.  In addition, we explicate the motivation for
+summarizes these well. In addition, we explicate the motivation for
 hybrid signatures here.
 
 ### **Complexity**
