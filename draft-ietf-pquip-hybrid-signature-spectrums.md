@@ -905,17 +905,27 @@ requirement is satisfied.
 Under traditional signature scheme security assumptions such as EUF-CMA, the
 adversary 'wins' the security experiment if it can produce a new message such
 that a message-signature pair `(m, sig)` correctly verifies. This traditional
-security notion is challenged under a hybrid construct.
+security notion has several layers of nuance under a hybrid construct.
 
-The most straightforward comparison would be for the adversary to attempt to
-produce a new message `m'` that a message-hybrid signature pair `(m', sig_h)`
-correctly verifies.  However, such a guarantee depends on the signature being
-strongly non-separable. Otherwise, in practical terms a security experiment
-must capture the case that an existing or new message `m` could be verified
+The most straightforward extension of the traditional EUF-CMA security game 
+would be for the adversary to attempt to produce a new message `m'` that a 
+message-hybrid signature pair `(m', sig_h)` correctly verifies.  However, 
+achieving EUF-CMA security in such a straightforward way depends on the 
+signature choice being strongly non-separable. 
+
+Otherwise, in practical terms, a security experiment must capture 
+the case that an existing or new message `m` could be verified
 with a component signature, e.g., to produce `(m', sig_1)` that correctly
-verifies under `Sigma_1.Sign`. Such considerations are beyond the scope of
-traditional security analysis and represent considerations that would need to
-be accounted for depending on the signature combiner method chosen.
+verifies under `Sigma_1.Verify`. As noted in [I-D.ounsworth-pq-composite-sigs],  
+if such component-wise verification is possible, some concatenated or nested 
+hybrid signatures actually do not achieve EUF-CMA. To mitigate the issue, 
+dedicated keys can be used for the hybrid signature, i.e., keys which are not 
+allowed to be used in cases of standalone component algorithm verification. 
+While such a policy requirement alleviates the risk of an EUF-CMA attack such 
+as that described in [I-D.ounsworth-pq-composite-sigs], it is a policy mitigation 
+and is beyond the scope of normal security analysis and cryptographic modeling. 
+Such subtleties in considerations would need to be accounted for depending on 
+the signature combiner method chosen.
 
 # Security Considerations {#sec-considerations}
 
