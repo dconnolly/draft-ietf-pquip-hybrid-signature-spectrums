@@ -260,9 +260,10 @@ in [RFC4949].
 define next-generation algorithms to be "algorithms which are not yet
 widely deployed but which may eventually be widely deployed". Hybrid
 signatures are mostly motivated by preparation for post-quantum
-transition, hence the reference to post-quantum algorithms through this
-draft.  However, the majority of the discussion in this document applies
-equally well to future transitions to other next-generation algorithms.
+transition or use in long-term post-quantum deployment, hence the
+reference to post-quantum algorithms through this draft.  However, the
+majority of the discussion in this document applies equally well to
+future transitions to other next-generation algorithms.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component algorithm tag is
@@ -279,7 +280,18 @@ equally well to future transitions to other next-generation algorithms.
   signature, comprised of concatenated post-quantum and traditional
   signatures, where an adversary simply removes the post-quantum component
   signature and submits the message and traditional component signature to a
-  traditional verifier.
+  traditional verifier. Stripping attacks should not be confused with
+  component message forgery attacks.
+
+- Component message forgery attacks: A forgery attack refers to a case where an
+  adversary attempts to forge a (non-hybrid) signature on a message using the
+  public key associated with a component algorithm. An common example of such an
+  attack would be a quantum attacker compromising the key associated with a
+  traditional component algorithm and forging a message and signature pair.
+  Message forgery attacks may be formalized with experiments such as EUF-CMA,
+  while the difference introduced in component message forgery attacks is that
+  the key is accepted for both hybrid and single algorithm use. Further
+  discussions on this appear under EUF-CMA Challenges.
 
 ## Motivation for use of hybrid signature schemes {#motivation}
 
@@ -311,10 +323,11 @@ traditional algorithms, such as RSA. RSA is a relatively simple
 algorithm to understand and explain, yet during its existence and use
 there have been multiple attacks and refinements, such as adding
 requirements to how padding and keys are chosen, and implementation
-issues such as cross-protocol attacks. Thus, even in a relatively simple
-algorithm subtleties and caveats on implementation and use can arise
-over time. Given the complexity of next generation algorithms, the
-chance of such discoveries and caveats needs to be taken into account.
+issues such as cross-protocol attacks (e.g., component message forgeries). 
+Thus, even in a relatively simple algorithm subtleties and caveats on 
+implementation and use can arise over time. Given the complexity of next 
+generation algorithms, the chance of such discoveries and caveats needs to 
+be taken into account.
 
 Of note, some next generation algorithms have received substantial analysis
 attention, for example through the NIST Post-Quantum Cryptography
@@ -950,11 +963,12 @@ component-wise verification is possible, some concatenated or nested hybrid
 signatures actually do not achieve EUF-CMA. To mitigate the issue, dedicated
 keys can be used for the hybrid signature, i.e., keys which are not allowed
 to be used in cases of standalone component algorithm verification.  While
-such a policy requirement alleviates the risk of an EUF-CMA attack such as
-that described in [I-D.ounsworth-pq-composite-sigs], it is a policy
-mitigation and is beyond the scope of normal security analysis and
-cryptographic modeling.  Such subtleties in considerations would need to be
-accounted for depending on the signature combiner method chosen.
+such a policy requirement alleviates the risk of an EUF-CMA attack such 
+component message forgeries and as that described in 
+[I-D.ounsworth-pq-composite-sigs], it is a policy mitigation and is beyond 
+the scope of normal security analysis and cryptographic modeling.  Such 
+subtleties in considerations would need to be accounted for depending on the 
+signature combiner method chosen.
 
 # Security Considerations {#sec-considerations}
 
