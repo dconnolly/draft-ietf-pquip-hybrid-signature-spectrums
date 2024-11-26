@@ -763,7 +763,7 @@ challenges c_1 and c_2, where c_1 and c_2 are hashes computed over the
 respective commitments comm_1 and comm_2 (and the message).  A fused hybrid
 signature could consist of the component responses, r_1 and r_2 and a
 challenge c that is computed as a hash over both commitments, i.e., c =
-Hash(comm_1,comm_2,message).  As such, c does not belong to either of the
+Hash((comm_1,comm_2),message).  As such, c does not belong to either of the
 component signatures but rather both, meaning that the signatures are
 'entangled'.
 
