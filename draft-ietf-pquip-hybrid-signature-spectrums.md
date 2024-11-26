@@ -542,18 +542,18 @@ compatibility is achieved using redundant information as little as possible.
 Simultaneous Verification (SV) builds on SNS and was first introduced in
 [HYBRIDSIGDESIGN]. SV requires that not only are all component signatures
 needed to achieve a successful verification present in the hybrid signature,
-but also that verification of both component algorithms occurs roughly
-simultaneously. Namely, "missing" information needs to be computed by the
-verifier so that a normally functioning verification algorithm cannot “quit”
-the verification process before both component signatures are verified. This
-may additionally cover some error-injection and similar attacks, where an
-adversary attempts to make an otherwise honest verifier skip algorithm steps.
-SV mimics traditional digital signatures guarantees, essentially ensuring that
-the hybrid digital signature behaves as a single algorithm vs. two separate
-component stages. Alternatively phrased, under an SV guarantee it is not
-possible for an otherwise honest verifier to initiate termination of the
-hybrid verification upon successful verification of one component algorithm
-without also knowing if the other component succeeded or failed.
+but also that verification of both component algorithms occurs roughly 
+simultaneously. Namely, "missing" information needs to be computed by the 
+verifier so that a normally functioning verification algorithm cannot “quit” 
+the verification process before both component signatures are verified. This 
+may additionally cover some error-injection and similar attacks, where an 
+adversary attempts to make an otherwise honest verifier skip algorithm steps. 
+SV mimics traditional digital signatures guarantees, essentially ensuring that 
+the hybrid digital signature behaves as a single algorithm vs. two separate 
+component stages. Alternatively phrased, under an SV guarantee it is not 
+possible for an otherwise honest verifier to initiate termination of the hybrid 
+verification upon successful verification of one component algorithm without 
+also knowing if the other component succeeded or failed.
 
 ### **Hybrid Generality**
 
@@ -659,16 +659,16 @@ For schemes achieving the most demanding security notion, Strong
 Non-Separability with Simultaneous Verification, verification succeeds not
 only when both of the component signatures are present but also only when the
 verifier has verified both signatures. Moreover, no information is leaked to
-the receiver during the verification process on the possible
-validity/invalidity of the component signatures until both verify (or fail to
-verify). This construct most closely mirrors traditional digital signatures
-where, assuming that the verifier does verify a signature at all, the result
-is either a positive verification of the full signature or a failure if the
-signature is not valid. For fused hybrid signatures, a `full signature`
-implies the fusion of both component algorithms, and therefore the strongest
-non-separability notion ensures an all-or-nothing approach to verification,
-regardless of adversarial action. Examples of algorithms providing this type
-of security can be found in [HYBRIDSIGDESIGN].
+the receiver during the verification process on the possible validity of the 
+component signatures until both verify (or verification failure may or may not 
+be attributable to a specific component algorithm). This construct most closely 
+mirrors traditional digital signatures where, assuming that the verifier does 
+verify a signature at all, the result is either a positive verification of the 
+full signature or a failure if the signature is not valid. For fused hybrid 
+signatures, a `full signature` implies the fusion of both component algorithms, 
+and therefore the strongest non-separability notion ensures an all-or-nothing 
+approach to verification,regardless of adversarial action. Examples of 
+algorithms providing this type of security can be found in [HYBRIDSIGDESIGN].
 
 # Artifacts {#art-spectrum}
 
