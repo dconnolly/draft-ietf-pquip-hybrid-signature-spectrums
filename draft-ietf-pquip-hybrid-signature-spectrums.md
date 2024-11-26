@@ -257,13 +257,13 @@ in [RFC4949].
   scheme' may be used as a synonym.
 
 - Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we
-define next-generation algorithms to be "algorithms which are not yet
-widely deployed but which may eventually be widely deployed". Hybrid
-signatures are mostly motivated by preparation for post-quantum
-transition or use in long-term post-quantum deployment, hence the
-reference to post-quantum algorithms through this draft.  However, the
-majority of the discussion in this document applies equally well to
-future transitions to other next-generation algorithms.
+  define next-generation algorithms to be "algorithms which are not yet
+  widely deployed but which may eventually be widely deployed". Hybrid
+  signatures are mostly motivated by preparation for post-quantum transition
+  or use in long-term post-quantum deployment, hence the reference to
+  post-quantum algorithms through this draft.  However, the majority of the
+  discussion in this document applies equally well to future transitions to
+  other next-generation algorithms.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component algorithm tag is
@@ -283,15 +283,15 @@ future transitions to other next-generation algorithms.
   traditional verifier. Stripping attacks should not be confused with
   component message forgery attacks.
 
-- Component message forgery attacks: A forgery attack refers to a case where an
-  adversary attempts to forge a (non-hybrid) signature on a message using the
-  public key associated with a component algorithm. An common example of such an
-  attack would be a quantum attacker compromising the key associated with a
-  traditional component algorithm and forging a message and signature pair.
-  Message forgery attacks may be formalized with experiments such as EUF-CMA,
-  while the difference introduced in component message forgery attacks is that
-  the key is accepted for both hybrid and single algorithm use. Further
-  discussions on this appear under EUF-CMA Challenges.
+- Component message forgery attacks: A forgery attack refers to a case where
+  an adversary attempts to forge a (non-hybrid) signature on a message using
+  the public key associated with a component algorithm. An common example of
+  such an attack would be a quantum attacker compromising the key associated
+  with a traditional component algorithm and forging a message and signature
+  pair.  Message forgery attacks may be formalized with experiments such as
+  EUF-CMA, while the difference introduced in component message forgery
+  attacks is that the key is accepted for both hybrid and single algorithm
+  use. Further discussions on this appear under {{euf-cma-challenges}}.
 
 ## Motivation for use of hybrid signature schemes {#motivation}
 
@@ -323,10 +323,10 @@ traditional algorithms, such as RSA. RSA is a relatively simple
 algorithm to understand and explain, yet during its existence and use
 there have been multiple attacks and refinements, such as adding
 requirements to how padding and keys are chosen, and implementation
-issues such as cross-protocol attacks (e.g., component message forgeries). 
-Thus, even in a relatively simple algorithm subtleties and caveats on 
-implementation and use can arise over time. Given the complexity of next 
-generation algorithms, the chance of such discoveries and caveats needs to 
+issues such as cross-protocol attacks (e.g., component message forgeries).
+Thus, even in a relatively simple algorithm subtleties and caveats on
+implementation and use can arise over time. Given the complexity of next
+generation algorithms, the chance of such discoveries and caveats needs to
 be taken into account.
 
 Of note, some next generation algorithms have received substantial analysis
@@ -555,20 +555,20 @@ compatibility is achieved using redundant information as little as possible.
 Simultaneous Verification (SV) builds on SNS and was first introduced in
 [HYBRIDSIGDESIGN]. SV requires that not only are all component signatures
 needed to achieve a successful verification present in the hybrid signature,
-but also that verification of both component algorithms occurs roughly 
-simultaneously. Namely, "missing" information needs to be computed by the 
-verifier so that a normally functioning verification algorithm cannot “quit” 
-the verification process before both component signatures are verified. This 
-may additionally cover some error-injection and similar attacks, where an 
-adversary attempts to make an otherwise honest verifier skip component algorithm 
-verification. SV mimics traditional digital signatures guarantees, essentially 
-ensuring that the hybrid digital signature behaves as a single algorithm vs. 
-two separate component stages. Alternatively phrased, under an SV guarantee it 
-is not possible for an otherwise honest verifier to initiate termination of the 
-hybrid verification upon successful verification of one component algorithm 
-without also knowing if the other component succeeded. Note that SV does not 
-prevent dishonest verification, such as if a verifier maliciously implements a 
-customized verification algorithm that is designed with intention to subvert 
+but also that verification of both component algorithms occurs roughly
+simultaneously. Namely, "missing" information needs to be computed by the
+verifier so that a normally functioning verification algorithm cannot “quit”
+the verification process before both component signatures are verified. This
+may additionally cover some error-injection and similar attacks, where an
+adversary attempts to make an otherwise honest verifier skip component algorithm
+verification. SV mimics traditional digital signatures guarantees, essentially
+ensuring that the hybrid digital signature behaves as a single algorithm vs.
+two separate component stages. Alternatively phrased, under an SV guarantee it
+is not possible for an otherwise honest verifier to initiate termination of the
+hybrid verification upon successful verification of one component algorithm
+without also knowing if the other component succeeded. Note that SV does not
+prevent dishonest verification, such as if a verifier maliciously implements a
+customized verification algorithm that is designed with intention to subvert
 the hybrid verification process or skips signature verification altogether.
 
 ### **Hybrid Generality**
@@ -675,17 +675,18 @@ For schemes achieving the most demanding security notion, Strong
 Non-Separability with Simultaneous Verification, verification succeeds not
 only when both of the component signatures are present but also only when the
 verifier has verified both signatures. Moreover, no information is leaked to
-the receiver during the verification process on the possible validity of the 
-component signatures until both verify (or verification failure may or may not 
-be attributable to a specific component algorithm). This construct most closely 
-mirrors traditional digital signatures where, assuming that the verifier does 
-verify a signature at all, the result is either a positive verification of the 
-full signature or a failure if the signature is not valid. For fused hybrid 
-signatures, a `full signature` implies the fusion of both component algorithms, 
-and therefore this type of construction has the potential to achieve the 
-strongest non-separability notion which ensures an all-or-nothing 
-approach to verification, regardless of adversarial action. Examples of 
-algorithms providing this type of security can be found in [HYBRIDSIGDESIGN].
+the receiver during the verification process on the possible validity of the
+component signatures until both verify (or verification failure may or may
+not be attributable to a specific component algorithm). This construct most
+closely mirrors traditional digital signatures where, assuming that the
+verifier does verify a signature at all, the result is either a positive
+verification of the full signature or a failure if the signature is not
+valid. For fused hybrid signatures, a `full signature` implies the fusion of
+both component algorithms, and therefore this type of construction has the
+potential to achieve the strongest non-separability notion which ensures an
+all-or-nothing approach to verification, regardless of adversarial
+action. Examples of algorithms providing this type of security can be found
+in [HYBRIDSIGDESIGN].
 
 # Artifacts {#art-spectrum}
 
@@ -780,7 +781,7 @@ challenges c_1 and c_2, where c_1 and c_2 are hashes computed over the
 respective commitments comm_1 and comm_2 (and the message).  A fused hybrid
 signature could consist of the component responses, r_1 and r_2 and a
 challenge c that is computed as a hash over both commitments, i.e., c =
-Hash((comm_1,comm_2), Hash2(message)).  As such, c does not belong to either
+Hash((comm_1, comm_2), Hash2(message)).  As such, c does not belong to either
 of the component signatures but rather both, meaning that the signatures are
 'entangled'.
 
@@ -963,11 +964,11 @@ component-wise verification is possible, some concatenated or nested hybrid
 signatures actually do not achieve EUF-CMA. To mitigate the issue, dedicated
 keys can be used for the hybrid signature, i.e., keys which are not allowed
 to be used in cases of standalone component algorithm verification.  While
-such a policy requirement alleviates the risk of an EUF-CMA attack such 
-component message forgeries and as that described in 
-[I-D.ounsworth-pq-composite-sigs], it is a policy mitigation and is beyond 
-the scope of normal security analysis and cryptographic modeling.  Such 
-subtleties in considerations would need to be accounted for depending on the 
+such a policy requirement alleviates the risk of an EUF-CMA attack such
+component message forgeries and as that described in
+[I-D.ounsworth-pq-composite-sigs], it is a policy mitigation and is beyond
+the scope of normal security analysis and cryptographic modeling.  Such
+subtleties in considerations would need to be accounted for depending on the
 signature combiner method chosen.
 
 # Security Considerations {#sec-considerations}
