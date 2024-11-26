@@ -666,8 +666,9 @@ mirrors traditional digital signatures where, assuming that the verifier does
 verify a signature at all, the result is either a positive verification of the 
 full signature or a failure if the signature is not valid. For fused hybrid 
 signatures, a `full signature` implies the fusion of both component algorithms, 
-and therefore the strongest non-separability notion ensures an all-or-nothing 
-approach to verification,regardless of adversarial action. Examples of 
+and therefore this type of construction has the potential to achieve the 
+strongest non-separability notion which ensures an all-or-nothing 
+approach to verification, regardless of adversarial action. Examples of 
 algorithms providing this type of security can be found in [HYBRIDSIGDESIGN].
 
 # Artifacts {#art-spectrum}
