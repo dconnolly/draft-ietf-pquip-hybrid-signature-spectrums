@@ -27,7 +27,7 @@ author:
     ins: D. Connolly
     name: Deirdre Connolly
     organization: SandboxAQ
-    email: deirdre.connolly@sandboxaq.com
+    email: durumcrustulum@gmail.com
   -
     ins: F. Driscoll
     name: Florence Driscoll
