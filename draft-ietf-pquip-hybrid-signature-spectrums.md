@@ -35,30 +35,6 @@ author:
     email: flo.d@ncsc.gov.uk
 
 informative:
-  HYBRIDKEM:
-    target: https://doi.org/10.1007/978-3-030-25510-7_12
-    title: Hybrid Key Encapsulation Mechanisms and Authenticated Key Exchange
-    author:
-      -
-        ins: N. Bindel
-        name: Nina Bindel
-      -
-        ins: J. Brendel
-        name: Jacqueline Brendel
-      -
-        ins: M. Fischlin
-        name: Marc Fischlin
-      -
-        ins: B. Goncalves
-        name: Brian Goncalves
-      -
-        ins: D. Stebila
-        name: Douglas Stebila
-    refcontent: Post-Quantum Cryptography pp.206-226
-    seriesinfo:
-      DOI: 10.1007/978-3-030-25510-7_12
-    date: 2019-07
-
   HYBRIDSIG:
     target: https://eprint.iacr.org/2017/460
     title: Transitioning to a Quantum-Resistant Public Key Infrastructure
@@ -152,49 +128,56 @@ algorithm turn-over is complex or takes a long time. There are also
 applications where future checks on past authenticity play a role, such as 
 long-lived digital signatures on legal documents.
 
-The relative newness of many (although not all) post-quantum algorithms means
-that less cryptanalysis of such algorithms is available than for
-long-established counterparts, such as RSA and elliptic-curve based solutions
-for confidentiality and authenticity. This has drawn attention to hybrid
-cryptographic schemes, which combine both traditional and post-quantum (or
-more generally next-generation) algorithms in one cryptographic scheme. These
-may offer increased assurance for implementers, namely that as long as the
-security of one of the two component algorithms of the hybrid scheme holds,
-the confidentiality or authenticity offered by that scheme is maintained.
+Still, there have been successful attacks against proposals using post-quantum 
+cryptography. Sometimes an attack exploits implementation issues, such as 
+[KYBERSLASH], which exploits timing variations, or [HQC-CVE] which exploits 
+implementation bugs. Sometimes an attack works for all implementations of
+the specified algorithm. Research has indicated that implementation-independent
+attacks published in 2023 or earlier had broken 48% of the proposals in
+Round 1 of the NIST Post-Quantum Cryptography Standardization Project,
+25% of the proposals not broken in Round 1, and 36% of the proposals
+selected by NIST for Round 2 [QRCSP]. 
+
+Such cryptanalysis and security concerns are one reason for to consider 'hybrid'
+cryptographic algorithms, which combine both traditional and post-quantum (or
+more generally a combination of two or more) algorithms. A core objective of 
+hybrid algorithms is to protect against quantum computers while at the
+same time making clear that the change is not reducing security. A premise of 
+security of these algorithms being that if at least one of the two component 
+algorithms of the hybrid scheme holds, the confidentiality or  authenticity 
+offered by that scheme is maintained. It should be noted that the word 'hybrid' 
+has many uses but this document uses 'hybrid' only in this algorithm sense.
 
 Whether or not hybridization is desired depends on the use case and security
-threat model. Conservative users may not have complete trust in the
-post-quantum algorithms or implementations available, while also recognizing
-a need to start post-quantum transition. For such users, hybridization can
-support near-term transition while also avoiding trusting solo post-quantum
-algorithms too early. On the other hand, hybrid schemes, particularly for
-authentication, may introduce significant complexity into a system or a
-transition process, so might not be the right choice for all.  For cases
+threat model. Users may recognize a need to start post-quantum transition, 
+even while issues such as those described above are a concern. For this, 
+hybridization can support transition. It should be noted that hybridization 
+is not necessary for all systems; recommendations on system types or analysis
+methods for such determination are out of scope of this document. For cases
 where hybridization is determined to be advantageous, a decision on how to
 hybridize needs to be made. With many options available, this document is
 intended to provide context on some of the trade-offs and nuances to
 consider.
 
-Hybridization has been looked at for key encapsulation [HYBRIDKEM], and in an
-initial sense for digital signatures [HYBRIDSIG]. Compared to key
-encapsulation, hybridization of digital signatures, where the verification
-tag may be expected to attest to both standard and post-quantum components,
-is subtler to design and implement due to the potential separability of the
+Hybridization of digital signatures, where the verification tag may be 
+expected to attest to both standard and post-quantum components,
+is subtle to design and implement due to the potential separability of the
 hybrid/dual signatures and the risk of downgrade/stripping attacks.  There
 are also a range of requirements and properties that may be required from
-hybrid signatures, not all of which can be achieved at once.
+hybrid signatures, which will be discussed in this draft. Some of these are 
+mutually exclusive, which highlights the importance of considering use-case 
+specific requirements. 
 
-This document focuses on explaining advantages and disadvantages of different
-hybrid signature scheme designs and different security goals for them. It is
+This document focuses on explaining a spectrum of different hybrid signature 
+scheme design categories and different security goals for them. It is
 intended as a resource for designers and implementers of hybrid signature
 schemes to help them decide what properties they do and do not require from
-their scheme. It does not attempt to answer the question of whether or not a
-hybrid scheme is desirable for, or should be used in a given case. It also
-intentionally does not propose concrete hybrid signature combiners or
-instantiations thereof. As with the data authenticity guarantees provided by
-any digital signature, the security guarantees discussed in this document
-are reliant on correct provisioning of the keys involved, e.g. entity
-authentication.
+their use case. In scope limitations, it does not attempt to give concrete 
+recommendations for any use case. It also intentionally does not propose 
+concrete hybrid signature combiners or instantiations thereof. As with the 
+data authenticity guarantees provided by any digital signature, the security 
+guarantees discussed in this document are reliant on correct provisioning of 
+the keys involved, e.g. entity authentication.
 
 ## Terminology {#terminology}
 
