@@ -318,10 +318,7 @@ NIST Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ].
 Thus, if and when further information on caveats and implementation issues 
 come to light, it is more likely that vulnerabilities will represent a 
 weakening of security than a full "break". Such weakening may also be offset 
-if a hybrid approach has been used. The complexity of post-quantum 
-algorithms needs to be balanced against the fact that hybridization itself 
-adds more complexity to a protocol and introduces the risk of implementation 
-mistakes in the hybridization process.
+if a hybrid approach has been used. 
 
 
 ### **Time**
