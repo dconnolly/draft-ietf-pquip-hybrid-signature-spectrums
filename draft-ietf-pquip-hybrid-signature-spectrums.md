@@ -142,13 +142,15 @@ Plans to transition protocols to post-quantum cryptography sometimes focus
 on confidentiality, given the potential risk of store and decrypt attacks, 
 where data encrypted today using traditional algorithms could be decrypted 
 in the future by an attacker with a sufficiently powerful quantum computer, 
-a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC). While traditional
-authentication is only at risk once a CRQC exists, it is important to
-consider the transition to post-quantum authentication before this point.
-This is particularly relevant for systems where algorithm turn-over is
-complex or takes a long time (e.g., long-lived systems with hardware roots of
-trust), or where future checks on past authenticity play a role (e.g.,
-digital signatures on legal documents).
+a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC). 
+
+It is important to also consider transitions to post-quantum authentication; 
+delaying such transitions creates risks. For example, attackers may be able 
+to carry out quantum attacks against RSA-2048 years before the public is 
+aware of these capabilities. Furthermore, there are applications where 
+algorithm turn-over is complex or takes a long time. There are also 
+applications where future checks on past authenticity play a role, such as 
+long-lived digital signatures on legal documents.
 
 The relative newness of many (although not all) post-quantum algorithms means
 that less cryptanalysis of such algorithms is available than for
@@ -1027,5 +1029,5 @@ We would like to acknowledge the following people in alphabetical order
 who have contributed to pushing this draft forward, offered insights and
 perspectives, and/or stimulated work in the area:
 
-Scott Fluhrer, Felix Günther, John Gray, Serge Mister, Max Pala, Mike
-Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
+D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister, 
+Max Pala, Mike Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
