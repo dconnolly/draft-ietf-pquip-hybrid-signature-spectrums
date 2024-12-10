@@ -138,11 +138,11 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
 
 # Introduction {#introduction}
 
-The initial focus on the transition to use of post-quantum algorithms in
-protocols has largely been on confidentiality, given the potential risk of
-store and decrypt attacks, where data encrypted today using traditional
-algorithms could be decrypted in the future by an attacker with a
-Cryptographically-Relevant Quantum Computer (CRQC). While traditional
+Plans to transition protocols to post-quantum cryptography sometimes focus 
+on confidentiality, given the potential risk of store and decrypt attacks, 
+where data encrypted today using traditional algorithms could be decrypted 
+in the future by an attacker with a sufficiently powerful quantum computer, 
+a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC). While traditional
 authentication is only at risk once a CRQC exists, it is important to
 consider the transition to post-quantum authentication before this point.
 This is particularly relevant for systems where algorithm turn-over is
