@@ -281,11 +281,10 @@ in [RFC4949].
 ## Motivation for use of hybrid signature schemes {#motivation}
 
 Before diving into the design goals for hybrid digital signatures, it is
-worth taking a look at why hybrid digital signatures are desirable for
-some applications. As many of the arguments hold in general for hybrid
-algorithms, we again refer to [I-D.ietf-tls-hybrid-design] that
-summarizes these well. In addition, we explicate the motivation for
-hybrid signatures here.
+worth taking a look at motivations for them. As many of the arguments hold 
+in general for hybrid algorithms, we again refer to 
+[I-D.ietf-tls-hybrid-design] that summarizes these well. In addition, we 
+explicate the motivation for hybrid signatures here.
 
 ### **Complexity**
 
@@ -297,10 +296,9 @@ well-known Fiat-Shamir transform to construct the signature scheme, it
 also relies on rejection sampling that is known to give cache side
 channel information (although this does not lead to a known attack).
 Likewise, the signature scheme Falcon uses complex sampling during
-signature generation. Furthermore, recent attacks again the
-next-generation multivariate schemes Rainbow and GeMSS might call into
-question the asymptotic and concrete security for conservative adopters
-and therefore might hinder adoption.
+signature generation. Furthermore, attacks against the next-generation 
+multivariate schemes Rainbow and GeMSS might raise concerns for 
+conservative adopters of other algorithms, which could hinder adoption.
 
 As such, some next-generation algorithms carry a higher risk of
 implementation mistakes and revision of parameters compared to
@@ -314,45 +312,36 @@ implementation and use can arise over time. Given the complexity of next
 generation algorithms, the chance of such discoveries and caveats needs to
 be taken into account.
 
-Of note, some next generation algorithms have received substantial analysis
-attention, for example through the NIST Post-Quantum Cryptography
-Standardization Process [NIST_PQC_FAQ]. Thus, if and when further information
-on caveats and implementation issues come to light, it is less likely that a
-"break" will be catastrophic. Instead, such vulnerabilities and issues may
-represent a weakening of security - which may in turn be offset if a hybrid
-approach has been used. The complexity of post-quantum algorithms needs to be
-balanced against the fact that hybridization itself adds more complexity to a
-protocol and introduces the risk of implementation mistakes in the
-hybridization process.
+Of note, some next generation algorithms have received considerable 
+analysis attention, for example, following attention gathered during the 
+NIST Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ]. 
+Thus, if and when further information on caveats and implementation issues 
+come to light, it is more likely that vulnerabilities will represent a 
+weakening of security than a full "break". Such weakening may also be offset 
+if a hybrid approach has been used. The complexity of post-quantum 
+algorithms needs to be balanced against the fact that hybridization itself 
+adds more complexity to a protocol and introduces the risk of implementation 
+mistakes in the hybridization process.
 
-One example of a next generation algorithm is the signature scheme
-ML-DSA (a.k.a. CRYSTALS-Dilithium) that has been selected for
-standardization by NIST. While the scheme follows the well-known
-Fiat-Shamir transform to construct the signature scheme, it also relies
-on rejection sampling that is known to give cache side channel
-information (although this does not lead to a known attack).
-Furthermore, recent attacks again the post-quantum multivariate schemes
-Rainbow and GeMSS might call into question the asymptotic and concrete
-security for conservative adopters and therefore might hinder adoption.
 
 ### **Time**
 
 The need to transition to post-quantum algorithms now while
 simultaneously being aware of potential, hidden subtleties in their
 resistance to standard attacks drives transition designs towards
-hybridization.  Mosca’s equation [MOSCA] very simply illustrates the
+hybridization.  Mosca’s equation [MOSCA] has been used to illustrate
 risk of post-quantum transition delay: `l + d > q`, where l is the
 information life-span, d is the time for system transition to
 post-quantum algorithms, and q is the time before a quantum computer is
 ready to execute cryptanalysis. In terms of risk to data confidentiality
 guarantees and therefore key exchange and KEM algorithms, application
-of this equation is straightforward. In contrast, it may not be obvious
-why there is urgency for an adoption of post-quantum
-signatures; namely, while encryption is subject to
-store-now-decrypt-later attacks, there may not seem to be a parallel
-notion for authenticity, i.e., 'store-now-modify-later attacks'.
+of this equation is fairly straightforward. In contrast, it may not be 
+obvious why there is urgency for an adoption of post-quantum signatures; 
+namely, while encryption is subject to store-now-decrypt-later attacks, 
+a parallel notion for authenticity, i.e., 'store-now-modify-later attacks' 
+may not be readily apparent. 
 
-However, in larger systems, including national systems, space systems,
+However, in large systems, including national systems, space systems,
 large healthcare support systems, and critical infrastructure, where
 acquisition and procurement time can be measured in years and algorithm
 replacement may be difficult or even practically impossible, this
@@ -367,7 +356,7 @@ auditing, and governmental systems).  The 'store-now-modify-later'
 analogy would present challenges in such sectors, where future analysis
 of past authentication may be more critical than in e.g., internet
 connection use cases. As such there is an eagerness to use post-quantum
-signature algorithms for some applications.
+signature algorithms.
 
 
 ## Goals {#goals}
