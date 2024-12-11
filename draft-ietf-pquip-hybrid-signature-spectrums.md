@@ -131,11 +131,11 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
 
 # Introduction {#introduction}
 
-Plans to transition protocols to post-quantum cryptography sometimes focus
-on confidentiality, given the potential risk of store and decrypt attacks,
-where data encrypted today using traditional algorithms could be decrypted
-in the future by an attacker with a sufficiently powerful quantum computer,
-a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC).
+Plans to transition protocols to post-quantum cryptography sometimes focus on
+confidentiality, given the potential risk of store and decrypt attacks, where
+data encrypted today using traditional algorithms could be decrypted in the
+future by an attacker with a sufficiently powerful quantum computer, also
+known as a Cryptographically-Relevant Quantum Computer (CRQC).
 
 It is important to also consider transitions to post-quantum authentication;
 delaying such transitions creates risks. For example, attackers may be able
@@ -145,25 +145,26 @@ algorithm turn-over is complex or takes a long time. There are also
 applications where future checks on past authenticity play a role, such as
 long-lived digital signatures on legal documents.
 
-Still, there have been successful attacks against proposals using post-quantum
-cryptography. Sometimes an attack exploits implementation issues, such as
-[KYBERSLASH], which exploits timing variations, or [HQC_CVE] which exploits
-implementation bugs. Sometimes an attack works for all implementations of
-the specified algorithm. Research has indicated that implementation-independent
-attacks published in 2023 or earlier had broken 48% of the proposals in
-Round 1 of the NIST Post-Quantum Cryptography Standardization Project,
-25% of the proposals not broken in Round 1, and 36% of the proposals
-selected by NIST for Round 2 [QRCSP].
+Still, there have been successful attacks against proposals using
+post-quantum cryptography. Sometimes an attack exploits implementation
+issues, such as [KYBERSLASH], which exploits timing variations, or [HQC_CVE]
+which exploits implementation bugs. Sometimes an attack works for all
+implementations of the specified algorithm. Research has indicated that
+implementation-independent attacks published in 2023 or earlier had broken
+48% of the proposals in Round 1 of the NIST Post-Quantum Cryptography
+Standardization Project, 25% of the proposals not broken in Round 1, and 36%
+of the proposals selected by NIST for Round 2 [QRCSP].
 
-Such cryptanalysis and security concerns are one reason for to consider 'hybrid'
-cryptographic algorithms, which combine both traditional and post-quantum (or
-more generally a combination of two or more) algorithms. A core objective of
-hybrid algorithms is to protect against quantum computers while at the
-same time making clear that the change is not reducing security. A premise of
-security of these algorithms being that if at least one of the two component
-algorithms of the hybrid scheme holds, the confidentiality or  authenticity
-offered by that scheme is maintained. It should be noted that the word 'hybrid'
-has many uses but this document uses 'hybrid' only in this algorithm sense.
+Such cryptanalysis and security concerns are one reason for to consider
+'hybrid' cryptographic algorithms, which combine both traditional and
+post-quantum (or more generally a combination of two or more) algorithms. A
+core objective of hybrid algorithms is to protect against quantum computers
+while at the same time making clear that the change is not reducing
+security. A premise of security of these algorithms being that if at least
+one of the two component algorithms of the hybrid scheme holds, the
+confidentiality or authenticity offered by that scheme is maintained. It
+should be noted that the word 'hybrid' has many uses but this document uses
+'hybrid' only in this algorithm sense.
 
 Whether or not hybridization is desired depends on the use case and security
 threat model. Users may recognize a need to start post-quantum transition,
@@ -548,16 +549,17 @@ simultaneously. Namely, "missing" information needs to be computed by the
 verifier so that a normally functioning verification algorithm cannot “quit”
 the verification process before both component signatures are verified. This
 may additionally cover some error-injection and similar attacks, where an
-adversary attempts to make an otherwise honest verifier skip component algorithm
-verification. SV mimics traditional digital signatures guarantees, essentially
-ensuring that the hybrid digital signature behaves as a single algorithm vs.
-two separate component stages. Alternatively phrased, under an SV guarantee it
-is not possible for an otherwise honest verifier to initiate termination of the
-hybrid verification upon successful verification of one component algorithm
-without also knowing if the other component succeeded. Note that SV does not
-prevent dishonest verification, such as if a verifier maliciously implements a
-customized verification algorithm that is designed with intention to subvert
-the hybrid verification process or skips signature verification altogether.
+adversary attempts to make an otherwise honest verifier skip component
+algorithm verification. SV mimics traditional digital signatures guarantees,
+essentially ensuring that the hybrid digital signature behaves as a single
+algorithm vs.  two separate component stages. Alternatively phrased, under an
+SV guarantee it is not possible for an otherwise honest verifier to initiate
+termination of the hybrid verification upon successful verification of one
+component algorithm without also knowing if the other component
+succeeded. Note that SV does not prevent dishonest verification, such as if a
+verifier maliciously implements a customized verification algorithm that is
+designed with intention to subvert the hybrid verification process or skips
+signature verification altogether.
 
 ### **Hybrid Generality**
 
