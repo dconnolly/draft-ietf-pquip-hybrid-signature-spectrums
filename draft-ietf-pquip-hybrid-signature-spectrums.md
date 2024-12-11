@@ -35,6 +35,9 @@ author:
     email: flo.d@ncsc.gov.uk
 
 informative:
+  HQC-CVE:
+    target: https://nvd.nist.gov/vuln/detail/CVE-2024-54137
+
   HYBRIDSIG:
     target: https://eprint.iacr.org/2017/460
     title: Transitioning to a Quantum-Resistant Public Key Infrastructure
@@ -73,6 +76,11 @@ informative:
 
   I-D.becker-guthrie-noncomposite-hybrid-auth:
 
+  KYBERSLASH:
+    target: https://eprint.iacr.org/2024/1049
+    title: "KyberSlash: Exploiting secret-dependent division timings in Kyber implementations"
+    date: 2024-06-30
+
   MOSCA:
     title: An Introduction to Quantum Computing, Oxford University Press
     author:
@@ -93,6 +101,14 @@ informative:
     author:
       - org: National Institute of Standards and Technology (NIST)
     date: 2022-07-05
+
+  QRCSP:
+    target: https://cr.yp.to/papers/qrcsp-20231124.pdf
+    title: Quantifying risks in cryptographic selection processes
+    author:
+      - ins: D. Bernstein
+        name: Daniel J. Bernstein
+    date: 2023-11-24
 
   RFC4949:
 
