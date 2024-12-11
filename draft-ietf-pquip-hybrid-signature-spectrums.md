@@ -35,7 +35,7 @@ author:
     email: flo.d@ncsc.gov.uk
 
 informative:
-  HQC-CVE:
+  HQC_CVE:
     target: https://nvd.nist.gov/vuln/detail/CVE-2024-54137
 
   HYBRIDSIG:
@@ -106,7 +106,8 @@ informative:
     target: https://cr.yp.to/papers/qrcsp-20231124.pdf
     title: Quantifying risks in cryptographic selection processes
     author:
-      - ins: D. Bernstein
+      -
+        ins: D. Bernstein
         name: Daniel J. Bernstein
     date: 2023-11-24
 
@@ -130,44 +131,44 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
 
 # Introduction {#introduction}
 
-Plans to transition protocols to post-quantum cryptography sometimes focus 
-on confidentiality, given the potential risk of store and decrypt attacks, 
-where data encrypted today using traditional algorithms could be decrypted 
-in the future by an attacker with a sufficiently powerful quantum computer, 
-a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC). 
+Plans to transition protocols to post-quantum cryptography sometimes focus
+on confidentiality, given the potential risk of store and decrypt attacks,
+where data encrypted today using traditional algorithms could be decrypted
+in the future by an attacker with a sufficiently powerful quantum computer,
+a.k.a. a Cryptographically-Relevant Quantum Computer (CRQC).
 
-It is important to also consider transitions to post-quantum authentication; 
-delaying such transitions creates risks. For example, attackers may be able 
-to carry out quantum attacks against RSA-2048 years before the public is 
-aware of these capabilities. Furthermore, there are applications where 
-algorithm turn-over is complex or takes a long time. There are also 
-applications where future checks on past authenticity play a role, such as 
+It is important to also consider transitions to post-quantum authentication;
+delaying such transitions creates risks. For example, attackers may be able
+to carry out quantum attacks against RSA-2048 years before the public is
+aware of these capabilities. Furthermore, there are applications where
+algorithm turn-over is complex or takes a long time. There are also
+applications where future checks on past authenticity play a role, such as
 long-lived digital signatures on legal documents.
 
-Still, there have been successful attacks against proposals using post-quantum 
-cryptography. Sometimes an attack exploits implementation issues, such as 
-[KYBERSLASH], which exploits timing variations, or [HQC-CVE] which exploits 
+Still, there have been successful attacks against proposals using post-quantum
+cryptography. Sometimes an attack exploits implementation issues, such as
+[KYBERSLASH], which exploits timing variations, or [HQC_CVE] which exploits
 implementation bugs. Sometimes an attack works for all implementations of
 the specified algorithm. Research has indicated that implementation-independent
 attacks published in 2023 or earlier had broken 48% of the proposals in
 Round 1 of the NIST Post-Quantum Cryptography Standardization Project,
 25% of the proposals not broken in Round 1, and 36% of the proposals
-selected by NIST for Round 2 [QRCSP]. 
+selected by NIST for Round 2 [QRCSP].
 
 Such cryptanalysis and security concerns are one reason for to consider 'hybrid'
 cryptographic algorithms, which combine both traditional and post-quantum (or
-more generally a combination of two or more) algorithms. A core objective of 
+more generally a combination of two or more) algorithms. A core objective of
 hybrid algorithms is to protect against quantum computers while at the
-same time making clear that the change is not reducing security. A premise of 
-security of these algorithms being that if at least one of the two component 
-algorithms of the hybrid scheme holds, the confidentiality or  authenticity 
-offered by that scheme is maintained. It should be noted that the word 'hybrid' 
+same time making clear that the change is not reducing security. A premise of
+security of these algorithms being that if at least one of the two component
+algorithms of the hybrid scheme holds, the confidentiality or  authenticity
+offered by that scheme is maintained. It should be noted that the word 'hybrid'
 has many uses but this document uses 'hybrid' only in this algorithm sense.
 
 Whether or not hybridization is desired depends on the use case and security
-threat model. Users may recognize a need to start post-quantum transition, 
-even while issues such as those described above are a concern. For this, 
-hybridization can support transition. It should be noted that hybridization 
+threat model. Users may recognize a need to start post-quantum transition,
+even while issues such as those described above are a concern. For this,
+hybridization can support transition. It should be noted that hybridization
 is not necessary for all systems; recommendations on system types or analysis
 methods for such determination are out of scope of this document. For cases
 where hybridization is determined to be advantageous, a decision on how to
@@ -175,24 +176,24 @@ hybridize needs to be made. With many options available, this document is
 intended to provide context on some of the trade-offs and nuances to
 consider.
 
-Hybridization of digital signatures, where the verification tag may be 
+Hybridization of digital signatures, where the verification tag may be
 expected to attest to both standard and post-quantum components,
 is subtle to design and implement due to the potential separability of the
 hybrid/dual signatures and the risk of downgrade/stripping attacks.  There
 are also a range of requirements and properties that may be required from
-hybrid signatures, which will be discussed in this draft. Some of these are 
-mutually exclusive, which highlights the importance of considering use-case 
-specific requirements. 
+hybrid signatures, which will be discussed in this draft. Some of these are
+mutually exclusive, which highlights the importance of considering use-case
+specific requirements.
 
-This document focuses on explaining a spectrum of different hybrid signature 
+This document focuses on explaining a spectrum of different hybrid signature
 scheme design categories and different security goals for them. It is
 intended as a resource for designers and implementers of hybrid signature
 schemes to help them decide what properties they do and do not require from
-their use case. In scope limitations, it does not attempt to give concrete 
-recommendations for any use case. It also intentionally does not propose 
-concrete hybrid signature combiners or instantiations thereof. As with the 
-data authenticity guarantees provided by any digital signature, the security 
-guarantees discussed in this document are reliant on correct provisioning of 
+their use case. In scope limitations, it does not attempt to give concrete
+recommendations for any use case. It also intentionally does not propose
+concrete hybrid signature combiners or instantiations thereof. As with the
+data authenticity guarantees provided by any digital signature, the security
+guarantees discussed in this document are reliant on correct provisioning of
 the keys involved, e.g. entity authentication.
 
 ## Terminology {#terminology}
@@ -297,9 +298,9 @@ in [RFC4949].
 ## Motivation for use of hybrid signature schemes {#motivation}
 
 Before diving into the design goals for hybrid digital signatures, it is
-worth taking a look at motivations for them. As many of the arguments hold 
-in general for hybrid algorithms, we again refer to 
-[I-D.ietf-tls-hybrid-design] that summarizes these well. In addition, we 
+worth taking a look at motivations for them. As many of the arguments hold
+in general for hybrid algorithms, we again refer to
+[I-D.ietf-tls-hybrid-design] that summarizes these well. In addition, we
 explicate the motivation for hybrid signatures here.
 
 ### **Complexity**
@@ -312,8 +313,8 @@ well-known Fiat-Shamir transform to construct the signature scheme, it
 also relies on rejection sampling that is known to give cache side
 channel information (although this does not lead to a known attack).
 Likewise, the signature scheme Falcon uses complex sampling during
-signature generation. Furthermore, attacks against the next-generation 
-multivariate schemes Rainbow and GeMSS might raise concerns for 
+signature generation. Furthermore, attacks against the next-generation
+multivariate schemes Rainbow and GeMSS might raise concerns for
 conservative adopters of other algorithms, which could hinder adoption.
 
 As such, some next-generation algorithms carry a higher risk of
@@ -328,13 +329,13 @@ implementation and use can arise over time. Given the complexity of next
 generation algorithms, the chance of such discoveries and caveats needs to
 be taken into account.
 
-Of note, some next generation algorithms have received considerable 
-analysis attention, for example, following attention gathered during the 
-NIST Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ]. 
-Thus, if and when further information on caveats and implementation issues 
-come to light, it is more likely that vulnerabilities will represent a 
-weakening of security than a full "break". Such weakening may also be offset 
-if a hybrid approach has been used. 
+Of note, some next generation algorithms have received considerable
+analysis attention, for example, following attention gathered during the
+NIST Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ].
+Thus, if and when further information on caveats and implementation issues
+come to light, it is more likely that vulnerabilities will represent a
+weakening of security than a full "break". Such weakening may also be offset
+if a hybrid approach has been used.
 
 
 ### **Time**
@@ -348,11 +349,11 @@ information life-span, d is the time for system transition to
 post-quantum algorithms, and q is the time before a quantum computer is
 ready to execute cryptanalysis. In terms of risk to data confidentiality
 guarantees and therefore key exchange and KEM algorithms, application
-of this equation is fairly straightforward. In contrast, it may not be 
-obvious why there is urgency for an adoption of post-quantum signatures; 
-namely, while encryption is subject to store-now-decrypt-later attacks, 
-a parallel notion for authenticity, i.e., 'store-now-modify-later attacks' 
-may not be readily apparent. 
+of this equation is fairly straightforward. In contrast, it may not be
+obvious why there is urgency for an adoption of post-quantum signatures;
+namely, while encryption is subject to store-now-decrypt-later attacks,
+a parallel notion for authenticity, i.e., 'store-now-modify-later attacks'
+may not be readily apparent.
 
 However, in large systems, including national systems, space systems,
 large healthcare support systems, and critical infrastructure, where
@@ -1014,5 +1015,5 @@ We would like to acknowledge the following people in alphabetical order
 who have contributed to pushing this draft forward, offered insights and
 perspectives, and/or stimulated work in the area:
 
-D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister, 
+D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister,
 Max Pala, Mike Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
