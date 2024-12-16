@@ -78,7 +78,7 @@ informative:
 
   KYBERSLASH:
     target: https://eprint.iacr.org/2024/1049
-    title: KyberSlash: Exploiting secret-dependent division timings in Kyber implementations
+    title: KyberSlash Exploiting secret-dependent division timings in Kyber implementations
     date: 2024-06-30
 
   MOSCA:
