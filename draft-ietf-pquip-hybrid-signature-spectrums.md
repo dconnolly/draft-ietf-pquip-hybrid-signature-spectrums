@@ -40,7 +40,7 @@ informative:
 
   HYBRIDSIG:
     target: https://eprint.iacr.org/2017/460
-    title: Transitioning to a Quantum-Resistant Public Key Infrastructure
+    title: "Transitioning to a Quantum-Resistant Public Key Infrastructure"
     author:
       -
         ins: N. Bindel
@@ -58,15 +58,15 @@ informative:
 
   HYBRIDSIGDESIGN:
     target: https://eprint.iacr.org/2023/423
-    title: A Note on Hybrid Signature Schemes
-    author:
-    -
-      ins: N. Bindel
-      name: Nina Bindel
-    -
-      ins: B. Hale
-      name: Britta Hale
+    title: "A Note on Hybrid Signature Schemes"
     date: 2023-03
+    author:
+      -
+        ins: N. Bindel
+        name: Nina Bindel
+      -
+        ins: B. Hale
+        name: Britta Hale
 
   I-D.ietf-tls-hybrid-design:
 
@@ -78,11 +78,12 @@ informative:
 
   KYBERSLASH:
     target: https://eprint.iacr.org/2024/1049
-    title: KyberSlash Exploiting secret-dependent division timings in Kyber implementations
+    title: "KyberSlash: Exploiting secret-dependent division timings in Kyber implementations"
     date: 2024-06-30
 
   MOSCA:
-    title: An Introduction to Quantum Computing, Oxford University Press
+    title: "An Introduction to Quantum Computing, Oxford University Press"
+    date: 2007-11
     author:
       -
         ins: P. Kaye
@@ -93,23 +94,23 @@ informative:
       -
         ins: M. Mosca
         name: Michele Mosca
-    date: 2007-11
+
 
   NIST_PQC_FAQ:
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography/faqs
-    title: Post-Quantum Cryptography FAQs
-    author:
-      - org: National Institute of Standards and Technology (NIST)
+    title: "Post-Quantum Cryptography FAQs"
     date: 2022-07-05
+    author:
+      org: National Institute of Standards and Technology (NIST)
 
   QRCSP:
     target: https://cr.yp.to/papers/qrcsp-20231124.pdf
-    title: Quantifying risks in cryptographic selection processes
+    title: "Quantifying risks in cryptographic selection processes"
+    date: 2023-11-24
     author:
       -
         ins: D. Bernstein
         name: Daniel J. Bernstein
-    date: 2023-11-24
 
   RFC4949:
 
