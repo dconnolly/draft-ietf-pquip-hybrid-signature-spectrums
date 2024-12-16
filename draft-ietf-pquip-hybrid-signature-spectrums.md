@@ -72,7 +72,7 @@ informative:
 
   I-D.ietf-pquip-pqt-hybrid-terminology:
 
-  I-D.lamps-pq-composite-sigs:
+  I-D.ietf-lamps-pq-composite-sigs:
 
   I-D.becker-guthrie-noncomposite-hybrid-auth:
 
