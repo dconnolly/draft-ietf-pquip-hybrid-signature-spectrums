@@ -494,7 +494,7 @@ investigation, but the signature verification itself would not fail. Thus,
 this case shows WNS (assuming the verification algorithm is defined
 accordingly) but not SNS.
 
-Some work [I-D.lamps-pq-composite-sigs] has looked at reliance on the
+Some work [I-D.ietf-lamps-pq-composite-sigs] has looked at reliance on the
 public key certificate chains to explicitly define hybrid use of the public
 key. Namely, that `Sigma_1.pk` cannot be used without `Sigma_2.pk`. This
 implies pushing the hybrid artifacts into the protocol and system level and a
@@ -707,7 +707,7 @@ ECDSA signatures) remove the label artifact from the message as well. So, for
 many applications and threat models, adding an artifact in the message might
 be insufficient under stripping attacks.  Another artifact location could be
 in the public key certificates as described in
-[I-D.lamps-pq-composite-sigs]. In such a case, the artifacts are still
+[I-D.ietf-lamps-pq-composite-sigs]. In such a case, the artifacts are still
 present even if a stripping attack occurs. In yet another case, artifacts may
 be present through the fused hybrid method, thus making them part of the
 signature at the algorithmic level. Note that in this latter case, it is not
@@ -975,13 +975,13 @@ the component forgery could occur on any system that accepts the component
 keys.
 
 There are a couple approaches to alleviating this issue. One is on
-restricting key reuse. As noted in [I-D.lamps-pq-composite-sigs], prohibiting
+restricting key reuse. As noted in [I-D.ietf-lamps-pq-composite-sigs], prohibiting
 hybrid algorithm and composite algorithm signers and verifiers from using the
 same keys can help ensure that a component verifier cannot be tricked into
 verifying the hybrid signature. One such means for restricting key reuse is
 through allowed key use descriptions in certificates. While prohibiting key
 reuse reduces the risk of such component forgeries, and is the mitigation
-described in [I-D.lamps-pq-composite-sigs], it is still a policy requirement
+described in [I-D.ietf-lamps-pq-composite-sigs], it is still a policy requirement
 and not a cryptographic assurance. Component forgery attacks may be possible
 if the policy is not followed or is followed inconsistently across all
 entities that might verify signatures using those keys. This needs to be
@@ -997,7 +997,7 @@ correctly, thereby preventing the signature separation required for the
 component forgery attack to be successful.
 
 It should be noted that weak non-separability is insufficient for mitigating
-risks of component forgeries. As noted in [I-D.lamps-pq-composite-sigs], in
+risks of component forgeries. As noted in [I-D.ietf-lamps-pq-composite-sigs], in
 cases hybrid algorithm selection that provides only weak non-separability key
 reuse should be avoided, as mentioned above, to mitigate risks of introducing
 EUF-CMA vulnerabilities for component algorithms.
