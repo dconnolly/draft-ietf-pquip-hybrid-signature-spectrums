@@ -163,7 +163,7 @@ while at the same time making clear that the change is not reducing
 security. A premise of security of these algorithms being that if at least
 one of the two component algorithms of the hybrid scheme holds, the
 confidentiality or authenticity offered by that scheme is maintained. It
-should be noted that the word 'hybrid' has many uses but this document uses
+should be noted that the word 'hybrid' has many uses, but this document uses
 'hybrid' only in this algorithm sense.
 
 Whether or not hybridization is desired depends on the use case and security
@@ -435,7 +435,7 @@ Under proof composability, the component algorithms are combined in such
 a way that it is possible to prove a security reduction from the
 security properties of a hybrid signature scheme to the properties of
 the respective component signature schemes and, potentially, other
-building blocks such as hash functions, KDF, etc.  Otherwise an entirely
+building blocks such as hash functions, KDF, etc. Otherwise, an entirely
 new proof of security is required, and there is a lack of assurance that
 the combination builds on the standardization processes and analysis
 performed to date on component algorithms. The resulting hybrid
@@ -449,13 +449,13 @@ composability.
 Non-Separability was one of the earliest properties of hybrid digital
 signatures to be discussed [HYBRIDSIG]. It was defined as the guarantee that
 an adversary cannot simply “remove” one of the component signatures without
-evidence left behind. For example there are artifacts that a carefully
+evidence left behind. For example, there are artifacts that a carefully
 designed verifier may be able to identify, or that are identifiable in later
 audits. This was later termed Weak Non-Separability (WNS)
 [HYBRIDSIGDESIGN]. Note that WNS does not restrict an adversary from
 potentially creating a valid component digital signature from a hybrid one (a
 signature stripping attack), but rather implies that such a digital signature
-will contain artifacts of the separation. Thus authentication that is
+will contain artifacts of the separation. Thus, authentication that is
 normally assured under correct verification of digital signature(s), is now
 potentially also reliant on further investigation on the receiver side that
 may extend well beyond traditional signature verification behavior. For
@@ -463,7 +463,7 @@ instance, this can intuitively be seen in cases of a message containing a
 context note on hybrid authentication, that is then signed by all component
 algorithms/the hybrid signature scheme. If an adversary removes one component
 signature but not the other, then artifacts in the message itself point to
-the possible existence of hybrid signature such as a label stating “this
+the possible existence of hybrid signature such as a label stating, “this
 message must be hybrid signed”. This might be a counter measure against
 stripping attacks if the verifier expects a hybrid signature scheme to have
 this property. However, it places the responsibility of signature validity
@@ -490,7 +490,7 @@ Sigma_2.Sign(hybridAlgID, m)`.  In this case, a new message `m' =
 (hybridAlgID, m)` along with signature `sig_1` and `Sigma_1.pk`, with the
 hybrid artifact embedded in the message instead of the signature, could be
 correctly verified. The separation would be identifiable through further
-investigation but the signature verification itself would not fail. Thus,
+investigation, but the signature verification itself would not fail. Thus,
 this case shows WNS (assuming the verification algorithm is defined
 accordingly) but not SNS.
 
@@ -511,7 +511,7 @@ dependencies at the system level.
 
 Backwards compatibility refers to the property where a hybrid signature may
 be verified by only verifying one component signature, allowing the scheme to
-be used by legacy receivers. In general this means verifying the traditional
+be used by legacy receivers. In general, this means verifying the traditional
 component signature scheme, potentially ignoring the post-quantum signature
 entirely. This provides an option to transition sender systems to
 post-quantum algorithms while still supporting select legacy
@@ -529,7 +529,7 @@ that hybrid signature schemes will be used for some time, but that eventually
 all systems will transition to use only one (particularly, only one
 post-quantum) algorithm. As this is very similar to backwards compatibility,
 it also may imply separability of a hybrid algorithm; however, it could also
-simply imply capability to support separate component signatures. Thus the
+simply imply capability to support separate component signatures. Thus, the
 key distinction between backwards and forwards compatibility is that
 backwards compatibility may be needed for legacy systems that cannot use
 and/or process hybrid or post-quantum signatures, whereas in forwards
@@ -595,7 +595,7 @@ smaller than the concatenation of the two component signatures.
 Duplicated information should be avoided when possible, as a general point of
 efficiency. This might include repeated information in hybrid certificates or
 in the communication of component certificates in additional to hybrid
-certificates (for example to achieve backwards/forwards-compatibility), or
+certificates (for example, to achieve backwards/forwards-compatibility) or
 sending multiple public keys or signatures of the same component algorithm.
 
 # Non-separability spectrum
@@ -687,10 +687,10 @@ message, the signature, or somewhere on the protocol level instead of at the
 algorithmic level). Even commonly discussed hybrid approaches, such as
 concatenation, are not inherently tied to one type of security (e.g., WNS or
 SNS). This can lead to ambiguities when comparing different approaches and
-assumptions about security or lack thereof. Thus in this section we cover
+assumptions about security or lack thereof. Thus, in this section we cover
 artifact locations and also walk through a high-level comparison of a few
 hybrid categories to show how artifact location can differ within a given
-approach.  Artifact location is tied to non-separability notions above; thus
+approach. Artifact location is tied to non-separability notions above; thus
 the selection of a given security guarantee and general hybrid approach must
 also include finer grained selection of artifact placement.
 
@@ -720,7 +720,7 @@ adversary tries to remove them.
 Eventual security analysis may be a consideration in choosing between
 levels. For example, if the security of the hybrid scheme is dependent on
 system policy, then cryptographic analysis must necessarily be reliant on
-specific policies and it may not be possible to describe a scheme's security
+specific policies, and it may not be possible to describe a scheme's security
 in a standalone sense.
 
 |--------------------------------------------| --------- |
@@ -872,10 +872,10 @@ such, there is a ``scale of approval`` that developers may consider as
 to whether they are using at least one approved component algorithm
 (``1-out-of-n approved software module``), or whether the implementation
 of that component algorithm has gone through an approvals review (thus
-making a ``all approved software module``). The former ``1-out-of-n
+making an ``all approved software module``). The former ``1-out-of-n
 approved software module`` would suggest a straightforward path for
 FIPS-140 approvals based on the NIST guidelines; however, it is not
-inconceivable that using a ``all approved software module`` could
+inconceivable that using an ``all approved software module`` could
 automate much of the certification review and therefore be attractive to
 developers.
 
@@ -895,7 +895,7 @@ process or falls under already approved specifications.
 | Uncertainty about whether separate approval is needed
 | ---------------------------------------------------------------------------------|
 | **1-out-of-n Approved Software Module**
-| Combiner supports one component algorithm and implementation  in a black-box way
+| Combiner supports one component algorithm and implementation in a black-box way
 | but potentially changes the other component algorithm implementation(s)
 | No new approval needed if the black-box component (implementation) is approved
 | ---------------------------------------------------------------------------------|
@@ -911,7 +911,7 @@ process or falls under already approved specifications.
 The first listed "combiner" would be a new construction with a security
 reduction to different hardness assumptions but not necessarily to approved
 (or even existing) signature schemes. Such a new, singular algorithm relies
-on both traditional and nextgen principles.
+on both traditional and next-gen principles.
 
 Next, is a combiner that might take inspiration from existing/approved
 signature schemes such that its security can be reduced to the security of
@@ -930,7 +930,7 @@ In an All-Approved combiner, all algorithm implementations are used in a
 black-box way. A concatenation combiner is a simple example (where a
 signature is valid if all component signatures are valid).  As long as at
 least one component is approved, no new approval is needed (per
-[NIST_PQC_FAQ]); thus as all algorithm implementations are approved the
+[NIST_PQC_FAQ]); thus, as all algorithm implementations are approved the
 requirement is satisfied.
 
 # EUF-CMA Challenges {#euf-cma-challenges}
@@ -964,7 +964,7 @@ verifier accepting a message that was not previously signed by that component
 algorithm.
 
 The component algorithm forgery verifier target does not need to be the 
-intended recipient of the hybrid-signed message, and may be in an entirely 
+intended recipient of the hybrid-signed message and may even be in an entirely 
 different system. This vulnerability is particularly an issue among concatenated 
 or nested hybrid signature schemes when component verification. It should be noted 
 that policy enforcement of a hybrid verification does not mitigate the issue on 
@@ -1030,7 +1030,7 @@ allow legacy systems without any software change to be able to process hybrid
 signatures, all differences between the legacy signature format and the
 hybrid signature format must be allowed to be ignored, including skipping
 verification of signatures additional to the classical signature. As such, if
-a system does skip an component signature, security does not rely on the
+a system does skip a component signature, security does not rely on the
 security of all component signatures. Note that this mutual exclusion occurs
 at the verification stage, as a hybrid signature that is verified by a system
 that can process both component schemes can provide hybrid unforgeability
