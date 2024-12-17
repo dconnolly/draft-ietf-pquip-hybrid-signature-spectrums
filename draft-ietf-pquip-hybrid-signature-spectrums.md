@@ -36,7 +36,9 @@ author:
 
 informative:
   HQC_CVE:
+    title: Correctness error in HQC decapsulation
     target: https://nvd.nist.gov/vuln/detail/CVE-2024-54137
+    date: 2024-12-06
 
   HYBRIDSIG:
     target: https://eprint.iacr.org/2017/460
@@ -309,7 +311,7 @@ explicate the motivation for hybrid signatures here.
 
 Next-generation algorithms and their underlying hardness assumptions are
 often more complex than traditional algorithms. For example, the
-signature scheme ML-DSA (a.k.a. CRYSTALS-Dilithium) that has been
+signature scheme ML-DSA (also known as CRYSTALS-Dilithium) that has been
 selected for standardization by NIST. While the scheme follows the
 well-known Fiat-Shamir transform to construct the signature scheme, it
 also relies on rejection sampling that is known to give cache side
