@@ -180,12 +180,12 @@ hybridize needs to be made. With many options available, this document is
 intended to provide context on some of the trade-offs and nuances to
 consider.
 
-Hybridization of digital signatures, where the verification tag may be
+Hybridization of digital signatures, where the hybrid signature may be
 expected to attest to both standard and post-quantum components,
 is subtle to design and implement due to the potential separability of the
 hybrid/dual signatures and the risk of downgrade/stripping attacks.  There
 are also a range of requirements and properties that may be required from
-hybrid signatures, which will be discussed in this draft. Some of these are
+hybrid signatures, which will be discussed in this document. Some of these are
 mutually exclusive, which highlights the importance of considering use-case
 specific requirements.
 
@@ -202,7 +202,7 @@ the keys involved, e.g. entity authentication.
 
 ## Terminology {#terminology}
 
-We follow existing Internet drafts on hybrid terminology
+We follow existing Internet documents on hybrid terminology
 [I-D.ietf-pquip-pqt-hybrid-terminology] and hybrid key encapsulation
 mechanisms (KEM) [I-D.ietf-tls-hybrid-design] to enable settling on a
 consistent language. We will make clear when this is not possible. In
@@ -267,12 +267,12 @@ in [RFC4949].
   widely deployed but which may eventually be widely deployed". Hybrid
   signatures are mostly motivated by preparation for post-quantum transition
   or use in long-term post-quantum deployment, hence the reference to
-  post-quantum algorithms through this draft.  However, the majority of the
+  post-quantum algorithms through this document.  However, the majority of the
   discussion in this document applies equally well to future transitions to
   other next-generation algorithms.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
-  signature that remains even if a component algorithm tag is
+  signature that remains even if a component signature is
   removed. Artifacts can be e.g., at the algorithmic level (e.g., within the
   digital signature), or at the protocol level (e.g., within the
   certificate), or on the system policy level (e.g., within the
@@ -651,7 +651,7 @@ side. Such policies may be further ambiguous to the sender, meaning that the
 type of authenticity offered to the receiver is unclear.  In another example,
 under nested signatures the verifier could be tricked into interpreting a new
 message as the message/inner signature combination and verify only the outer
-signature.  In this case, the inner signature-tag is an artifact.
+signature.  In this case, the inner signature is an artifact.
 
 Third on the scale is the Strong Non-Separability notion, in which
 separability detection is dependent on artifacts in the signature
@@ -1056,11 +1056,11 @@ verification' is enforced.
 
 # Acknowledgements {#acknowledgements}
 
-This draft is based on the template of [I-D.ietf-tls-hybrid-design].
+This document is based on the template of [I-D.ietf-tls-hybrid-design].
 
 We would like to acknowledge the following people in alphabetical order
-who have contributed to pushing this draft forward, offered insights and
-perspectives, and/or stimulated work in the area:
+who have contributed to pushing this document forward, offered useful 
+insights and perspectives, and/or stimulated work in the area:
 
 D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister,
 Max Pala, Mike Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember
