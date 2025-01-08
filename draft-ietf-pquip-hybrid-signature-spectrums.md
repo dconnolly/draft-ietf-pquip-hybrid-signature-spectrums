@@ -550,24 +550,25 @@ compatibility is achieved using redundant information as little as possible.
 ### **Simultaneous Verification**
 
 Simultaneous Verification (SV) builds on SNS and was first introduced in
-[HYBRIDSIGDESIGN]. SV requires that not only are all component signatures
-needed to achieve a successful verification present in the hybrid signature,
-but also that verification of both component algorithms occurs roughly
-simultaneously. Namely, "missing" information needs to be computed by the
-verifier so that a normally functioning verification algorithm cannot “quit”
-the verification process before both component signatures are verified. This
-may additionally cover some error-injection and similar attacks, where an
-adversary attempts to make an otherwise honest verifier skip component
-algorithm verification. SV mimics traditional digital signatures guarantees,
-essentially ensuring that the hybrid digital signature behaves as a single
-algorithm vs.  two separate component stages. Alternatively phrased, under an
-SV guarantee it is not possible for an otherwise honest verifier to initiate
-termination of the hybrid verification upon successful verification of one
-component algorithm without also knowing if the other component
-succeeded. Note that SV does not prevent dishonest verification, such as if a
-verifier maliciously implements a customized verification algorithm that is
-designed with intention to subvert the hybrid verification process or skips
-signature verification altogether.
+[HYBRIDSIGDESIGN]. SV requires that not only is the entire hybrid signature 
+(e.g., all component signature elements) needed to achieve a successful 
+verification present in the signature presented for verification, but also 
+that verification of both component algorithms occurs roughly simultaneously. 
+Namely, "missing" information needs to be computed by the verifier so that a 
+normally functioning verification algorithm cannot “quit” the verification 
+process before the hybrid signature elements attesting for both component 
+algorithms are verified. This may additionally cover some error-injection and 
+similar attacks, where an adversary attempts to make an otherwise honest 
+verifier skip component algorithm verification. SV mimics traditional digital 
+signatures guarantees, essentially ensuring that the hybrid digital signature 
+behaves as a single algorithm vs. two separate component stages. Alternatively 
+phrased, under an SV guarantee it is not possible for an otherwise honest 
+verifier to initiate termination of the hybrid verification upon successful 
+verification of one component algorithm without also knowing if the other 
+component succeeded. Note that SV does not prevent dishonest verification, 
+such as if a verifier maliciously implements a customized verification 
+algorithm that is designed with intention to subvert the hybrid verification 
+process or skips signature verification altogether.
 
 ### **Hybrid Generality**
 
