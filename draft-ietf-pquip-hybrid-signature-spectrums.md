@@ -219,6 +219,11 @@ in [RFC4949].
   - `Sign(sk, m) -> (sig)`: A probabilistic signature generation, which
     takes as input a secret signing key `sk` and a message `m`, and
     outputs a signature `sig`.
+    In this draft, the secret signing key `sk` is assumed to be implicit
+    for notational simplicity, and the following notation is used:
+    `Sign(m) -> (sig)`. If the message `m` is comprised of multiple fields,
+    `m1, m2, ..., mN`, this is notated `Sign(m) = Sign (m1, m2, ... mN) ->
+    (sig)`. 
   - `Verify(pk, sig, m) -> b`: A verification algorithm, which takes as
     input a public verifying key `pk`, a signature `sig` and a message
     `m`, and outputs a bit `b` indicating `accept (b=1)` or `reject
@@ -979,7 +984,7 @@ keys.
 
 There are a couple approaches to alleviating this issue. One is on
 restricting key reuse. As noted in [I-D.ietf-lamps-pq-composite-sigs], prohibiting
-hybrid algorithm and composite algorithm signers and verifiers from using the
+hybrid algorithm and component algorithm signers and verifiers from using the
 same keys can help ensure that a component verifier cannot be tricked into
 verifying the hybrid signature. One such means for restricting key reuse is
 through allowed key use descriptions in certificates. While prohibiting key
