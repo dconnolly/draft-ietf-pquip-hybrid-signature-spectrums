@@ -945,34 +945,28 @@ requirement is satisfied.
 # EUF-CMA Challenges {#euf-cma-challenges}
 
 Unforgeability properties for hybrid signature schemes are more nuanced than
-for single-algorithm schemes.
+for single-algorithm schemes. 
 
 Under the traditional EUF-CMA security assumption, an adversary can request
 signatures for messages of their choosing and succeeds if they are able to
 produce a valid signature for a message that was not part of an earlier
-request.  EUF-CMA can be seen as applying to the hybrid signature scheme in
-the same way as single-algorithm schemes, but also has several layers of
+request. EUF-CMA can be seen as applying to the hybrid signature scheme in
+the same way as single-algorithm schemes. Namely, the most straightforward 
+extension of the traditional EUF-CMA security game would be that an adversary 
+can request hybrid signatures for messages of their choosing and succeeds if 
+they are able to produce a valid hybrid signature for a message that was not 
+part of an earlier request. However, this has several layers of
 nuance under a hybrid construct.
 
-Namely, the most straightforward extension of the traditional EUF-CMA
-security game would be that an adversary can request hybrid signatures for
-messages of their choosing and succeeds if they are able to produce a valid
-hybrid signature for a message that was not part of an earlier
-request. However, achieving EUF-CMA security in such a straightforward way
-depends on the either component algorithm forgeries, a.k.a. cross-protocol
-attacks, being out of scope or the hybrid signature choice being strongly
-non-separable.
-
-Component algorithm forgeries, which can be seen as a type of cross-protocol
-attack, affect the type of unforgeability properties offered by a scheme and
-are a practical consideration that system designers and managers should be
-aware of when selecting among hybrid schemes. Under such a forgery, for
-example, an adversary that has access to a hybrid signature can attempt to
-separate out one of the component signatures and fraudulently present it to
-the component algorithm for verification. This in turn can cause a loss of
-EUF-CMA security on the component algorithm, namely if the adversary's
-actions result in the component verifier accepting a message that was not
-previously signed by that component algorithm.
+Consider for example a simplistic hybrid approach using concatenated component 
+algorithms. If the hybrid signature is stripped, such that a single component 
+signature is submitted to a verification algorithm for that component along 
+with the message that was signed by the hybrid, the result would be an EUF-CMA 
+forgery for the component signature. This is becasue as the component signing 
+algorithm was not previously called for the message - the hybrid signing 
+algorithm was used to generate the signature. This is an example of a component 
+algorithm forgery, a.k.a. a case of cross-algorithm attack or cross-protocol 
+attack. 
 
 The component algorithm forgery verifier target does not need to be the
 intended recipient of the hybrid-signed message and may even be in an
@@ -983,27 +977,40 @@ verification does not mitigate the issue on the intended message recipient:
 the component forgery could occur on any system that accepts the component
 keys.
 
-There are a couple approaches to alleviating this issue. One is on
-restricting key reuse. As noted in [I-D.ietf-lamps-pq-composite-sigs], prohibiting
-hybrid algorithm and component algorithm signers and verifiers from using the
-same keys can help ensure that a component verifier cannot be tricked into
-verifying the hybrid signature. One such means for restricting key reuse is
-through allowed key use descriptions in certificates. While prohibiting key
-reuse reduces the risk of such component forgeries, and is the mitigation
-described in [I-D.ietf-lamps-pq-composite-sigs], it is still a policy requirement
-and not a cryptographic assurance. Component forgery attacks may be possible
-if the policy is not followed or is followed inconsistently across all
-entities that might verify signatures using those keys. This needs to be
-accounted for in any security analysis. Since cryptographic provable security
-modeling has not historically accounted for key reuse in this way, it should
-not be assumed that systems with existing analyses are robust to this issue.
+Thus, if EUF-CMA security for hybrids is considered to be informally defined in 
+the straightfoward way as that an adversary can request hybrid signatures for 
+messages of their choosing and succeeds if they are able to produce a valid 
+hybrid signature for a message that was not part of an earlier request, 
+implicit requirements must hold in order to avoid real-world implications. 
+Namely, either component algorithm forgeries, a.k.a. cross-protocol attacks, 
+must be out of scope for the use case or or the hybrid signature choice must be 
+strongly non-separable. Otherwise, component algorithm forgeries, which can be 
+seen as a type of cross-protocol attack, affect the type of EUF-CMA properties 
+offered and are a practical consideration that system designers and managers 
+should be aware of when selecting among hybrid approaches for their use case. 
 
-Another approach to alleviating the component forgery risk is through hybrid
-signature selection, by choosing schemes that provide strong
-non-separability. Under this approach ensures that the hybrid signature
-cannot be separated into component algorithm signatures that will verify
-correctly, thereby preventing the signature separation required for the
-component forgery attack to be successful.
+There are a couple approaches to alleviating this issue, as noted above. 
+One is on restricting key reuse. As described in 
+[I-D.ietf-lamps-pq-composite-sigs], prohibiting hybrid algorithm and component 
+algorithm signers and verifiers from using the same keys can help ensure that a 
+component verifier cannot be tricked into verifying the hybrid signature. This 
+would effectively put component forgeries out of scope for a use case. One means 
+for restricting key reuse is through allowed key use descriptions in 
+certificates. While prohibiting key reuse reduces the risk of such component 
+forgeries, and is the mitigation described in [I-D.ietf-lamps-pq-composite-sigs], 
+it is still a policy requirement and not a cryptographic assurance. Component 
+forgery attacks may be possible if the policy is not followed or is followed 
+inconsistently across all entities that might verify signatures using those keys. 
+This needs to be accounted for in any security analysis. Since cryptographic 
+provable security modeling has not historically accounted for key reuse in this 
+way, it should not be assumed that systems with existing analyses are robust 
+to this issue.
+
+The other approach noted for alleviating the component forgery risk is through 
+hybrid signature selection of a scheme that provides strong non-separability. 
+Under this approach, the hybrid signature cannot be separated into component 
+algorithm signatures that will verify correctly, thereby preventing the signature 
+separation required for the component forgery attack to be successful.
 
 It should be noted that weak non-separability is insufficient for mitigating
 risks of component forgeries. As noted in [I-D.ietf-lamps-pq-composite-sigs], in
