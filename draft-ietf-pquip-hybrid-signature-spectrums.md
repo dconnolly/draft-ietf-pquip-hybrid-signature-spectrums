@@ -223,7 +223,7 @@ in [RFC4949].
     for notational simplicity, and the following notation is used:
     `Sign(m) -> (sig)`. If the message `m` is comprised of multiple fields,
     `m1, m2, ..., mN`, this is notated `Sign(m) = Sign (m1, m2, ... mN) ->
-    (sig)`. 
+    (sig)`.
   - `Verify(pk, sig, m) -> b`: A verification algorithm, which takes as
     input a public verifying key `pk`, a signature `sig` and a message
     `m`, and outputs a bit `b` indicating `accept (b=1)` or `reject
@@ -550,24 +550,24 @@ compatibility is achieved using redundant information as little as possible.
 ### **Simultaneous Verification**
 
 Simultaneous Verification (SV) builds on SNS and was first introduced in
-[HYBRIDSIGDESIGN]. SV requires that not only is the entire hybrid signature 
-(e.g., all component signature elements) needed to achieve a successful 
-verification present in the signature presented for verification, but also 
-that verification of both component algorithms occurs roughly simultaneously. 
-Namely, "missing" information needs to be computed by the verifier so that a 
-normally functioning verification algorithm cannot “quit” the verification 
-process before the hybrid signature elements attesting for both component 
-algorithms are verified. This may additionally cover some error-injection and 
-similar attacks, where an adversary attempts to make an otherwise honest 
-verifier skip component algorithm verification. SV mimics traditional digital 
-signatures guarantees, essentially ensuring that the hybrid digital signature 
-behaves as a single algorithm vs. two separate component stages. Alternatively 
-phrased, under an SV guarantee it is not possible for an otherwise honest 
-verifier to initiate termination of the hybrid verification upon successful 
-verification of one component algorithm without also knowing if the other 
-component succeeded. Note that SV does not prevent dishonest verification, 
-such as if a verifier maliciously implements a customized verification 
-algorithm that is designed with intention to subvert the hybrid verification 
+[HYBRIDSIGDESIGN]. SV requires that not only is the entire hybrid signature
+(e.g., all component signature elements) needed to achieve a successful
+verification present in the signature presented for verification, but also
+that verification of both component algorithms occurs roughly simultaneously.
+Namely, "missing" information needs to be computed by the verifier so that a
+normally functioning verification algorithm cannot “quit” the verification
+process before the hybrid signature elements attesting for both component
+algorithms are verified. This may additionally cover some error-injection and
+similar attacks, where an adversary attempts to make an otherwise honest
+verifier skip component algorithm verification. SV mimics traditional digital
+signatures guarantees, essentially ensuring that the hybrid digital signature
+behaves as a single algorithm vs. two separate component stages. Alternatively
+phrased, under an SV guarantee it is not possible for an otherwise honest
+verifier to initiate termination of the hybrid verification upon successful
+verification of one component algorithm without also knowing if the other
+component succeeded. Note that SV does not prevent dishonest verification,
+such as if a verifier maliciously implements a customized verification
+algorithm that is designed with intention to subvert the hybrid verification
 process or skips signature verification altogether.
 
 ### **Hybrid Generality**
@@ -945,28 +945,28 @@ requirement is satisfied.
 # EUF-CMA Challenges {#euf-cma-challenges}
 
 Unforgeability properties for hybrid signature schemes are more nuanced than
-for single-algorithm schemes. 
+for single-algorithm schemes.
 
 Under the traditional EUF-CMA security assumption, an adversary can request
 signatures for messages of their choosing and succeeds if they are able to
 produce a valid signature for a message that was not part of an earlier
 request. EUF-CMA can be seen as applying to the hybrid signature scheme in
-the same way as single-algorithm schemes. Namely, the most straightforward 
-extension of the traditional EUF-CMA security game would be that an adversary 
-can request hybrid signatures for messages of their choosing and succeeds if 
-they are able to produce a valid hybrid signature for a message that was not 
+the same way as single-algorithm schemes. Namely, the most straightforward
+extension of the traditional EUF-CMA security game would be that an adversary
+can request hybrid signatures for messages of their choosing and succeeds if
+they are able to produce a valid hybrid signature for a message that was not
 part of an earlier request. However, this has several layers of
 nuance under a hybrid construct.
 
-Consider for example a simplistic hybrid approach using concatenated component 
-algorithms. If the hybrid signature is stripped, such that a single component 
-signature is submitted to a verification algorithm for that component along 
-with the message that was signed by the hybrid, the result would be an EUF-CMA 
-forgery for the component signature. This is becasue as the component signing 
-algorithm was not previously called for the message - the hybrid signing 
-algorithm was used to generate the signature. This is an example of a component 
-algorithm forgery, a.k.a. a case of cross-algorithm attack or cross-protocol 
-attack. 
+Consider for example a simplistic hybrid approach using concatenated component
+algorithms. If the hybrid signature is stripped, such that a single component
+signature is submitted to a verification algorithm for that component along
+with the message that was signed by the hybrid, the result would be an EUF-CMA
+forgery for the component signature. This is becasue as the component signing
+algorithm was not previously called for the message - the hybrid signing
+algorithm was used to generate the signature. This is an example of a component
+algorithm forgery, a.k.a. a case of cross-algorithm attack or cross-protocol
+attack.
 
 The component algorithm forgery verifier target does not need to be the
 intended recipient of the hybrid-signed message and may even be in an
@@ -977,39 +977,39 @@ verification does not mitigate the issue on the intended message recipient:
 the component forgery could occur on any system that accepts the component
 keys.
 
-Thus, if EUF-CMA security for hybrids is considered to be informally defined in 
-the straightfoward way as that an adversary can request hybrid signatures for 
-messages of their choosing and succeeds if they are able to produce a valid 
-hybrid signature for a message that was not part of an earlier request, 
-implicit requirements must hold in order to avoid real-world implications. 
-Namely, either component algorithm forgeries, a.k.a. cross-protocol attacks, 
-must be out of scope for the use case or or the hybrid signature choice must be 
-strongly non-separable. Otherwise, component algorithm forgeries, which can be 
-seen as a type of cross-protocol attack, affect the type of EUF-CMA properties 
-offered and are a practical consideration that system designers and managers 
-should be aware of when selecting among hybrid approaches for their use case. 
+Thus, if EUF-CMA security for hybrids is considered to be informally defined in
+the straightfoward way as that an adversary can request hybrid signatures for
+messages of their choosing and succeeds if they are able to produce a valid
+hybrid signature for a message that was not part of an earlier request,
+implicit requirements must hold in order to avoid real-world implications.
+Namely, either component algorithm forgeries, a.k.a. cross-protocol attacks,
+must be out of scope for the use case or or the hybrid signature choice must be
+strongly non-separable. Otherwise, component algorithm forgeries, which can be
+seen as a type of cross-protocol attack, affect the type of EUF-CMA properties
+offered and are a practical consideration that system designers and managers
+should be aware of when selecting among hybrid approaches for their use case.
 
-There are a couple approaches to alleviating this issue, as noted above. 
-One is on restricting key reuse. As described in 
-[I-D.ietf-lamps-pq-composite-sigs], prohibiting hybrid algorithm and component 
-algorithm signers and verifiers from using the same keys can help ensure that a 
-component verifier cannot be tricked into verifying the hybrid signature. This 
-would effectively put component forgeries out of scope for a use case. One means 
-for restricting key reuse is through allowed key use descriptions in 
-certificates. While prohibiting key reuse reduces the risk of such component 
-forgeries, and is the mitigation described in [I-D.ietf-lamps-pq-composite-sigs], 
-it is still a policy requirement and not a cryptographic assurance. Component 
-forgery attacks may be possible if the policy is not followed or is followed 
-inconsistently across all entities that might verify signatures using those keys. 
-This needs to be accounted for in any security analysis. Since cryptographic 
-provable security modeling has not historically accounted for key reuse in this 
-way, it should not be assumed that systems with existing analyses are robust 
+There are a couple approaches to alleviating this issue, as noted above.
+One is on restricting key reuse. As described in
+[I-D.ietf-lamps-pq-composite-sigs], prohibiting hybrid algorithm and component
+algorithm signers and verifiers from using the same keys can help ensure that a
+component verifier cannot be tricked into verifying the hybrid signature. This
+would effectively put component forgeries out of scope for a use case. One means
+for restricting key reuse is through allowed key use descriptions in
+certificates. While prohibiting key reuse reduces the risk of such component
+forgeries, and is the mitigation described in [I-D.ietf-lamps-pq-composite-sigs],
+it is still a policy requirement and not a cryptographic assurance. Component
+forgery attacks may be possible if the policy is not followed or is followed
+inconsistently across all entities that might verify signatures using those keys.
+This needs to be accounted for in any security analysis. Since cryptographic
+provable security modeling has not historically accounted for key reuse in this
+way, it should not be assumed that systems with existing analyses are robust
 to this issue.
 
-The other approach noted for alleviating the component forgery risk is through 
-hybrid signature selection of a scheme that provides strong non-separability. 
-Under this approach, the hybrid signature cannot be separated into component 
-algorithm signatures that will verify correctly, thereby preventing the signature 
+The other approach noted for alleviating the component forgery risk is through
+hybrid signature selection of a scheme that provides strong non-separability.
+Under this approach, the hybrid signature cannot be separated into component
+algorithm signatures that will verify correctly, thereby preventing the signature
 separation required for the component forgery attack to be successful.
 
 It should be noted that weak non-separability is insufficient for mitigating
@@ -1072,7 +1072,7 @@ verification' is enforced.
 This document is based on the template of [I-D.ietf-tls-hybrid-design].
 
 We would like to acknowledge the following people in alphabetical order
-who have contributed to pushing this document forward, offered useful 
+who have contributed to pushing this document forward, offered useful
 insights and perspectives, and/or stimulated work in the area:
 
 D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister,
