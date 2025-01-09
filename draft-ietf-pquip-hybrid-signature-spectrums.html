@@ -25,15 +25,15 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
 <meta content="draft-ietf-pquip-hybrid-signature-spectrums-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.25.0
-    Python 3.12.7
+    Python 3.12.8
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
-    pycountry 22.3.5
-    PyYAML 6.0.1
+    pycountry 24.6.1
+    PyYAML 6.0.2
     requests 2.32.3
     setuptools 70.3.0
     wcwidth 0.2.13
@@ -1055,11 +1055,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">ietf-pquip-hybrid-spectrums</td>
-<td class="right">December 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Bindel, et al.</td>
-<td class="center">Expires 20 June 2025</td>
+<td class="center">Expires 13 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hybrid-signature-spectrums-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-17" class="published">17 December 2024</time>
+<time datetime="2025-01-09" class="published">9 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-20">20 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-13">13 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1142,7 +1142,7 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums<a href=
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1151,7 +1151,7 @@ https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums<a href=
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1321,12 +1321,12 @@ where hybridization is determined to be advantageous, a decision on how to
 hybridize needs to be made. With many options available, this document is
 intended to provide context on some of the trade-offs and nuances to
 consider.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">Hybridization of digital signatures, where the verification tag may be
+<p id="section-1-6">Hybridization of digital signatures, where the hybrid signature may be
 expected to attest to both standard and post-quantum components,
 is subtle to design and implement due to the potential separability of the
 hybrid/dual signatures and the risk of downgrade/stripping attacks.  There
 are also a range of requirements and properties that may be required from
-hybrid signatures, which will be discussed in this draft. Some of these are
+hybrid signatures, which will be discussed in this document. Some of these are
 mutually exclusive, which highlights the importance of considering use-case
 specific requirements.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">This document focuses on explaining a spectrum of different hybrid signature
@@ -1344,7 +1344,7 @@ the keys involved, e.g. entity authentication.<a href="#section-1-7" class="pilc
         <h3 id="name-terminology">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
         </h3>
-<p id="section-1.1-1">We follow existing Internet drafts on hybrid terminology
+<p id="section-1.1-1">We follow existing Internet documents on hybrid terminology
 <span>[<a href="#I-D.ietf-pquip-pqt-hybrid-terminology" class="cite xref">I-D.ietf-pquip-pqt-hybrid-terminology</a>]</span> and hybrid key encapsulation
 mechanisms (KEM) <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span> to enable settling on a
 consistent language. We will make clear when this is not possible. In
@@ -1365,7 +1365,12 @@ which generates a public verifying key <code>pk</code> and a secret signing key
               <li class="normal" id="section-1.1-2.1.2.2">
                 <p id="section-1.1-2.1.2.2.1"><code>Sign(sk, m) -&gt; (sig)</code>: A probabilistic signature generation, which
 takes as input a secret signing key <code>sk</code> and a message <code>m</code>, and
-outputs a signature <code>sig</code>.<a href="#section-1.1-2.1.2.2.1" class="pilcrow">¶</a></p>
+outputs a signature <code>sig</code>.
+In this draft, the secret signing key <code>sk</code> is assumed to be implicit
+for notational simplicity, and the following notation is used:
+<code>Sign(m) -&gt; (sig)</code>. If the message <code>m</code> is comprised of multiple fields,
+<code>m1, m2, ..., mN</code>, this is notated <code>Sign(m) = Sign (m1, m2, ... mN) -&gt;
+(sig)</code>.<a href="#section-1.1-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-1.1-2.1.2.3">
                 <p id="section-1.1-2.1.2.3.1"><code>Verify(pk, sig, m) -&gt; b</code>: A verification algorithm, which takes as
@@ -1422,13 +1427,13 @@ define next-generation algorithms to be "algorithms which are not yet
 widely deployed but which may eventually be widely deployed". Hybrid
 signatures are mostly motivated by preparation for post-quantum transition
 or use in long-term post-quantum deployment, hence the reference to
-post-quantum algorithms through this draft.  However, the majority of the
+post-quantum algorithms through this document.  However, the majority of the
 discussion in this document applies equally well to future transitions to
 other next-generation algorithms.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.6">
             <p id="section-1.1-2.6.1">Artifact: An artifact is evidence of the sender's intent to hybridize a
-signature that remains even if a component algorithm tag is
+signature that remains even if a component signature is
 removed. Artifacts can be e.g., at the algorithmic level (e.g., within the
 digital signature), or at the protocol level (e.g., within the
 certificate), or on the system policy level (e.g., within the
@@ -1737,24 +1742,25 @@ compatibility is achieved using redundant information as little as possible.<a h
 <a href="#section-1.3.6" class="section-number selfRef">1.3.6. </a><a href="#name-simultaneous-verification" class="section-name selfRef"><strong>Simultaneous Verification</strong></a>
           </h4>
 <p id="section-1.3.6-1">Simultaneous Verification (SV) builds on SNS and was first introduced in
-<span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SV requires that not only are all component signatures
-needed to achieve a successful verification present in the hybrid signature,
-but also that verification of both component algorithms occurs roughly
-simultaneously. Namely, "missing" information needs to be computed by the
-verifier so that a normally functioning verification algorithm cannot “quit”
-the verification process before both component signatures are verified. This
-may additionally cover some error-injection and similar attacks, where an
-adversary attempts to make an otherwise honest verifier skip component
-algorithm verification. SV mimics traditional digital signatures guarantees,
-essentially ensuring that the hybrid digital signature behaves as a single
-algorithm vs.  two separate component stages. Alternatively phrased, under an
-SV guarantee it is not possible for an otherwise honest verifier to initiate
-termination of the hybrid verification upon successful verification of one
-component algorithm without also knowing if the other component
-succeeded. Note that SV does not prevent dishonest verification, such as if a
-verifier maliciously implements a customized verification algorithm that is
-designed with intention to subvert the hybrid verification process or skips
-signature verification altogether.<a href="#section-1.3.6-1" class="pilcrow">¶</a></p>
+<span>[<a href="#HYBRIDSIGDESIGN" class="cite xref">HYBRIDSIGDESIGN</a>]</span>. SV requires that not only is the entire hybrid signature
+(e.g., all component signature elements) needed to achieve a successful
+verification present in the signature presented for verification, but also
+that verification of both component algorithms occurs roughly simultaneously.
+Namely, "missing" information needs to be computed by the verifier so that a
+normally functioning verification algorithm cannot “quit” the verification
+process before the hybrid signature elements attesting for both component
+algorithms are verified. This may additionally cover some error-injection and
+similar attacks, where an adversary attempts to make an otherwise honest
+verifier skip component algorithm verification. SV mimics traditional digital
+signatures guarantees, essentially ensuring that the hybrid digital signature
+behaves as a single algorithm vs. two separate component stages. Alternatively
+phrased, under an SV guarantee it is not possible for an otherwise honest
+verifier to initiate termination of the hybrid verification upon successful
+verification of one component algorithm without also knowing if the other
+component succeeded. Note that SV does not prevent dishonest verification,
+such as if a verifier maliciously implements a customized verification
+algorithm that is designed with intention to subvert the hybrid verification
+process or skips signature verification altogether.<a href="#section-1.3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hybrid-generality">
@@ -1870,7 +1876,7 @@ side. Such policies may be further ambiguous to the sender, meaning that the
 type of authenticity offered to the receiver is unclear.  In another example,
 under nested signatures the verifier could be tricked into interpreting a new
 message as the message/inner signature combination and verify only the outer
-signature.  In this case, the inner signature-tag is an artifact.<a href="#section-2-4" class="pilcrow">¶</a></p>
+signature.  In this case, the inner signature is an artifact.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">Third on the scale is the Strong Non-Separability notion, in which
 separability detection is dependent on artifacts in the signature
 itself. Unlike in Weak Non-Separability, where artifacts may be in the actual
@@ -2267,55 +2273,62 @@ for single-algorithm schemes.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Under the traditional EUF-CMA security assumption, an adversary can request
 signatures for messages of their choosing and succeeds if they are able to
 produce a valid signature for a message that was not part of an earlier
-request.  EUF-CMA can be seen as applying to the hybrid signature scheme in
-the same way as single-algorithm schemes, but also has several layers of
+request. EUF-CMA can be seen as applying to the hybrid signature scheme in
+the same way as single-algorithm schemes. Namely, the most straightforward
+extension of the traditional EUF-CMA security game would be that an adversary
+can request hybrid signatures for messages of their choosing and succeeds if
+they are able to produce a valid hybrid signature for a message that was not
+part of an earlier request. However, this has several layers of
 nuance under a hybrid construct.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Namely, the most straightforward extension of the traditional EUF-CMA
-security game would be that an adversary can request hybrid signatures for
-messages of their choosing and succeeds if they are able to produce a valid
-hybrid signature for a message that was not part of an earlier
-request. However, achieving EUF-CMA security in such a straightforward way
-depends on the either component algorithm forgeries, a.k.a. cross-protocol
-attacks, being out of scope or the hybrid signature choice being strongly
-non-separable.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Component algorithm forgeries, which can be seen as a type of cross-protocol
-attack, affect the type of unforgeability properties offered by a scheme and
-are a practical consideration that system designers and managers should be
-aware of when selecting among hybrid schemes. Under such a forgery, for
-example, an adversary that has access to a hybrid signature can attempt to
-separate out one of the component signatures and fraudulently present it to
-the component algorithm for verification. This in turn can cause a loss of
-EUF-CMA security on the component algorithm, namely if the adversary's
-actions result in the component verifier accepting a message that was not
-previously signed by that component algorithm.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">The component algorithm forgery verifier target does not need to be the
+<p id="section-5-3">Consider for example a simplistic hybrid approach using concatenated component
+algorithms. If the hybrid signature is stripped, such that a single component
+signature is submitted to a verification algorithm for that component along
+with the message that was signed by the hybrid, the result would be an EUF-CMA
+forgery for the component signature. This is becasue as the component signing
+algorithm was not previously called for the message - the hybrid signing
+algorithm was used to generate the signature. This is an example of a component
+algorithm forgery, a.k.a. a case of cross-algorithm attack or cross-protocol
+attack.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">The component algorithm forgery verifier target does not need to be the
 intended recipient of the hybrid-signed message and may even be in an
 entirely different system. This vulnerability is particularly an issue among
 concatenated or nested hybrid signature schemes when component
 verification. It should be noted that policy enforcement of a hybrid
 verification does not mitigate the issue on the intended message recipient:
 the component forgery could occur on any system that accepts the component
-keys.<a href="#section-5-5" class="pilcrow">¶</a></p>
-<p id="section-5-6">There are a couple approaches to alleviating this issue. One is on
-restricting key reuse. As noted in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>, prohibiting
-hybrid algorithm and composite algorithm signers and verifiers from using the
-same keys can help ensure that a component verifier cannot be tricked into
-verifying the hybrid signature. One such means for restricting key reuse is
-through allowed key use descriptions in certificates. While prohibiting key
-reuse reduces the risk of such component forgeries, and is the mitigation
-described in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>, it is still a policy requirement
-and not a cryptographic assurance. Component forgery attacks may be possible
-if the policy is not followed or is followed inconsistently across all
-entities that might verify signatures using those keys. This needs to be
-accounted for in any security analysis. Since cryptographic provable security
-modeling has not historically accounted for key reuse in this way, it should
-not be assumed that systems with existing analyses are robust to this issue.<a href="#section-5-6" class="pilcrow">¶</a></p>
-<p id="section-5-7">Another approach to alleviating the component forgery risk is through hybrid
-signature selection, by choosing schemes that provide strong
-non-separability. Under this approach ensures that the hybrid signature
-cannot be separated into component algorithm signatures that will verify
-correctly, thereby preventing the signature separation required for the
-component forgery attack to be successful.<a href="#section-5-7" class="pilcrow">¶</a></p>
+keys.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">Thus, if EUF-CMA security for hybrids is considered to be informally defined in
+the straightfoward way as that an adversary can request hybrid signatures for
+messages of their choosing and succeeds if they are able to produce a valid
+hybrid signature for a message that was not part of an earlier request,
+implicit requirements must hold in order to avoid real-world implications.
+Namely, either component algorithm forgeries, a.k.a. cross-protocol attacks,
+must be out of scope for the use case or or the hybrid signature choice must be
+strongly non-separable. Otherwise, component algorithm forgeries, which can be
+seen as a type of cross-protocol attack, affect the type of EUF-CMA properties
+offered and are a practical consideration that system designers and managers
+should be aware of when selecting among hybrid approaches for their use case.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">There are a couple approaches to alleviating this issue, as noted above.
+One is on restricting key reuse. As described in
+<span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>, prohibiting hybrid algorithm and component
+algorithm signers and verifiers from using the same keys can help ensure that a
+component verifier cannot be tricked into verifying the hybrid signature. This
+would effectively put component forgeries out of scope for a use case. One means
+for restricting key reuse is through allowed key use descriptions in
+certificates. While prohibiting key reuse reduces the risk of such component
+forgeries, and is the mitigation described in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>,
+it is still a policy requirement and not a cryptographic assurance. Component
+forgery attacks may be possible if the policy is not followed or is followed
+inconsistently across all entities that might verify signatures using those keys.
+This needs to be accounted for in any security analysis. Since cryptographic
+provable security modeling has not historically accounted for key reuse in this
+way, it should not be assumed that systems with existing analyses are robust
+to this issue.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-5-7">The other approach noted for alleviating the component forgery risk is through
+hybrid signature selection of a scheme that provides strong non-separability.
+Under this approach, the hybrid signature cannot be separated into component
+algorithm signatures that will verify correctly, thereby preventing the signature
+separation required for the component forgery attack to be successful.<a href="#section-5-7" class="pilcrow">¶</a></p>
 <p id="section-5-8">It should be noted that weak non-separability is insufficient for mitigating
 risks of component forgeries. As noted in <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>, in
 cases hybrid algorithm selection that provides only weak non-separability key
@@ -2396,10 +2409,10 @@ verification' is enforced.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgements">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
       </h2>
-<p id="section-8-1">This draft is based on the template of <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">This document is based on the template of <span>[<a href="#I-D.ietf-tls-hybrid-design" class="cite xref">I-D.ietf-tls-hybrid-design</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">We would like to acknowledge the following people in alphabetical order
-who have contributed to pushing this draft forward, offered insights and
-perspectives, and/or stimulated work in the area:<a href="#section-8-2" class="pilcrow">¶</a></p>
+who have contributed to pushing this document forward, offered useful
+insights and perspectives, and/or stimulated work in the area:<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">D.J. Bernstein, Scott Fluhrer, Felix Günther, John Gray, Serge Mister,
 Max Pala, Mike Ounsworth, Douglas Stebila, Falko Strenzke, Brendan Zember<a href="#section-8-3" class="pilcrow">¶</a></p>
 </section>
