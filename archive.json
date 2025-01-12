@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-09T00:23:52.210245+00:00",
+  "timestamp": "2025-01-12T00:26:36.057946+00:00",
   "repo": "dconnolly/draft-ietf-pquip-hybrid-signature-spectrums",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDOKkGQK859_ETx",
       "title": "Citations ",
       "url": "https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "br-hale",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Recommended citations to be added regarding approvals requirements, e.g., from ETSI. Awaiting the current document under draft.",
       "createdAt": "2024-02-01T23:05:13Z",
-      "updatedAt": "2024-02-01T23:05:13Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-01-09T17:40:29Z",
+      "closedAt": "2025-01-09T17:40:29Z",
+      "comments": [
+        {
+          "author": "dconnolly",
+          "authorAssociation": "OWNER",
+          "body": "Done",
+          "createdAt": "2025-01-09T17:40:29Z",
+          "updatedAt": "2025-01-09T17:40:29Z"
+        }
+      ]
     },
     {
       "number": 3,
