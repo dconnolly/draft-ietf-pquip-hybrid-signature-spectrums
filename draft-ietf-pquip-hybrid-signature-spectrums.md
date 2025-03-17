@@ -347,8 +347,8 @@ be taken into account.
 Of note, some next generation algorithms have received considerable
 analysis attention, for example, following attention gathered during the
 NIST Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ].
-Thus, if and when further information on caveats and implementation issues
-come to light, it is more likely that vulnerabilities will represent a
+However, if and when further information on caveats and implementation issues
+come to light, it is quite possible that vulnerabilities will represent a
 weakening of security than a full "break". Such weakening may also be offset
 if a hybrid approach has been used.
 
