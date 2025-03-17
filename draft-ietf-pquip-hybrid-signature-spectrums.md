@@ -865,8 +865,9 @@ validity.
 # Need-For-Approval Spectrum {#need-for-approval-spectrum}
 
 In practice, use of hybrid digital signatures relies on standards
-specifications where applicable. This is particularly relevant in the case of
-FIPS approval considerations as well as NIST, which has provided basic
+specifications where applicable. This is particularly relevant in the cases
+where use of FIPS approved software modules is required, not only use 
+of NIST algorithms or recommendations which has provided basic
 guidance on hybrid signature use. NIST provides the following guidance
 (emphasis added),
 
