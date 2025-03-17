@@ -144,7 +144,7 @@ It is important to also consider transitions to post-quantum authentication;
 delaying such transitions creates risks. For example, attackers may be able
 to carry out quantum attacks against RSA-2048 years before the public is
 aware of these capabilities. Furthermore, there are applications where
-algorithm turn-over is complex or takes a long time. There are also
+algorithm turn-over is complex or takes a long time. For example, root certificates are often valid for about 20 years or longer. There are also
 applications where future checks on past authenticity play a role, such as
 long-lived digital signatures on legal documents.
 
@@ -158,7 +158,7 @@ implementation-independent attacks published in 2023 or earlier had broken
 Standardization Project, 25% of the proposals not broken in Round 1, and 36%
 of the proposals selected by NIST for Round 2 [QRCSP].
 
-Such cryptanalysis and security concerns are one reason for to consider
+Such cryptanalysis and security concerns are one reason to consider
 'hybrid' cryptographic algorithms, which combine both traditional and
 post-quantum (or more generally a combination of two or more) algorithms. A
 core objective of hybrid algorithms is to protect against quantum computers
@@ -286,11 +286,11 @@ in [RFC4949].
 
 - Stripping attack: A stripping attack refers to a case where an adversary
   takes a message and hybrid signature pair and attempts to submit (a
-  potential modification of) the pair to a component algorithm verifier.  A
+  potential modification of) the pair to a component algorithm verifier, meanign that the security is based only on the remaining component scheme but not on all component schemes anymore. A
   common example of a stripping attack includes a message and hybrid
   signature, comprised of concatenated post-quantum and traditional
-  signatures, where an adversary simply removes the post-quantum component
-  signature and submits the message and traditional component signature to a
+  signatures, where a quantum adversary simply removes the post-quantum component
+  signature and submits the (changed) message and traditional (forged) component signature to a
   traditional verifier. Stripping attacks should not be confused with
   component message forgery attacks.
 
@@ -300,7 +300,7 @@ in [RFC4949].
   such an attack would be a quantum attacker compromising the key associated
   with a traditional component algorithm and forging a message and signature
   pair.  Message forgery attacks may be formalized with experiments such as
-  EUF-CMA, while the difference introduced in component message forgery
+  (hybrid) existential unforgability under chosen-message attack (EUF-CMA), while the difference introduced in component message forgery
   attacks is that the key is accepted for both hybrid and single algorithm
   use. Further discussions on this appear under {{euf-cma-challenges}}.
 
@@ -373,7 +373,7 @@ turn-over can be complex and difficult and can take considerable time
 (such as in long-lived systems with hardware deployment), meaning that
 an algorithm may be committed to long-term, with no option for
 replacement. Long-term commitment creates further urgency for immediate
-post-quantum algorithm selection.  Additionally, for some sectors future
+post-quantum algorithm selection, for example when generating root certificates with their long validity windows.  Additionally, for some sectors future
 checks on past authenticity plays a role (e.g., many legal, financial,
 auditing, and governmental systems).  The 'store-now-modify-later'
 analogy would present challenges in such sectors, where future analysis
@@ -397,7 +397,8 @@ scheme can achieve 'hybrid authentication' which is the property that
 (cryptographic) authentication is achieved by the hybrid signature
 scheme provided that a least one component signature algorithm remains
 'secure'. There might be, however, other goals in competition with this
-one, such as backward-compatibility. Hybrid authentication is an umbrella
+one, such as backward-compatibility (refering to the property where a hybrid signature may
+be verified by only verifying one component signature, see description below). Hybrid authentication is an umbrella
 term that encompasses more specific concepts of hybrid signature
 security, such as 'hybrid unforgeability' described next.
 
@@ -413,21 +414,13 @@ incompatible with backward-compatibility, where the EUF-CMA security of the
 hybrid signature relies solely on the security of one of the component
 schemes instead of relying on both, e.g., the dual message combiner using
 nesting in [HYBRIDSIG]. For more details, we refer to our discussion
-below. Note that unlike EUF-CMA security, SUF-CMA security of the hybrid
-scheme may rely on SUF-CMA security of both component schemes achieving
-SUF-CMA, depending on the hybridization approach.  For instance, this can be
-clearly seen under a concatenation combiner where the hybrid signature is
-comprised of two distinct component signatures; in that case, if either
-component signature does not offer SUF-CMA, the hybrid does not achieve
-SUF-CMA.
+below. Note that 'strong' existential unforgability under chosen message attack (SUF-CMA) security of the hybrid
+scheme (defined similarly to the traditional strong unforgability) may require SUF-CMA security of both component schemes.  For instance, under a concatenation combiner where the hybrid signature is
+comprised of two distinct component signatures; in that case, if one of the component schemes offers SUF-CMA and the other only offers EUF-CMA, the hybrid does not achieve SUF-CMA but only EUF-CMA. 
 
 Use cases where a hybrid scheme is used with, e.g., EUF-CMA security assumed
 for only one component scheme generally use hybrid techniques for their
-'functional transition' pathway support, while fully trusting either the
-traditional or post-quantum algorithm. E.g., hybrid signatures may be used as
-a transition step for when a system or system-of-systems is comprised of some
-verifiers that support traditional signatures only while other verifiers are
-upgraded to also support post-quantum signatures. In this example, a system
+'functional transition' pathway support (i.e., a gradual adaption to ensure interoperability in system or system-of-systems of verifiers that support traditional signatures only and verifiers that are upgraded to also support post-quantum signatures). In this case, a system
 manager is using hybrid signatures as a 'functional transition' support, but
 not yet expecting different security guarantees. As such, EUF-CMA security is
 assumed for one component algorithm.
@@ -435,7 +428,7 @@ assumed for one component algorithm.
 In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA
 security assumed for both component schemes without prioritisation between
 them can use hybrid techniques for both functional transition and security
-transition, where it may not be known which algorithm should be relied upon.
+transition (i.e., a transisition to ensure security even if it may not be known which algorithm should be relied upon).
 
 ### **Proof Composability**
 
@@ -527,7 +520,7 @@ receivers. Notably, this is a verification property; the sender has provided
 a hybrid digital signature, but the verifier is allowed, due to internal
 policy and/or implementation, to only verify one component
 signature. Backwards compatibility may be further decomposed to subcategories
-where component key provenance is either separate or hybrid so as to support
+where component key provenance is either per component or hybrid so as to support
 implementations that cannot recognize (and/or process) hybrid signatures or
 keys.
 
@@ -761,13 +754,13 @@ artifacts in different locations in {{tab-hybrid-approach-categories}}.
 
 - Concatenation: variants of hybridization where, for component algorithms
 `Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated as a
-concatenation `(sig_1, sig_2)` such that `sig_1 = Sigma_1.Sign(hybridAlgID,
-m)` and `sig_2 = Sigma_2.Sign(hybridAlgID, m)`.
+concatenation `(sig_1, sig_2)` such that `sig_1 = Sigma_1.Sign(hybridAlgID ||
+m)` and `sig_2 = Sigma_2.Sign(hybridAlgID || m)`.
 
 - Nesting: variants of hybridization where for component algorithms
 `Sigma_1.Sign` and `Sigma_2.Sign`, the hybrid signature is calculated in a
 layered approach as `(sig_1, sig_2)` such that, e.g., `sig_1 =
-Sigma_1.Sign(hybridAlgID, m)` and `sig_2 = Sigma_2.Sign(hybridAlgID, (m,
+Sigma_1.Sign(hybridAlgID || m)` and `sig_2 = Sigma_2.Sign(hybridAlgID || (m ||
 sig_1))`.
 
 - Fused hybrid: variants of hybridization where for component algorithms
@@ -780,7 +773,7 @@ challenges c_1 and c_2, where c_1 and c_2 are hashes computed over the
 respective commitments comm_1 and comm_2 (and the message).  A fused hybrid
 signature could consist of the component responses, r_1 and r_2 and a
 challenge c that is computed as a hash over both commitments, i.e., c =
-Hash((comm_1, comm_2), Hash2(message)).  As such, c does not belong to either
+Hash((comm_1 || comm_2) || Hash2(message)).  As such, c does not belong to either
 of the component signatures but rather both, meaning that the signatures are
 'entangled'.
 
@@ -962,7 +955,7 @@ Consider for example a simplistic hybrid approach using concatenated component
 algorithms. If the hybrid signature is stripped, such that a single component
 signature is submitted to a verification algorithm for that component along
 with the message that was signed by the hybrid, the result would be an EUF-CMA
-forgery for the component signature. This is becasue as the component signing
+forgery for the component signature. This is because as the component signing
 algorithm was not previously called for the message - the hybrid signing
 algorithm was used to generate the signature. This is an example of a component
 algorithm forgery, a.k.a. a case of cross-algorithm attack or cross-protocol
@@ -972,7 +965,7 @@ The component algorithm forgery verifier target does not need to be the
 intended recipient of the hybrid-signed message and may even be in an
 entirely different system. This vulnerability is particularly an issue among
 concatenated or nested hybrid signature schemes when component
-verification. It should be noted that policy enforcement of a hybrid
+verification is allowed. It should be noted that policy enforcement of a hybrid
 verification does not mitigate the issue on the intended message recipient:
 the component forgery could occur on any system that accepts the component
 keys.
@@ -1013,7 +1006,7 @@ algorithm signatures that will verify correctly, thereby preventing the signatur
 separation required for the component forgery attack to be successful.
 
 It should be noted that weak non-separability is insufficient for mitigating
-risks of component forgeries. As noted in [I-D.ietf-lamps-pq-composite-sigs], in
+risks of component forgeries. As noted in [I-D.ietf-lamps-pq-composite-sigs], Sect. 11.3, in
 cases hybrid algorithm selection that provides only weak non-separability key
 reuse should be avoided, as mentioned above, to mitigate risks of introducing
 EUF-CMA vulnerabilities for component algorithms.
