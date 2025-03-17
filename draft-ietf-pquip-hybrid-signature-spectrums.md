@@ -144,7 +144,8 @@ It is important to also consider transitions to post-quantum authentication;
 delaying such transitions creates risks. For example, attackers may be able
 to carry out quantum attacks against RSA-2048 years before the public is
 aware of these capabilities. Furthermore, there are applications where
-algorithm turn-over is complex or takes a long time. For example, root certificates are often valid for about 20 years or longer. There are also
+algorithm turn-over is complex or takes a long time. For example, root 
+certificates are often valid for about 20 years or longer. There are also
 applications where future checks on past authenticity play a role, such as
 long-lived digital signatures on legal documents.
 
@@ -286,13 +287,17 @@ in [RFC4949].
 
 - Stripping attack: A stripping attack refers to a case where an adversary
   takes a message and hybrid signature pair and attempts to submit (a
-  potential modification of) the pair to a component algorithm verifier, meanign that the security is based only on the remaining component scheme but not on all component schemes anymore. A
-  common example of a stripping attack includes a message and hybrid
+  potential modification of) the pair to a component algorithm verifier,
+  meaning that the security is based only on the remaining component scheme.
+  A common example of a stripping attack includes a message and hybrid
   signature, comprised of concatenated post-quantum and traditional
-  signatures, where a quantum adversary simply removes the post-quantum component
-  signature and submits the (changed) message and traditional (forged) component signature to a
-  traditional verifier. Stripping attacks should not be confused with
-  component message forgery attacks.
+  signatures, where a quantum adversary simply removes the post-quantum
+  component signature and submits the (potentially changed) message and
+  traditional component signature to a traditional verifier. This could
+  include an authentic traditional certificate authority signature on a
+  certificate that was originaly hybrid-signed. An attribute of this is that
+  the an honest signer would attest to generating the signature. Stripping
+  attacks should not be confused with component message forgery attacks.
 
 - Component message forgery attacks: A forgery attack refers to a case where
   an adversary attempts to forge a (non-hybrid) signature on a message using
@@ -300,7 +305,8 @@ in [RFC4949].
   such an attack would be a quantum attacker compromising the key associated
   with a traditional component algorithm and forging a message and signature
   pair.  Message forgery attacks may be formalized with experiments such as
-  (hybrid) existential unforgability under chosen-message attack (EUF-CMA), while the difference introduced in component message forgery
+  (hybrid) existential unforgability under chosen-message attack (EUF-CMA),
+  while the difference introduced in component message forgery
   attacks is that the key is accepted for both hybrid and single algorithm
   use. Further discussions on this appear under {{euf-cma-challenges}}.
 
@@ -373,9 +379,10 @@ turn-over can be complex and difficult and can take considerable time
 (such as in long-lived systems with hardware deployment), meaning that
 an algorithm may be committed to long-term, with no option for
 replacement. Long-term commitment creates further urgency for immediate
-post-quantum algorithm selection, for example when generating root certificates with their long validity windows.  Additionally, for some sectors future
-checks on past authenticity plays a role (e.g., many legal, financial,
-auditing, and governmental systems).  The 'store-now-modify-later'
+post-quantum algorithm selection, for example when generating root 
+certificates with their long validity windows.  Additionally, for some 
+sectors future checks on past authenticity plays a role (e.g., many legal, 
+financial, auditing, and governmental systems).  The 'store-now-modify-later'
 analogy would present challenges in such sectors, where future analysis
 of past authentication may be more critical than in e.g., internet
 connection use cases. As such there is an eagerness to use post-quantum
@@ -397,8 +404,9 @@ scheme can achieve 'hybrid authentication' which is the property that
 (cryptographic) authentication is achieved by the hybrid signature
 scheme provided that a least one component signature algorithm remains
 'secure'. There might be, however, other goals in competition with this
-one, such as backward-compatibility (refering to the property where a hybrid signature may
-be verified by only verifying one component signature, see description below). Hybrid authentication is an umbrella
+one, such as backward-compatibility (refering to the property where a 
+hybrid signature may be verified by only verifying one component signature, 
+see description below). Hybrid authentication is an umbrella
 term that encompasses more specific concepts of hybrid signature
 security, such as 'hybrid unforgeability' described next.
 
@@ -414,21 +422,29 @@ incompatible with backward-compatibility, where the EUF-CMA security of the
 hybrid signature relies solely on the security of one of the component
 schemes instead of relying on both, e.g., the dual message combiner using
 nesting in [HYBRIDSIG]. For more details, we refer to our discussion
-below. Note that 'strong' existential unforgability under chosen message attack (SUF-CMA) security of the hybrid
-scheme (defined similarly to the traditional strong unforgability) may require SUF-CMA security of both component schemes.  For instance, under a concatenation combiner where the hybrid signature is
-comprised of two distinct component signatures; in that case, if one of the component schemes offers SUF-CMA and the other only offers EUF-CMA, the hybrid does not achieve SUF-CMA but only EUF-CMA. 
+below. Note that 'strong' existential unforgability under chosen message attack 
+(SUF-CMA) security of the hybrid scheme (defined similarly to the traditional 
+strong unforgability) may require SUF-CMA security of both component schemes. 
+For instance, under a concatenation combiner where the hybrid signature is 
+comprised of two distinct component signatures; in that case, if one of the 
+component schemes offers SUF-CMA and the other only offers EUF-CMA, the hybrid 
+does not achieve SUF-CMA but only EUF-CMA. 
 
 Use cases where a hybrid scheme is used with, e.g., EUF-CMA security assumed
 for only one component scheme generally use hybrid techniques for their
-'functional transition' pathway support (i.e., a gradual adaption to ensure interoperability in system or system-of-systems of verifiers that support traditional signatures only and verifiers that are upgraded to also support post-quantum signatures). In this case, a system
-manager is using hybrid signatures as a 'functional transition' support, but
-not yet expecting different security guarantees. As such, EUF-CMA security is
-assumed for one component algorithm.
+'functional transition' pathway support (i.e., a gradual adaption to ensure 
+interoperability in system or system-of-systems of verifiers that support 
+traditional signatures only and verifiers that are upgraded to also support 
+post-quantum signatures). In this case, a system manager is using hybrid 
+signatures as a 'functional transition' support, but not yet expecting 
+different security guarantees. As such, EUF-CMA security is assumed for one 
+component algorithm.
 
 In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA
 security assumed for both component schemes without prioritisation between
 them can use hybrid techniques for both functional transition and security
-transition (i.e., a transisition to ensure security even if it may not be known which algorithm should be relied upon).
+transition (i.e., a transisition to ensure security even if it may not be 
+known which algorithm should be relied upon).
 
 ### **Proof Composability**
 
@@ -623,7 +639,8 @@ representing `degrees` of separability hardness, visualized in
 | ----------------------------------------------------------------------------|
 ▼
 ~~~
-{: #fig-spectrum-non-separability title="Spectrum of non-separability from weakest to strongest."}
+{: #fig-spectrum-non-separability title="Spectrum of non-separability from 
+weakest to strongest."}
 
 
 At one end of the spectrum are schemes in which one of the component
