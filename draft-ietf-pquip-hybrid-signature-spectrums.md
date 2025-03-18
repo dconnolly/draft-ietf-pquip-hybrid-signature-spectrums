@@ -862,7 +862,7 @@ signature itself, meaning that these bear the closest resemblance to
 traditional schemes where message authenticity is dependent on signature
 validity.
 
-# Need-For-Approval Spectrum {#need-for-approval-spectrum}
+# Need For Approval Spectrum {#need-for-approval-spectrum}
 
 In practice, use of hybrid digital signatures relies on standards
 specifications where applicable. This is particularly relevant in the cases
@@ -926,7 +926,7 @@ process or falls under already approved specifications.
 | ---------------------------------------------------------------------------------|
 ▼
 ~~~~
-{: #fig-generality-spectrum title="Generality / Need-for-approval spectrum"}
+{: #fig-generality-spectrum title="Generality / Need for Approval spectrum"}
 
 The first listed "combiner" would be a new construction with a security
 reduction to different hardness assumptions but not necessarily to approved
@@ -1070,7 +1070,7 @@ that property.
 ## Simultaneous verification vs. low need for approval
 
 It seems that the more simultaneous verification is enforced by the hybrid
-design, the higher is the need-for-approval as simultaneous verification
+design, the higher is the need for approval as simultaneous verification
 algorithms fuse (or 'entangle') the verification of the component algorithms
 such that verification operations from the different component schemes depend
 on each other in some way. For example, concatenation of signatures in a
