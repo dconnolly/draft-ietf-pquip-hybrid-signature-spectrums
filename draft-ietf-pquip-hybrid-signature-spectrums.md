@@ -1069,14 +1069,16 @@ that property.
 
 ## Simultaneous verification vs. low need for approval
 
-It seems that the more simultaneous verification is enforced by the hybrid
-design, the higher is the need for approval as simultaneous verification
-algorithms fuse (or 'entangle') the verification of the component algorithms
-such that verification operations from the different component schemes depend
-on each other in some way. For example, concatenation of signatures in a
-black-box way without any artefacts is, e.g., FIPS-approved, but the
-component signatures are usually verified separately and no 'simultaneous
-verification' is enforced.
+Hybrid algorithms that achieve simultaneous verification tend to fuse (or 
+'entangle') the verification of component algorithms such that verification 
+operations from the different component schemes depend on each other in some 
+way. Consequently, there may be a natural connection between achieving 
+simultaneous verification and a higher need for approval. As a contrasting 
+example, concatenatation of a FIPS approved signature and another (potentially 
+non-FIPS approved) signature without any artefacts is by description a 
+FIPS-approved hybrid, however as the component signatures are verified 
+separately it is not possible to enforce 'simultaneous verification'.
+
 
 # Acknowledgements {#acknowledgements}
 
