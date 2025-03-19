@@ -535,10 +535,7 @@ post-quantum algorithms while still supporting select legacy
 receivers. Notably, this is a verification property; the sender has provided
 a hybrid digital signature, but the verifier is allowed, due to internal
 policy and/or implementation, to only verify one component
-signature. Backwards compatibility may be further decomposed to subcategories
-where component key provenance is either per component or hybrid so as to support
-implementations that cannot recognize (and/or process) hybrid signatures or
-keys.
+signature. 
 
 Forwards compatibility has also been a consideration in hybrid proposals
 [I-D.becker-guthrie-noncomposite-hybrid-auth]. Forward compatibility assumes
