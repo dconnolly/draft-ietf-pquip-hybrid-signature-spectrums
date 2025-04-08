@@ -34,6 +34,13 @@ author:
     organization: UK National Cyber Security Centre
     email: flo.d@ncsc.gov.uk
 
+normative:
+  I-D.ietf-tls-hybrid-design:
+
+  I-D.ietf-pquip-pqt-hybrid-terminology:
+
+  RFC4949:
+
 informative:
   HQC_CVE:
     title: Correctness error in HQC decapsulation
@@ -69,10 +76,6 @@ informative:
       -
         ins: B. Hale
         name: Britta Hale
-
-  I-D.ietf-tls-hybrid-design:
-
-  I-D.ietf-pquip-pqt-hybrid-terminology:
 
   I-D.ietf-lamps-pq-composite-sigs:
 
@@ -114,8 +117,6 @@ informative:
         ins: D. Bernstein
         name: Daniel J. Bernstein
 
-  RFC4949:
-
 
 --- abstract
 
@@ -149,8 +150,8 @@ certificates are often valid for about 20 years or longer. There are also
 applications where future checks on past authenticity play a role, such as
 long-lived digital signatures on legal documents.
 
-Still, there have been successful attacks against proposals using
-post-quantum cryptography. Sometimes an attack exploits implementation
+Still, there have been successful attacks against algorithms using
+post-quantum cryptography, as well as implementations of such algorithms. Sometimes an attack exploits implementation
 issues, such as [KYBERSLASH], which exploits timing variations, or [HQC_CVE]
 which exploits implementation bugs. Sometimes an attack works for all
 implementations of the specified algorithm. Research has indicated that
@@ -465,7 +466,7 @@ composability.
 
 Non-Separability was one of the earliest properties of hybrid digital
 signatures to be discussed [HYBRIDSIG]. It was defined as the guarantee that
-an adversary cannot simply “remove” one of the component signatures without
+an adversary cannot simply "remove" one of the component signatures without
 evidence left behind. For example, there are artifacts that a carefully
 designed verifier may be able to identify, or that are identifiable in later
 audits. This was later termed Weak Non-Separability (WNS)
@@ -480,8 +481,8 @@ instance, this can intuitively be seen in cases of a message containing a
 context note on hybrid authentication, that is then signed by all component
 algorithms/the hybrid signature scheme. If an adversary removes one component
 signature but not the other, then artifacts in the message itself point to
-the possible existence of hybrid signature such as a label stating, “this
-message must be hybrid signed”. This might be a counter measure against
+the possible existence of hybrid signature such as a label stating, "this
+message must be hybrid signed". This might be a counter measure against
 stripping attacks if the verifier expects a hybrid signature scheme to have
 this property. However, it places the responsibility of signature validity
 not only on the correct format of the message, as in a traditional signature
@@ -561,7 +562,7 @@ Simultaneous Verification (SV) builds on SNS and was first introduced in
 verification present in the signature presented for verification, but also
 that verification of both component algorithms occurs roughly simultaneously.
 Namely, "missing" information needs to be computed by the verifier so that a
-normally functioning verification algorithm cannot “quit” the verification
+normally functioning verification algorithm cannot "quit" the verification
 process before the hybrid signature elements attesting for both component
 algorithms are verified. This may additionally cover some error-injection and
 similar attacks, where an adversary attempts to make an otherwise honest
@@ -678,8 +679,8 @@ signature itself may encode the information that a hybrid signature scheme is
 used. Examples of this type may be found in [HYBRIDSIGDESIGN].
 
 For schemes achieving the most demanding security notion, Strong
-Non-Separability with Simultaneous Verification, verification succeeds not
-only when both of the component signatures are present but also only when the
+Non-Separability with Simultaneous Verification, verification succeeds 
+only when both of the component signatures are present and the
 verifier has verified both signatures. Moreover, no information is leaked to
 the receiver during the verification process on the possible validity of the
 component signatures until both verify (or verification failure may or may
@@ -835,7 +836,7 @@ In cases 2 and 5 the artifacts lie within the message. This is notable as the
 authenticity of the message relies on the validity of the signature, and the
 artifact location means that the signature in turn relies on the authentic
 content of the message (the artifact label). This creates a risk of circular
-dependency. Alternative approaches such as cases 3 and 4 solve this circular
+dependency. Alternative approaches such as cases 3, 4, 6 and 7 solve this circular
 dependency by provisioning keys in a combined certificate.
 
 Another observation from this comparison is that artifact locations may be
@@ -851,7 +852,7 @@ ease.
 
 A final observation that this type of comparison provides is how various
 combiners may change the security analysis assumptions in a system. For
-instance, cases 3, 4, 5, and 6 all push artifacts - and therefore the
+instance, cases 3, 4, 6, and 7 all push artifacts - and therefore the
 signature validity - into the certificate chain. Naturally the entire chain
 must then also use a similar combiner if a straightforward security argument
 is to be made. Other cases, such as 8, 9, 10, and 11 put artifacts within the
@@ -1027,14 +1028,6 @@ reuse should be avoided, as mentioned above, to mitigate risks of introducing
 EUF-CMA vulnerabilities for component algorithms.
 
 
-# Security Considerations {#sec-considerations}
-
-This document discusses digital signature constructions that may be used in
-security protocols. It is an informational document and does not directly
-affect any other Internet draft. The security considerations for any specific
-implementation or incorporation of a hybrid scheme should be discussed in the
-relevant specification documents.
-
 # Discussion of Advantages/Disadvantages {#advantages-disadvantages}
 
 The design (and hence, security guarantees) of hybrid signature schemes
@@ -1076,6 +1069,16 @@ non-FIPS approved) signature without any artefacts is by description a
 FIPS-approved hybrid, however as the component signatures are verified 
 separately it is not possible to enforce 'simultaneous verification'.
 
+# Security Considerations {#sec-considerations}
+
+This document discusses digital signature constructions that may be used in
+security protocols. It is an informational document and does not directly
+affect any other Internet draft. The security considerations for any specific
+implementation or incorporation of a hybrid scheme should be discussed in the
+relevant specification documents.
+
+# IANA Considerations
+This document has no IANA actions.
 
 # Acknowledgements {#acknowledgements}
 
