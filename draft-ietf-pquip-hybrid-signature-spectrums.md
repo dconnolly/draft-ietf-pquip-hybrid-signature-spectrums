@@ -434,9 +434,9 @@ signature algorithms.
 
 ## Goals {#goals}
 
-There are various security goals that can be achieved through
+There are various security and usability goals that can be achieved through
 hybridization. The following provides a summary of these goals, while
-also noting where security goals are in conflict, i.e., that achievement
+also noting where goals are in conflict, i.e., that achievement
 of one goal precludes another, such as backwards compatibility.
 
 ### Hybrid Authentication
@@ -779,7 +779,7 @@ Eventual security analysis may be a consideration in choosing between
 levels. For example, if the security of the hybrid scheme is dependent on
 system policy, then cryptographic analysis must necessarily be reliant on
 specific policies, and it may not be possible to describe a scheme's security
-in a standalone sense.
+in a standalone sense.  In this case, it is necessary to consider the configuration of a particular implementation or use to assess security, which could increase the risk of vulnerabilities, regardless of the algorithms in use.
 
 |--------------------------------------------| --------- |
 | **Location of Artifacts of Hybrid Intent** | **Level** |
