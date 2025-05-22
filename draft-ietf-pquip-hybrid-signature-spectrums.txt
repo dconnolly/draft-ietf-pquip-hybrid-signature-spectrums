@@ -1193,8 +1193,8 @@ Table of Contents
               Solutions to Identification and Signature Problems", 1986,
               <https://doi.org/10.1007%2F3-540-47721-7_12>.
 
-   [GEMSS]    "GeMSS: A Great Multivariate Short Signature",
-              <https://www-polsys.lip6.fr/Links/NIST/
+   [GEMSS]    "GeMSS: A Great Multivariate Short Signature", 15 April
+              2020, <https://www-polsys.lip6.fr/Links/NIST/
               GeMSS_specification_round2_V2.pdf>.
 
    [HQC_CVE]  "Correctness error in HQC decapsulation", 6 December 2024,
