@@ -62,7 +62,7 @@ informative:
   GEMSS:
     title: "GeMSS: A Great Multivariate Short Signature"
     target: https://www-polsys.lip6.fr/Links/NIST/GeMSS_specification_round2_V2.pdf
-    date: 2020-15-04
+    date: 2020-04-15
 
   HQC_CVE:
     title: Correctness error in HQC decapsulation
