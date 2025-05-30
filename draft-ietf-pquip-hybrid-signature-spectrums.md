@@ -43,6 +43,11 @@ normative:
 
 informative:
 
+  EUFCMA:
+    title: "EUF-CMA and SUF-CMA"
+    target: https://blog.cryptographyengineering.com/euf-cma-and-suf-cma/
+    author: Matthew Green
+  
   FALCON:
     title: "FALCON: Fast-Fourier Lattice-based Compact Signatures over NTRU"
     target: https://falcon-sign.info/falcon.pdf
@@ -344,7 +349,7 @@ particular, we follow the definition of 'post-quantum algorithm',
   such an attack would be a quantum attacker compromising the key associated
   with a traditional component algorithm and forging a message and signature
   pair.  Message forgery attacks may be formalized with experiments such as 
-  existential unforgeability under chosen-message attack (EUF-CMA),
+  existential unforgeability under chosen-message attack (EUF-CMA) [EUFCMA],
   while the difference introduced in component message forgery attacks is
   that the key is accepted for both hybrid and single algorithm use. Further
   discussions on this appear under {{euf-cma-challenges}}.
