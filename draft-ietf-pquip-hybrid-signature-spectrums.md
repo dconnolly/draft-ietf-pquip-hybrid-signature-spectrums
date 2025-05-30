@@ -174,11 +174,6 @@ composability, non-separability of the component signatures given a
 hybrid signature, backwards/forwards compatibility, hybrid generality,
 and simultaneous verification.
 
-Discussion of this work is encouraged to happen on the IETF PQUIP
-mailing list pqc@ietf.org or on the GitHub repository which contains the
-draft:
-https://github.com/dconnolly/draft-ietf-pquip-hybrid-signature-spectrums
-
 --- middle
 
 # Introduction {#introduction}
@@ -248,8 +243,8 @@ their use case. In scope limitations, it does not attempt to give concrete
 recommendations for any use case. It also intentionally does not propose
 concrete hybrid signature combiners or instantiations thereof. As with the
 data authenticity guarantees provided by any digital signature, the security
-guarantees discussed in this document are reliant on correct provisioning of
-the keys involved, e.g. entity authentication.
+guarantees discussed in this document are reliant on correct provisioning and management of
+the keys involved, e.g. entity authentication, key revocation etc.  This document only considers scenarios with a single signer and a single verifier, constructions with multiple signers or verifiers are out of scope.
 
 ## Terminology {#terminology}
 
@@ -386,7 +381,7 @@ subtleties and caveats on implementation and use can arise over time. Given
 the complexity of next generation algorithms, the chance of such discoveries
 and caveats needs to be taken into account.
 
-Of note, some next generation algorithms have received considerable analysis, for example, following attention gathered during the NIST
+Of note, some next-generation algorithms have received considerable analysis, for example, following attention gathered during the NIST
 Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ].  However,
 if and when further information on caveats and implementation issues come to
 light, it is quite possible that vulnerabilities will represent a weakening
@@ -395,37 +390,14 @@ hybrid approach has been used.
 
 ### Time
 
-The need to transition to post-quantum algorithms now while
-simultaneously being aware of potential, hidden subtleties in their
-resistance to standard attacks drives transition designs towards
-hybridization.  Mosca’s equation [MOSCA] has been used to illustrate
-risk of post-quantum transition delay: `l + d > q`, where l is the
-information life-span, d is the time for system transition to
-post-quantum algorithms, and q is the time before a quantum computer is
-ready to execute cryptanalysis. In terms of risk to data confidentiality
-guarantees and therefore key exchange and KEM algorithms, application
-of this equation is fairly straightforward. In contrast, it may not be
-obvious why there is urgency for an adoption of post-quantum signatures;
-namely, while encryption is subject to store-now-decrypt-later attacks,
-a parallel notion for authenticity, i.e., 'store-now-modify-later attacks'
-may not be readily apparent.
-
-However, in large systems, including national systems, space systems, large
-healthcare support systems, and critical infrastructure, where acquisition
+In large systems, including national systems, space systems, large
+healthcare support systems, and critical infrastructure, acquisition
 and procurement time can be measured in years and algorithm replacement may
-be difficult or even practically impossible, this equation can have drastic
-implications.  In such systems, algorithm turn-over can be complex and
-difficult and can take considerable time (such as in long-lived systems with
-hardware deployment), meaning that an algorithm may be committed to
-long-term, with no option for replacement. Long-term commitment creates
+be difficult or even practically impossible. Long-term commitment creates
 further urgency for immediate post-quantum algorithm selection, for example
 when generating root certificates with their long validity windows.
 Additionally, for some sectors, future checks on past authenticity plays a
-role (e.g., many legal, financial, auditing, and governmental systems).  The
-'store-now-modify-later' analogy would present challenges in such sectors,
-where future analysis of past authentication may be more critical than in
-e.g., internet connection use cases. As such there is an eagerness to use
-post-quantum signature algorithms.
+role (e.g., many legal, financial, auditing, and governmental systems).  This means there is a need to transition some systems to post-quantum signature algorithms imminently.  However, as described above, there is a need to remain aware of potential, hidden subtleties in next-generation algorithms' resistance to standard attacks, particularly in cases where it is difficult to replace algorithms.  This combination of time pressure and complexity drives some transition designs towards hybridization.
 
 ## Goals {#goals}
 
