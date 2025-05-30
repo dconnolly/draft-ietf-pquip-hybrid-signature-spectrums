@@ -277,7 +277,7 @@ particular, we follow the definition of 'post-quantum algorithm',
 - Hybrid signature scheme: Following [I-D.ietf-pquip-pqt-hybrid-terminology],
   we define a hybrid signature scheme to be "a multi-algorithm digital
   signature scheme made up of two or more component digital signature
-  algorithms ...". While it often makes sense for security purposes to
+  algorithms". While it often makes sense for security purposes to
   require that the security of the component schemes is based on the hardness
   of different cryptographic assumptions, in other cases hybrid schemes might
   be motivated, e.g., by interoperability of variants on the same scheme and
@@ -288,7 +288,7 @@ particular, we follow the definition of 'post-quantum algorithm',
   will use the more general term 'hybrid signature scheme' instead of
   requiring one post-quantum and one traditional algorithm (i.e., PQ/T hybrid
   signature schemes) to allow also the combination of several post-quantum
-  algorithms. The term 'composite scheme' is sometimes used as a synonym for
+  algorithms. The term 'composite scheme' has sometimes been used as a synonym for
   'hybrid scheme'. This is different from
   [I-D.ietf-pquip-pqt-hybrid-terminology] where the term is used as a
   specific instantiation of hybrid schemes such that "where multiple
@@ -300,7 +300,7 @@ particular, we follow the definition of 'post-quantum algorithm',
   scheme's signature generation. As synonyms we might use 'dual signature'.
   For example, NIST defines a dual signature as "two or more signatures on a
   common message" [NIST_PQC_FAQ]. For the same reason as above we will avoid
-  using the term 'composite signature' although it sometimes appears as
+  using the term 'composite signature' although it sometimes appears as a 
   synonym for 'hybrid/dual signature'.
 
 - Component (signature) scheme: Component signature schemes are the
@@ -343,8 +343,8 @@ particular, we follow the definition of 'post-quantum algorithm',
   the public key associated with a component algorithm. An common example of
   such an attack would be a quantum attacker compromising the key associated
   with a traditional component algorithm and forging a message and signature
-  pair.  Message forgery attacks may be formalized with experiments such as
-  (hybrid) existential unforgeability under chosen-message attack (EUF-CMA),
+  pair.  Message forgery attacks may be formalized with experiments such as 
+  existential unforgeability under chosen-message attack (EUF-CMA),
   while the difference introduced in component message forgery attacks is
   that the key is accepted for both hybrid and single algorithm use. Further
   discussions on this appear under {{euf-cma-challenges}}.
@@ -381,12 +381,11 @@ subtleties and caveats on implementation and use can arise over time. Given
 the complexity of next generation algorithms, the chance of such discoveries
 and caveats needs to be taken into account.
 
-Of note, some next generation algorithms have received considerable analysis
-attention, for example, following attention gathered during the NIST
+Of note, some next generation algorithms have received considerable analysis, for example, following attention gathered during the NIST
 Post-Quantum Cryptography Standardization Process [NIST_PQC_FAQ].  However,
 if and when further information on caveats and implementation issues come to
 light, it is quite possible that vulnerabilities will represent a weakening
-of security than a full "break". Such weakening may also be offset if a
+of security rather than a full "break". Such weakening may also be offset if a
 hybrid approach has been used.
 
 ### Time
@@ -416,7 +415,7 @@ hardware deployment), meaning that an algorithm may be committed to
 long-term, with no option for replacement. Long-term commitment creates
 further urgency for immediate post-quantum algorithm selection, for example
 when generating root certificates with their long validity windows.
-Additionally, for some sectors future checks on past authenticity plays a
+Additionally, for some sectors, future checks on past authenticity plays a
 role (e.g., many legal, financial, auditing, and governmental systems).  The
 'store-now-modify-later' analogy would present challenges in such sectors,
 where future analysis of past authentication may be more critical than in
@@ -438,8 +437,8 @@ can achieve 'hybrid authentication' which is the property that
 (cryptographic) authentication is achieved by the hybrid signature scheme
 provided that a least one component signature algorithm remains
 'secure'. There might be, however, other goals in competition with this one,
-such as backward-compatibility (refering to the property where a hybrid
-signature may be verified by only verifying one component signature, see
+such as backward-compatibility - referring to the property where a hybrid
+signature may be verified by only verifying one component signature (see
 description below). Hybrid authentication is an umbrella term that
 encompasses more specific concepts of hybrid signature security, such as
 'hybrid unforgeability' described next.
@@ -448,36 +447,23 @@ encompasses more specific concepts of hybrid signature security, such as
 
 Hybrid unforgeability is a specific type of hybrid authentication, where the
 security assumption for the scheme, e.g. EUF-CMA, is maintained as long as at
-least one of the component schemes is EUF-CMA secure without a
-prioritisation. We call this notion 'hybrid unforgeability'; it is a specific
+least one of the component schemes maintains that security assumption. We call this notion 'hybrid unforgeability'; it is a specific
 type of hybrid authentication. For example, the concatenation combiner in
 [HYBRIDSIG] is 'hybrid unforgeable'. As mentioned above, this might be
 incompatible with backward-compatibility, where the EUF-CMA security of the
 hybrid signature relies solely on the security of one of the component
 schemes instead of relying on both, e.g., the dual message combiner using
 nesting in [HYBRIDSIG]. For more details, we refer to our discussion
-below. Note that 'strong' existential unforgeability under chosen message
-attack (SUF-CMA) security of the hybrid scheme (defined similarly to the
-traditional strong unforgeability) may require SUF-CMA security of both
-component schemes.  For instance, under a concatenation combiner where the
-hybrid signature is comprised of two distinct component signatures; in that
-case, if one of the component schemes offers SUF-CMA and the other only
-offers EUF-CMA, the hybrid does not achieve SUF-CMA but only EUF-CMA.
+below.
 
 Use cases where a hybrid scheme is used with, e.g., EUF-CMA security assumed
 for only one component scheme generally use hybrid techniques for their
-'functional transition' pathway support (i.e., a gradual adaption to ensure
-interoperability in system or system-of-systems of verifiers that support
-traditional signatures only and verifiers that are upgraded to also support
-post-quantum signatures). In this case, a system manager is using hybrid
-signatures as a 'functional transition' support, but not yet expecting
-different security guarantees. As such, EUF-CMA security is assumed for one
-component algorithm.
+'functional transition' pathway support.  For example, hybrid signatures may be used as a transition step for gradual post-quantum adoption, while ensuring interoperability when a system includes both verifiers that only support traditional signatures and verifiers that have been upgraded to support post-quantum signatures.
 
 In contrast, use cases where a hybrid scheme is used with e.g., EUF-CMA
 security assumed for both component schemes without prioritisation between
 them can use hybrid techniques for both functional transition and security
-transition (i.e., a transisition to ensure security even if it may not be
+transition (i.e., a transition to ensure security even if it may not be
 known which algorithm should be relied upon).
 
 ### Proof Composability
@@ -772,7 +758,7 @@ system policy, then cryptographic analysis must necessarily be reliant on
 specific policies, and it may not be possible to describe a scheme's security
 in a standalone sense.  In this case, it is necessary to consider the
 configuration of a particular implementation or use to assess security, which
-could increase the risk of vulnerabilities, regardless of the algorithms in
+could increase the risk of unknown and unanticipated vulnerabilities, regardless of the algorithms in
 use.
 
 |--------------------------------------------| --------- |
@@ -898,10 +884,9 @@ validity.
 # Need For Approval Spectrum {#need-for-approval-spectrum}
 
 In practice, use of hybrid digital signatures relies on standards
-specifications where applicable. This is particularly relevant in the cases
+where applicable. This is particularly relevant in the cases
 where use of FIPS (Federal Information Processing Standard) approved software
-modules is required, not only use of NIST algorithms or recommendations which
-has provided basic guidance on hybrid signature use. NIST provides the
+modules is required. NIST provides the
 following guidance (emphasis added),
 
 > Assume that in a \[hybrid\] signature, *one signature is generated
@@ -1015,8 +1000,7 @@ attack or cross-protocol attack.
 The component algorithm forgery verifier target does not need to be the
 intended recipient of the hybrid-signed message and may even be in an
 entirely different system. This vulnerability is particularly an issue among
-concatenated or nested hybrid signature schemes when component verification
-is allowed. It should be noted that policy enforcement of a hybrid
+concatenated or nested hybrid signature schemes where individual component verification could be possible. It should be noted that policy enforcement of a hybrid
 verification does not mitigate the issue on the intended message recipient:
 the component forgery could occur on any system that accepts the component
 keys.
@@ -1027,7 +1011,7 @@ for messages of their choosing and succeeds if they are able to produce a
 valid hybrid signature for a message that was not part of an earlier request,
 implicit requirements must hold in order to avoid real-world implications.
 Namely, either component algorithm forgeries, a.k.a. cross-protocol attacks,
-must be out of scope for the use case or or the hybrid signature choice must
+must be out of scope for the use case or the hybrid signature choice must
 be strongly non-separable. Otherwise, component algorithm forgeries, which
 can be seen as a type of cross-protocol attack, affect the type of EUF-CMA
 properties offered and are a practical consideration that system designers
@@ -1060,8 +1044,8 @@ forgery attack to be successful.
 
 It should be noted that weak non-separability is insufficient for mitigating
 risks of component forgeries. As noted in [I-D.ietf-lamps-pq-composite-sigs],
-Sect. 11.3, in cases of hybrid algorithm selection that provides only weak
-non-separability key reuse should be avoided, as mentioned above, to mitigate
+Sect. 11.3, in cases of hybrid algorithm selection that provide only weak
+non-separability, key reuse should be avoided, as mentioned above, to mitigate
 risks of introducing EUF-CMA vulnerabilities for component algorithms.
 
 # Discussion of Advantages/Disadvantages {#advantages-disadvantages}
@@ -1099,10 +1083,9 @@ Hybrid algorithms that achieve simultaneous verification tend to fuse (or
 'entangle') the verification of component algorithms such that verification
 operations from the different component schemes depend on each other in some
 way. Consequently, there may be a natural connection between achieving
-simultaneous verification and a higher need for approval. As a contrasting
-example, concatenatation of a FIPS approved signature and another
-(potentially non-FIPS approved) signature without any artifacts is by
-description a FIPS-approved hybrid, however as the component signatures are
+simultaneous verification and a higher need-for-approval. As a contrasting
+example, NIST accommodate concatenation of a FIPS approved signature and another
+(potentially non-FIPS approved) signature without any artifacts in FIPS 140 validation [NIST_PQC_FAQ], however as the component signatures are
 verified separately it is not possible to enforce 'simultaneous
 verification'.
 
