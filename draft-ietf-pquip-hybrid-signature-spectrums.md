@@ -863,8 +863,10 @@ validity.
 In practice, use of hybrid digital signatures relies on standards
 where applicable. This is particularly relevant in the cases
 where use of FIPS (Federal Information Processing Standard) approved software
-modules is required. NIST provides the
-following guidance (emphasis added),
+modules is required, but applies equally to any guidance or policy direction 
+that specifies that at least one component algorithm of the hybrid has past 
+some certification type while not specifying requirements on the other component.
+NIST provides the following guidance (emphasis added),
 
 > Assume that in a \[hybrid\] signature, *one signature is generated
 > with a NIST-approved signature scheme as specified in FIPS 186, while
@@ -878,25 +880,21 @@ following guidance (emphasis added),
 > function, since the NIST-approved component is regarded as assuring
 > the validity of the `hybrid` signature. [NIST_PQC_FAQ]
 
-The emphasized texts point to two things: 1) the signature scheme for
-one of the component algorithms must be approved and 2) that said
-algorithm must be properly implemented. This leaves some ambiguity as to
-whether only the algorithm must be approved and well implemented, or if
-that implementation must go through an approval process as well.  As
-such, there is a ``scale of approval`` that developers may consider as
-to whether they are using at least one approved component algorithm
-(``1-out-of-n approved software module``), or whether the implementation
-of that component algorithm has gone through an approvals review (thus
-making an ``all approved software module``). The former ``1-out-of-n
-approved software module`` would suggest a straightforward path for
-FIPS-140 approvals based on the NIST guidelines; however, it is not
-inconceivable that using an ``all approved software module`` could
-automate much of the certification review and therefore be attractive to
-developers.
+This draft does not define a formally interpretation of the NIST statement; 
+however, we use it as motivation to highlight some points that implementors 
+of hybrids may wish to consider when following any guidance documents that 
+specify that 1) the signature scheme for one of the component algorithms 
+must be approved and 2) the said algorithm must be a well implemented or a 
+certified implementation. There is a ``scale of approval`` that developers 
+may consider as to whether they are using at least one approved component 
+algorithm implementation (``1-out-of-n approved software module``), or 
+whether every component algorithm implementation is individually approved 
+(``all approved software module``). 
 
-We provide a scale for the different nuances of approval of the hybrid
-combiners. This is related to whether the combiner needs a new approval
-process or falls under already approved specifications.
+We provide a scale for the different nuances of "approval" of the hybrid
+combiners, where "approval" means that a software implementation of a component 
+algorithm can be used unmodified for creation of the hybrid signature. This may be  
+related to whether a hybrid combiner is likely to need dedicated certification.
 
 ~~~~
 | ---------------------------------------------------------------------------------|
@@ -938,15 +936,15 @@ algorithm(s) and approval of the implementation(s).
 
 The 1-out-of-n combiner uses at least one approved algorithm implementation
 in a black-box way. It may potentially change the specifics of the other
-component algorithm implementations. As long as at least one component is
-approved, no new approval is needed (per [NIST_PQC_FAQ]).
+component algorithm implementations. If the premise is that no new approval 
+is needed so long as at least one component is approved, then this is likely 
+considered sufficient.
 
-In an All-Approved combiner, all algorithm implementations are used in a
+In an all-approved combiner, every algorithm implementation is used in a
 black-box way. A concatenation combiner is a simple example (where a
-signature is valid if all component signatures are valid).  As long as at
-least one component is approved, no new approval is needed (per
-[NIST_PQC_FAQ]); thus, as all algorithm implementations are approved the
-requirement is satisfied.
+signature is valid if all component signatures are valid). Thus, as all 
+algorithm implementations are approved, a requirement that at least one of 
+hybrid component algorithms is approved would be satisfied.
 
 # EUF-CMA Challenges {#euf-cma-challenges}
 
