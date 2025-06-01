@@ -885,13 +885,19 @@ however, we use it as motivation to highlight some points that implementors
 of hybrids may wish to consider when following any guidance documents that 
 specify that 1) the signature scheme for one of the component algorithms 
 must be approved and 2) the said algorithm must be a well implemented or a 
-certified implementation. There is a ``scale of approval`` that developers 
-may consider as to whether they are using at least one approved component 
+certified implementation. This type of ``need for approval`` (i.e., a
+requirement that an implementor is looking to follow regarding approval or 
+certification of the software module implementation of hybrid or its 
+component algorithms) can drive some logistical decisios on what types of 
+hybrids an implementor should consider. 
+
+In this respect, there is a ``scale of approval`` that developers may 
+consider as to whether they are using at least one approved component 
 algorithm implementation (``1-out-of-n approved software module``), or 
 whether every component algorithm implementation is individually approved 
 (``all approved software module``). 
 
-We provide a scale for the different nuances of "approval" of the hybrid
+We provide a scale for the different nuances of ``approval`` of the hybrid
 combiners, where "approval" means that a software implementation of a component 
 algorithm can be used unmodified for creation of the hybrid signature. This may be  
 related to whether a hybrid combiner is likely to need dedicated certification.
@@ -935,10 +941,11 @@ potentially imply a distinction between a need for fresh approval of the
 algorithm(s) and approval of the implementation(s).
 
 The 1-out-of-n combiner uses at least one approved algorithm implementation
-in a black-box way. It may potentially change the specifics of the other
-component algorithm implementations. If the premise is that no new approval 
-is needed so long as at least one component is approved, then this is likely 
-considered sufficient.
+in a black-box way (i.e., without modification to the software module 
+implementaton for that algorithm). It may potentially change the specifics 
+of the other component algorithm implementations. If the premise is that no 
+new approval is needed so long as at least one component is approved, then 
+this is likely considered sufficient.
 
 In an all-approved combiner, every algorithm implementation is used in a
 black-box way. A concatenation combiner is a simple example (where a
