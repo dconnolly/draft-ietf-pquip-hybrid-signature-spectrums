@@ -1075,7 +1075,7 @@ verification'.
 
 This document discusses digital signature constructions that may be used in
 security protocols. It is an informational document and does not directly
-affect any other Internet Draft. The security considerations for any specific
+affect any other Internet-Draft. The security considerations for any specific
 implementation or incorporation of a hybrid scheme should be discussed in the
 relevant specification documents.
 
