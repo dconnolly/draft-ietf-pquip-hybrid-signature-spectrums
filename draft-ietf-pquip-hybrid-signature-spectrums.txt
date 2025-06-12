@@ -1217,10 +1217,6 @@ Table of Contents
               "Module-Lattice-Based Digital Signature Standard", 13
               August 2024, <https://doi.org/10.6028/NIST.FIPS.204>.
 
-   [MOSCA]    Kaye, P., Laflamme, R., and M. Mosca, "An Introduction to
-              Quantum Computing, Oxford University Press", November
-              2007.
-
    [NIST_PQC_FAQ]
               National Institute of Standards and Technology (NIST),
               "Post-Quantum Cryptography FAQs", 5 July 2022,
