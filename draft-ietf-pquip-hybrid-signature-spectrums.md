@@ -866,7 +866,7 @@ In practice, use of hybrid digital signatures relies on standards where
 applicable. This is particularly relevant in the cases where use of FIPS
 (Federal Information Processing Standard) approved software modules is
 required, but applies equally to any guidance or policy direction that
-specifies that at least one component algorithm of the hybrid has past some
+specifies that at least one component algorithm of the hybrid has passed some
 certification type while not specifying requirements on the other component.
 NIST provides the following guidance (emphasis added),
 
@@ -882,7 +882,7 @@ NIST provides the following guidance (emphasis added),
 > function, since the NIST-approved component is regarded as assuring
 > the validity of the `hybrid` signature. [NIST_PQC_FAQ]
 
-This draft does not define a formally interpretation of the NIST statement;
+This draft does not define a formal interpretation of the NIST statement;
 however, we use it as motivation to highlight some points that implementors
 of hybrids may wish to consider when following any guidance documents that
 specify that 1) the signature scheme for one of the component algorithms
