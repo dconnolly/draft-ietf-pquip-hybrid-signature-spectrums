@@ -123,21 +123,6 @@ informative:
     author:
       org: National Institute of Standards and Technology (NIST)
 
-  MOSCA:
-    title: "An Introduction to Quantum Computing, Oxford University Press"
-    date: 2007-11
-    author:
-      -
-        ins: P. Kaye
-        name: Phillip Kaye
-      -
-        ins: R. Laflamme
-        name: Raymond Laflamme
-      -
-        ins: M. Mosca
-        name: Michele Mosca
-
-
   NIST_PQC_FAQ:
     target: https://csrc.nist.gov/Projects/post-quantum-cryptography/faqs
     title: "Post-Quantum Cryptography FAQs"
