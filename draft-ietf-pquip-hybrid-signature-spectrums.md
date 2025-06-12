@@ -46,7 +46,10 @@ informative:
   EUFCMA:
     title: "EUF-CMA and SUF-CMA"
     target: https://blog.cryptographyengineering.com/euf-cma-and-suf-cma/
-    author: Matthew Green
+    author:
+      -
+        ins: M. Green
+        name: Matthew Green
 
   FALCON:
     title: "FALCON: Fast-Fourier Lattice-based Compact Signatures over NTRU"
