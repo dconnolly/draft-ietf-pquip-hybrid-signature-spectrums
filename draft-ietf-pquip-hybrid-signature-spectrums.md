@@ -321,10 +321,10 @@ particular, we follow the definition of 'post-quantum algorithm',
   meaning that the security is based only on the remaining component scheme.
   A common example of a stripping attack includes a message and hybrid
   signature, comprised of concatenated post-quantum and traditional
-  signatures, where a quantum adversary simply removes the post-quantum
-  component signature and submits the (potentially changed) message and
-  traditional component signature to a traditional verifier. This could
-  include an authentic traditional certificate authority signature on a
+  signatures, where an adversary with a quantum computer simply removes the
+  post-quantum component signature and submits the (potentially changed)
+  message and traditional component signature to a traditional verifier. This
+  could include an authentic traditional certificate authority signature on a
   certificate that was originaly hybrid-signed. An attribute of this is that
   the an honest signer would attest to generating the signature. Stripping
   attacks should not be confused with component message forgery attacks.
