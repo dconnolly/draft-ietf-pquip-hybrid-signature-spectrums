@@ -5,12 +5,12 @@
 Network Working Group                                          N. Bindel
 Internet-Draft                                                 SandboxAQ
 Intended status: Informational                                   B. Hale
-Expires: 14 December 2025                      Naval Postgraduate School
+Expires: 19 December 2025                      Naval Postgraduate School
                                                              D. Connolly
                                                                SandboxAQ
                                                              F. Driscoll
                                        UK National Cyber Security Centre
-                                                            12 June 2025
+                                                            17 June 2025
 
 
                        Hybrid signature spectrums
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2025.
+   This Internet-Draft will expire on 19 December 2025.
 
 Copyright Notice
 
@@ -277,11 +277,11 @@ Table of Contents
       algorithm verifier, meaning that the security is based only on the
       remaining component scheme.  A common example of a stripping
       attack includes a message and hybrid signature, comprised of
-      concatenated post-quantum and traditional signatures, where a
-      quantum adversary simply removes the post-quantum component
-      signature and submits the (potentially changed) message and
-      traditional component signature to a traditional verifier.  This
-      could include an authentic traditional certificate authority
+      concatenated post-quantum and traditional signatures, where an
+      adversary with a quantum computer simply removes the post-quantum
+      component signature and submits the (potentially changed) message
+      and traditional component signature to a traditional verifier.
+      This could include an authentic traditional certificate authority
       signature on a certificate that was originaly hybrid-signed.  An
       attribute of this is that the an honest signer would attest to
       generating the signature.  Stripping attacks should not be
@@ -1203,10 +1203,10 @@ Table of Contents
    [I-D.ietf-lamps-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
               Fluhrer, "Composite ML-DSA for use in X.509 Public Key
-              Infrastructure and CMS", Work in Progress, Internet-Draft,
-              draft-ietf-lamps-pq-composite-sigs-04, 3 March 2025,
+              Infrastructure", Work in Progress, Internet-Draft, draft-
+              ietf-lamps-pq-composite-sigs-05, 16 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              pq-composite-sigs-04>.
+              pq-composite-sigs-05>.
 
    [KYBERSLASH]
               "KyberSlash: Exploiting secret-dependent division timings
