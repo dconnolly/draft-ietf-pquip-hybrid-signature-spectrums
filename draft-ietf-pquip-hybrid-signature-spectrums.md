@@ -309,7 +309,7 @@ particular, we follow the definition of 'post-quantum algorithm',
   to other next-generation algorithms.
 
 - Policy: Throughout this document we refer to policy in the context of e.g., 
-  whether a syste policy requires verification of two signatures, etc. Similar
+  whether a system policy requires verification of two signatures, etc. Similar
   terminology may include security configuration settings, or related
   phrasing. We treat these terms as equivalent for the purposes of this
   document.
