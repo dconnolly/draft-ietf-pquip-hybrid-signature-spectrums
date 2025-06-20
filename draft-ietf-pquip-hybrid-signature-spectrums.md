@@ -309,10 +309,10 @@ particular, we follow the definition of 'post-quantum algorithm',
   to other next-generation algorithms.
 
 - Policy: Throughout this document we refer to policy in the context of e.g., 
-  whether a system policy requires verification of two signatures, etc. Similar
-  terminology may include security configuration settings, or related
-  phrasing. We treat these terms as equivalent for the purposes of this
-  document.
+  a system policy requiring verification of two signatures, an RFC description,
+  guidance documentation, etc. Similar terminology may include security
+  configuration settings, or related phrasing. We treat these terms as
+  equivalent for the purposes of this document.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component signature is removed. Artifacts
