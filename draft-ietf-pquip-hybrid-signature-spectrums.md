@@ -308,6 +308,12 @@ particular, we follow the definition of 'post-quantum algorithm',
   the discussion in this document applies equally well to future transitions
   to other next-generation algorithms.
 
+- Policy: Throughout this document we refer to policy in the context of e.g., 
+  whether a syste policy requires verification of two signatures, etc. Similar
+  terminology may include security configuration settings, or related
+  phrasing. We treat these terms as equivalent for the purposes of this
+  document.
+
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component signature is removed. Artifacts
   can be e.g., at the algorithmic level (e.g., within the digital signature),
