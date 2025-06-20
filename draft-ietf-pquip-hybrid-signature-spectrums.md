@@ -714,6 +714,26 @@ approach. Artifact location is tied to non-separability notions above; thus
 the selection of a given security guarantee and general hybrid approach must
 also include finer grained selection of artifact placement.
 
+## Artifacts vs. Separability {#art-sep}
+
+Note that non-separability is a security notion and not directly related 
+to artifacts – artifacts may be used for detection of separation, however. 
+For instance, under strong non-separability, the scheme would fail 
+verification if separation occurs, while for weak non-separability some 
+artifacts exist if separation occurs but verification would not necessarily 
+fail. The verifier could indeed ignore the artifact, hence the scheme achieving 
+only weak non-separability and not strong non-separability. It is rather that 
+an artifact exists that could be identified if an investigation occurred, etc. 
+Under weak non-separability, detection of separation may depend on 
+non-cryptographic configurations or other dependencies. Also, strong 
+non-separability and weak non-separability are properties of the signature 
+scheme – artifacts are not necessarily in the signature and may appear in the 
+signed message, the certificate, the protocol, or in configuration policy 
+(hence them not necessarily being related to the strong non-sepability and 
+weak non-separablility security notions). Artifacts may still be useful 
+(albeit dependent on system configurations) even if separable signatures 
+are used.
+
 ## Artifact Locations {#art-locations}
 
 There are a variety of artifact locations possible, ranging from within the
