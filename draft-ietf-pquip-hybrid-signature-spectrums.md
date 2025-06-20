@@ -37,9 +37,9 @@ author:
 normative:
   I-D.ietf-tls-hybrid-design:
 
-  I-D.ietf-pquip-pqt-hybrid-terminology:
-
   RFC4949:
+
+  RFC9794:
 
 informative:
 
@@ -239,13 +239,13 @@ scope.
 
 ## Terminology {#terminology}
 
-We follow existing Internet documents on hybrid terminology
-[I-D.ietf-pquip-pqt-hybrid-terminology] and hybrid key encapsulation
-mechanisms (KEM) [I-D.ietf-tls-hybrid-design] to enable settling on a
-consistent language. We will make clear when this is not possible. In
-particular, we follow the definition of 'post-quantum algorithm',
-'traditional algorithms', and 'combiner'. Moreover, we use the definition of
-'certificate' to mean 'public-key certificate' as defined in [RFC4949].
+We follow existing Internet documents on hybrid terminology [RFC9794] and
+hybrid key encapsulation mechanisms (KEM) [I-D.ietf-tls-hybrid-design] to
+enable settling on a consistent language. We will make clear when this is not
+possible. In particular, we follow the definition of 'post-quantum
+algorithm', 'traditional algorithms', and 'combiner'. Moreover, we use the
+definition of 'certificate' to mean 'public-key certificate' as defined in
+[RFC4949].
 
 - Signature scheme: A signature scheme is defined via the following
   three algorithms:
@@ -265,27 +265,26 @@ particular, we follow the definition of 'post-quantum algorithm',
     `m`, and outputs a bit `b` indicating `accept (b=1)` or `reject
     (b=0)` of the signature for message `m`.
 
-- Hybrid signature scheme: Following [I-D.ietf-pquip-pqt-hybrid-terminology],
-  we define a hybrid signature scheme to be "a multi-algorithm digital
-  signature scheme made up of two or more component digital signature
-  algorithms". While it often makes sense for security purposes to require
-  that the security of the component schemes is based on the hardness of
-  different cryptographic assumptions, in other cases hybrid schemes might be
-  motivated, e.g., by interoperability of variants on the same scheme and as
-  such both component schemes are based on the same hardness assumption
-  (e.g., both post-quantum assumptions or even both the same concrete
-  assumption such as Ring LWE).  We allow this explicitly. This means in
-  particular that in contrast to [I-D.ietf-pquip-pqt-hybrid-terminology], we
-  will use the more general term 'hybrid signature scheme' instead of
-  requiring one post-quantum and one traditional algorithm (i.e., PQ/T hybrid
-  signature schemes) to allow also the combination of several post-quantum
+- Hybrid signature scheme: Following [RFC9794], we define a hybrid signature
+  scheme to be "a multi-algorithm digital signature scheme made up of two or
+  more component digital signature algorithms". While it often makes sense
+  for security purposes to require that the security of the component schemes
+  is based on the hardness of different cryptographic assumptions, in other
+  cases hybrid schemes might be motivated, e.g., by interoperability of
+  variants on the same scheme and as such both component schemes are based on
+  the same hardness assumption (e.g., both post-quantum assumptions or even
+  both the same concrete assumption such as Ring LWE).  We allow this
+  explicitly. This means in particular that in contrast to [RFC9794], we will
+  use the more general term 'hybrid signature scheme' instead of requiring
+  one post-quantum and one traditional algorithm (i.e., PQ/T hybrid signature
+  schemes) to allow also the combination of several post-quantum
   algorithms. The term 'composite scheme' has sometimes been used as a
-  synonym for 'hybrid scheme'. This is different from
-  [I-D.ietf-pquip-pqt-hybrid-terminology] where the term is used as a
-  specific instantiation of hybrid schemes such that "where multiple
-  cryptographic algorithms are combined to form a single key or signature
-  such that they can be treated as a single atomic object at the protocol
-  level." To avoid confusing we will avoid the term 'composite scheme'.
+  synonym for 'hybrid scheme'. This is different from [RFC9794] where the
+  term is used as a specific instantiation of hybrid schemes such that "where
+  multiple cryptographic algorithms are combined to form a single key or
+  signature such that they can be treated as a single atomic object at the
+  protocol level." To avoid confusing we will avoid the term 'composite
+  scheme'.
 
 - Hybrid signature: A hybrid signature is the output of the hybrid signature
   scheme's signature generation. As synonyms we might use 'dual signature'.
@@ -296,8 +295,8 @@ particular, we follow the definition of 'post-quantum algorithm',
 
 - Component (signature) scheme: Component signature schemes are the
   cryptographic algorithms contributing to the hybrid signature scheme. This
-  has a similar purpose as in [I-D.ietf-pquip-pqt-hybrid-terminology].
-  'Ingredient (signature) scheme' may be used as a synonym.
+  has a similar purpose as in [RFC9794]. 'Ingredient (signature) scheme' may
+  be used as a synonym.
 
 - Next-generation algorithms: Following [I-D.ietf-tls-hybrid-design], we
   define next-generation algorithms to be "algorithms which are not yet
@@ -308,11 +307,11 @@ particular, we follow the definition of 'post-quantum algorithm',
   the discussion in this document applies equally well to future transitions
   to other next-generation algorithms.
 
-- Policy: Throughout this document we refer to 'policy' in the context of e.g., 
-  a system policy requiring verification of two signatures, an RFC description,
-  guidance documentation, etc. Similar terminology may include 'security
-  configuration settings', or related phrasing. We treat these terms as
-  equivalent for the purposes of this document.
+- Policy: Throughout this document we refer to 'policy' in the context of
+  e.g., a system policy requiring verification of two signatures, an RFC
+  description, guidance documentation, etc. Similar terminology may include
+  'security configuration settings', or related phrasing. We treat these
+  terms as equivalent for the purposes of this document.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
   signature that remains even if a component signature is removed. Artifacts
@@ -412,15 +411,14 @@ precludes another, such as backwards compatibility.
 
 ### Hybrid Authentication
 
-One goal of hybrid signature schemes is security. As defined in
-[I-D.ietf-pquip-pqt-hybrid-terminology], ideally a hybrid signature scheme
-can achieve 'hybrid authentication' which is the property that
-(cryptographic) authentication is achieved by the hybrid signature scheme
-provided that a least one component signature algorithm remains
-'secure'. There might be, however, other goals in competition with this one,
-such as backward-compatibility - referring to the property where a hybrid
-signature may be verified by only verifying one component signature (see
-description below). Hybrid authentication is an umbrella term that
+One goal of hybrid signature schemes is security. As defined in [RFC9794],
+ideally a hybrid signature scheme can achieve 'hybrid authentication' which
+is the property that (cryptographic) authentication is achieved by the hybrid
+signature scheme provided that a least one component signature algorithm
+remains 'secure'. There might be, however, other goals in competition with
+this one, such as backward-compatibility - referring to the property where a
+hybrid signature may be verified by only verifying one component signature
+(see description below). Hybrid authentication is an umbrella term that
 encompasses more specific concepts of hybrid signature security, such as
 'hybrid unforgeability' described next.
 
@@ -716,22 +714,23 @@ also include finer grained selection of artifact placement.
 
 ## Artifacts vs. Separability {#art-sep}
 
-Note that non-separability is a security notion of the signature scheme and 
-not directly related to artifacts – artifacts may be used for detection of 
-separation, however. For instance, under strong non-separability, the scheme 
-would fail verification if separation occurs, while for weak non-separability 
-some artifacts exist if separation occurs but verification would not necessarily 
-fail. The verifier could indeed ignore the artifact, hence the scheme achieving 
-only weak non-separability and not strong non-separability. It is rather that 
-an artifact exists that could be identified if an investigation occurred, etc. 
-Under weak non-separability, detection of separation may depend on 
-non-cryptographic configurations or other dependencies. Also, strong 
-non-separability and weak non-separability are properties of the signature 
-scheme – artifacts are not necessarily in the signature and may appear in the 
-signed message, the certificate, the protocol, or policy (hence them not 
-necessarily being related to the strong non-separability and weak 
-non-separablity security notions). Artifacts may still be useful (albeit 
-dependent on system configurations) even if separable signatures are used.
+Note that non-separability is a security notion of the signature scheme and
+not directly related to artifacts – artifacts may be used for detection of
+separation, however. For instance, under strong non-separability, the scheme
+would fail verification if separation occurs, while for weak non-separability
+some artifacts exist if separation occurs but verification would not
+necessarily fail. The verifier could indeed ignore the artifact, hence the
+scheme achieving only weak non-separability and not strong
+non-separability. It is rather that an artifact exists that could be
+identified if an investigation occurred, etc.  Under weak non-separability,
+detection of separation may depend on non-cryptographic configurations or
+other dependencies. Also, strong non-separability and weak non-separability
+are properties of the signature scheme – artifacts are not necessarily in the
+signature and may appear in the signed message, the certificate, the
+protocol, or policy (hence them not necessarily being related to the strong
+non-separability and weak non-separablity security notions). Artifacts may
+still be useful (albeit dependent on system configurations) even if separable
+signatures are used.
 
 ## Artifact Locations {#art-locations}
 
