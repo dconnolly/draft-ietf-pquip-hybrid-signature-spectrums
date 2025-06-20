@@ -308,10 +308,10 @@ particular, we follow the definition of 'post-quantum algorithm',
   the discussion in this document applies equally well to future transitions
   to other next-generation algorithms.
 
-- Policy: Throughout this document we refer to policy in the context of e.g., 
+- Policy: Throughout this document we refer to *policy* in the context of e.g., 
   a system policy requiring verification of two signatures, an RFC description,
-  guidance documentation, etc. Similar terminology may include security
-  configuration settings, or related phrasing. We treat these terms as
+  guidance documentation, etc. Similar terminology may include *security
+  configuration settings*, or related phrasing. We treat these terms as
   equivalent for the purposes of this document.
 
 - Artifact: An artifact is evidence of the sender's intent to hybridize a
