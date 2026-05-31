@@ -721,8 +721,8 @@ would fail verification if separation occurs, while for weak non-separability
 some artifacts exist if separation occurs but verification would not
 necessarily fail. The verifier could indeed ignore the artifact, hence the
 scheme achieving only weak non-separability and not strong
-non-separability. It is rather that an artifact exists that could be
-identified if an investigation occurred, etc.  Under weak non-separability,
+non-separability. However, the artifact exists and could be identified if an 
+investigation occurred. Under weak non-separability,
 detection of separation may depend on non-cryptographic configurations or
 other dependencies. Also, strong non-separability and weak non-separability
 are properties of the signature scheme – artifacts are not necessarily in the
